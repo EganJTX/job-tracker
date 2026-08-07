@@ -1,0 +1,2767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPgo8cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjIyIiBmaWxsPSIjMDM2OWExIi8+CjxsaW5lIHgxPSIzOCIgeTE9IjM3IiB4Mj0iOCIgeTI9IjMzIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLW9wYWNpdHk9IjAuOSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxsaW5lIHgxPSIzOCIgeTE9IjQxIiB4Mj0iNiIgeTI9IjQ2IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLW9wYWNpdHk9IjAuNDUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8bGluZSB4MT0iNjQiIHkxPSIzNyIgeDI9Ijk0IiB5Mj0iMzMiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2Utb3BhY2l0eT0iMC45IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPGxpbmUgeDE9IjY0IiB5MT0iNDEiIHgyPSI5NiIgeTI9IjQ2IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLW9wYWNpdHk9IjAuNDUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cG9seWdvbiBwb2ludHM9IjUxLDE0IDY2LDI2IDM2LDI2IiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSIzNCIgeT0iMjYiIHdpZHRoPSIzNCIgaGVpZ2h0PSIxMyIgcng9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjM5IiB5PSIyOCIgd2lkdGg9IjIuNSIgaGVpZ2h0PSI5IiByeD0iMSIgZmlsbD0iIzAzNjlhMSIvPgo8cmVjdCB4PSI0NiIgeT0iMjgiIHdpZHRoPSIyLjUiIGhlaWdodD0iOSIgcng9IjEiIGZpbGw9IiMwMzY5YTEiLz4KPHJlY3QgeD0iNTMiIHk9IjI4IiB3aWR0aD0iMi41IiBoZWlnaHQ9IjkiIHJ4PSIxIiBmaWxsPSIjMDM2OWExIi8+CjxyZWN0IHg9IjYwIiB5PSIyOCIgd2lkdGg9IjIuNSIgaGVpZ2h0PSI5IiByeD0iMSIgZmlsbD0iIzAzNjlhMSIvPgo8cmVjdCB4PSIzMSIgeT0iMzgiIHdpZHRoPSI0MCIgaGVpZ2h0PSI1IiByeD0iMiIgZmlsbD0id2hpdGUiLz4KPHBvbHlnb24gcG9pbnRzPSIzNyw0MyA2NSw0MyA2Miw5MCA0MCw5MCIgZmlsbD0id2hpdGUiLz4KPHBvbHlnb24gcG9pbnRzPSIzNyw1NSA2NSw0NyA2NSw1OCAzNyw2NyIgZmlsbD0iIzAzNjlhMSIvPgo8cG9seWdvbiBwb2ludHM9IjM3LDcyIDY1LDY0IDY1LDc1IDM3LDgzIiBmaWxsPSIjMDM2OWExIi8+CjxyZWN0IHg9IjMzIiB5PSI4OSIgd2lkdGg9IjM2IiBoZWlnaHQ9IjUiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSIzMyIgeT0iOTYiIHdpZHRoPSI2MiIgaGVpZ2h0PSIxMCIgcng9IjMiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPg==">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lighthouse — Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #f0ece4;
+    --bg2:     #ffffff;
+    --bg3:     #f5f2ed;
+    --border:  #e2ddd6;
+    --border2: #cdc7be;
+    --text:    #18120e;
+    --text2:   #4a403a;
+    --text3:   #8c7e76;
+    --accent:  #0369a1;
+    --accent2: #0284c7;
+    --amber:   #92400e;
+    --red:     #991b1b;
+    --blue:    #0369a1;
+    --purple:  #5b21b6;
+    --priority:#158a3e;
+    --strong:  #0369a1;
+    --maybe:   #92400e;
+    --borderline:#b45309;
+    --skip:    #991b1b;
+    --sans:    -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .app { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 24px 20px; }
+
+  /* Header */
+  .header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 32px; gap: 16px; }
+  .header-left {}
+  .logo { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: var(--accent); letter-spacing: -0.5px; }
+  .tagline { color: var(--text2); font-family: var(--sans); font-size: 12px; margin-top: 4px; }
+  .header-stats { display: flex; gap: 12px; }
+  .stat-pill {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    text-align: center;
+    min-width: 68px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .stat-pill .num { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: var(--accent); }
+  .stat-pill .lbl { color: var(--text3); font-family: var(--sans); font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 2px; margin-bottom: 24px; border-bottom: 2px solid var(--border); }
+  .tab {
+    padding: 10px 18px;
+    cursor: pointer;
+    color: var(--text3);
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.15s;
+  }
+  .tab:hover { color: var(--text2); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 700; }
+
+  /* Panels */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .card-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+
+  textarea {
+    width: 100%;
+    background: #f0f0ee;
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    padding: 10px 12px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    line-height: 1.65;
+  }
+  textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(3,105,161,0.08); background: #fff; }
+  textarea::placeholder { color: var(--text3); }
+
+  input[type="text"], input[type="url"], select {
+    width: 100%;
+    background: #f0f0ee;
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    padding: 9px 12px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  input:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(3,105,161,0.08); background: #fff; }
+  select option { background: #f0f0ee; }
+
+  .field-row { margin-bottom: 16px; }
+  .field-label {
+    font-family: var(--sans);
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .btn {
+    background: #0369a1;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 3px 8px rgba(3,105,161,0.25); }
+  .btn:active { transform: translateY(0); box-shadow: none; }
+  .btn:disabled { background: var(--border2); color: var(--text3); cursor: not-allowed; transform: none; }
+  .btn-ghost { background: transparent; color: var(--text2); border: 1px solid var(--border); }
+  .btn-ghost:hover { background: var(--bg3); color: var(--text); box-shadow: none; transform: none; }
+  .btn-sm { padding: 5px 12px; font-size: 11px; }
+
+  /* Verdict badges */
+  .verdict-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .verdict-priority  { background: rgba(21,138,62,0.1);  color: #14532d; border: 1px solid rgba(21,138,62,0.3); }
+  .verdict-strong    { background: rgba(3,105,161,0.1);  color: #0c4a6e; border: 1px solid rgba(3,105,161,0.3); }
+  .verdict-maybe     { background: rgba(146,64,14,0.1);  color: #78350f; border: 1px solid rgba(146,64,14,0.3); }
+  .verdict-borderline{ background: rgba(180,83,9,0.1);   color: #92400e; border: 1px solid rgba(180,83,9,0.3); }
+  .verdict-skip      { background: rgba(153,27,27,0.1);  color: #7f1d1d; border: 1px solid rgba(153,27,27,0.3); }
+
+  /* Status badges */
+  .status-badge {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .status-scored              { background: #eeeceb; color: #57534e; }
+  .status-applied             { background: rgba(3,105,161,0.1);   color: #0c4a6e; }
+  .status-interview-recruiter { background: rgba(91,33,182,0.07);  color: #4c1d95; }
+  .status-interview-hiringmgr { background: rgba(91,33,182,0.12);  color: #4c1d95; }
+  .status-interview-panel     { background: rgba(91,33,182,0.18);  color: #3b0764; }
+  .status-offer               { background: rgba(21,138,62,0.12);  color: #14532d; }
+  .status-rejected            { background: rgba(153,27,27,0.08);  color: #7f1d1d; }
+  .status-passed              { background: #eeeceb; color: #57534e; }
+  .status-ghosted             { background: rgba(180,83,9,0.07);   color: #92400e; }
+  .status-shelved             { background: #eeeceb; color: #78716c; }
+  .status-new                 { background: #eeeceb; color: #57534e; }
+  .status-interviewing        { background: rgba(91,33,182,0.12);  color: #4c1d95; }
+
+  /* Pipeline */
+  .pipeline-group { margin-bottom: 28px; }
+  .pipeline-group-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+  }
+  .pipeline-group-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text3);
+  }
+  .pipeline-group-label.label-offer     { color: #158a3e; }
+  .pipeline-group-label.label-panel     { color: #3b0764; }
+  .pipeline-group-label.label-hm        { color: #4c1d95; }
+  .pipeline-group-label.label-recruiter { color: #5b21b6; }
+  .pipeline-group-label.label-applied   { color: var(--accent); }
+  .pipeline-group-label.label-scored    { color: var(--text3); }
+  .pipeline-group-count {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text3);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1px 8px;
+  }
+
+  .terminal-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 0;
+    cursor: pointer;
+    color: var(--text3);
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-top: 1px solid var(--border);
+    margin-top: 8px;
+    user-select: none;
+  }
+  .terminal-toggle:hover { color: var(--text2); }
+  .terminal-toggle-arrow { transition: transform 0.2s; font-size: 9px; }
+  .terminal-toggle.open .terminal-toggle-arrow { transform: rotate(90deg); }
+  .terminal-section { display: none; }
+  .terminal-section.open { display: block; }
+
+  .role-list { display: flex; flex-direction: column; gap: 8px; }
+  .role-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: start;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .role-card:hover { border-color: var(--border2); box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+  .role-card.expanded { border-color: var(--accent); box-shadow: 0 2px 12px rgba(3,105,161,0.1); }
+
+  .role-title { font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--text); }
+  .role-company { color: var(--text2); font-family: var(--sans); font-size: 13px; margin-top: 2px; }
+  .role-meta { display: flex; gap: 8px; margin-top: 7px; flex-wrap: wrap; align-items: center; }
+  .role-date { color: var(--text3); font-family: var(--sans); font-size: 11px; }
+  .last-updated { color: var(--text3); font-family: var(--sans); font-size: 11px; font-style: italic; }
+
+  .role-expanded {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--border);
+    margin-top: 10px;
+    padding-top: 14px;
+    display: none;
+  }
+  .role-card.expanded .role-expanded { display: block; }
+
+  .expanded-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .expanded-grid { grid-template-columns: 1fr; } }
+
+  .exp-section-title {
+    font-family: var(--sans);
+    color: var(--text3);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 6px;
+  }
+  .exp-text { color: var(--text2); font-size: 12px; line-height: 1.65; font-family: var(--sans); }
+
+  .status-select-row { display: flex; gap: 10px; align-items: flex-end; margin-top: 12px; flex-wrap: wrap; }
+  .status-select-row select { max-width: 220px; }
+  .feedback-input { width: 100%; margin-top: 8px; }
+
+  .empty-state { text-align: center; padding: 56px 20px; color: var(--text3); }
+  .empty-state .empty-icon { font-size: 32px; margin-bottom: 12px; opacity: 0.4; }
+  .empty-state p { font-family: var(--sans); font-size: 13px; line-height: 1.6; max-width: 320px; margin: 0 auto; }
+
+  /* Intelligence */
+  .intel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .intel-grid { grid-template-columns: 1fr; } }
+  .intel-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+  .intel-card-title { font-family: var(--sans); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text3); margin-bottom: 14px; }
+  .pattern-item { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--border); }
+  .pattern-item:last-child { border-bottom: none; }
+  .pattern-label { color: var(--text2); font-family: var(--sans); font-size: 13px; }
+  .pattern-val { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; }
+  .bar-row { margin-bottom: 10px; }
+  .bar-label-row { display: flex; justify-content: space-between; margin-bottom: 4px; align-items: baseline; }
+  .bar-label { color: var(--text2); font-family: var(--sans); font-size: 13px; font-weight: 500; }
+  .bar-count { color: var(--text3); font-family: var(--sans); font-size: 12px; }
+  .mini-bar { height: 4px; background: var(--border); border-radius: 2px; }
+  .mini-bar-fill { height: 100%; border-radius: 2px; background: #0369a1; }
+  .insight-item {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+  .insight-item > div {
+    flex: 1;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+  .insight-item:last-child { border-bottom: none; }
+  .insight-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+  .insight-dot.amber { background: var(--amber); }
+  .insight-dot.blue  { background: var(--blue); }
+
+  /* Score/result */
+  .score-meter { display: flex; align-items: center; gap: 10px; margin: 10px 0; }
+  .meter-bar { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .meter-fill { height: 100%; border-radius: 2px; transition: width 0.6s ease; }
+  .meter-pct { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; min-width: 44px; text-align: right; }
+  .result-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin-top: 16px; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .result-section { margin-top: 12px; }
+  .result-section-title { color: var(--text3); font-family: var(--sans); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .result-section p, .result-section li { color: var(--text2); line-height: 1.6; font-size: 13px; font-family: var(--sans); }
+  .result-section ul { padding-left: 16px; }
+  .result-section li { margin-bottom: 3px; }
+  .resume-badge { display: inline-block; padding: 3px 10px; border-radius: 4px; background: rgba(3,105,161,0.08); color: #0c4a6e; border: 1px solid rgba(3,105,161,0.25); font-family: var(--sans); font-size: 11px; font-weight: 600; }
+  .flag-item { display: flex; align-items: flex-start; gap: 6px; margin-bottom: 5px; font-size: 13px; font-family: var(--sans); }
+  .flag-green { color: var(--accent); }
+  .flag-red   { color: var(--red); }
+  .flag-amber { color: var(--amber); }
+  .loading-dots { display: inline-flex; gap: 4px; align-items: center; }
+  .loading-dots span { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: dot 1.2s infinite; }
+  .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes dot { 0%,80%,100%{opacity:0.2;transform:scale(0.8)} 40%{opacity:1;transform:scale(1)} }
+
+  /* Config Tab */
+  .cfg-section {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .cfg-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .cfg-section-header:hover { background: var(--bg3); }
+  .cfg-section-title {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0;
+  }
+  .cfg-chevron { color: var(--text3); font-size: 13px; transition: transform 0.2s; }
+  .cfg-section-body {
+    padding: 20px 24px 24px;
+    border-top: 1px solid var(--border);
+  }
+  .cfg-section.collapsed .cfg-section-body { display: none; }
+  .cfg-section.collapsed .cfg-chevron { transform: rotate(-90deg); }
+  .cfg-hint {
+    font-family: var(--sans);
+    color: #1e4976;
+    font-size: 13px;
+    line-height: 1.65;
+    padding: 10px 14px;
+    background: rgba(3,105,161,0.07);
+    border-radius: 6px;
+    border-left: 3px solid rgba(3,105,161,0.35);
+    margin-bottom: 20px;
+  }
+  .cfg-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .cfg-grid2 { grid-template-columns: 1fr; } }
+  .cfg-eg {
+    font-family: var(--sans);
+    color: var(--text3);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 12px;
+    display: block;
+    margin-top: 3px;
+    line-height: 1.5;
+  }
+  .career-entry, .resume-entry {
+    background: #ffffff;
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .entry-remove {
+    position: absolute;
+    top: 10px; right: 12px;
+    background: none;
+    border: none;
+    color: var(--text3);
+    font-size: 13px;
+    cursor: pointer;
+    padding: 2px 4px;
+    line-height: 1;
+    font-family: var(--sans);
+  }
+  .entry-remove:hover { color: var(--red); }
+
+  /* Config zone separators */
+  .cfg-zone-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 12px;
+    margin-top: 8px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+  }
+  .cfg-zone-number {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .cfg-zone-title {
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .cfg-zone-desc {
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--text3);
+    margin-top: 3px;
+  }
+  .cfg-zone-desc code {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    background: var(--bg3);
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--accent);
+  }
+
+  /* Config summary cards (view mode) */
+  .cfg-summary-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+  }
+  .cfg-summary-card-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text3);
+    margin-bottom: 10px;
+  }
+  .cfg-summary-body { flex: 1; }
+  .cfg-sum-line {
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.6;
+    padding: 2px 0;
+  }
+  .cfg-sum-ok   { color: #158a3e; font-weight: 600; }
+  .cfg-sum-warn { color: var(--amber); }
+
+  /* Config output blocks */
+  .cfg-output-block {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+  }
+  .cfg-output-block-title {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .cfg-output-block-desc {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--text3);
+    line-height: 1.5;
+    margin-bottom: 4px;
+  }
+  .cfg-file-status {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: #158a3e;
+    margin-top: 4px;
+  }
+  .cfg-output-optional-empty { opacity: 0.5; }
+
+  @media (max-width: 700px) {
+    .cfg-summary-card, .cfg-output-block { grid-column: 1 / -1; }
+  }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+  /* Instructions tab */
+  .instr-section {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .instr-section-optional { border-color: rgba(91,33,182,0.2); background: rgba(91,33,182,0.02); }
+  .instr-section-eyebrow { font-family: var(--sans); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 4px; }
+  .instr-section-optional .instr-section-eyebrow { color: #5b21b6; }
+  .instr-section-title { font-family: var(--sans); font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
+  .instr-body { font-family: var(--sans); font-size: 13px; color: var(--text2); line-height: 1.65; }
+  .instr-body p { margin-bottom: 8px; }
+  .instr-body code { font-family: 'DM Mono', monospace; font-size: 11px; background: var(--bg3); padding: 1px 5px; border-radius: 3px; color: var(--accent); }
+  .instr-steps { display: flex; flex-direction: column; gap: 10px; margin: 14px 0; }
+  .instr-step { display: flex; gap: 12px; align-items: flex-start; }
+  .instr-num { min-width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #fff; font-family: var(--sans); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .instr-section-optional .instr-num { background: #5b21b6; }
+  .instr-note { font-size: 12px; color: var(--text3); background: var(--bg3); border-left: 3px solid var(--border2); border-radius: 4px; padding: 10px 14px; margin-top: 12px; line-height: 1.6; font-family: var(--sans); }
+
+  .divider { height: 1px; background: var(--border); margin: 16px 0; }
+  .score-layout { display: grid; grid-template-columns: 1fr 340px; gap: 20px; }
+  @media (max-width: 700px) { .score-layout { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left" style="display:flex;align-items:flex-start;gap:12px;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="38" height="38" style="flex-shrink:0;border-radius:8px;margin-top:2px;">
+        <rect width="128" height="128" rx="22" fill="#0369a1"/>
+        <line x1="38" y1="37" x2="8" y2="33" stroke="white" stroke-width="2.5" stroke-opacity="0.9" stroke-linecap="round"/>
+        <line x1="38" y1="41" x2="6" y2="46" stroke="white" stroke-width="1.5" stroke-opacity="0.45" stroke-linecap="round"/>
+        <line x1="64" y1="37" x2="94" y2="33" stroke="white" stroke-width="2.5" stroke-opacity="0.9" stroke-linecap="round"/>
+        <line x1="64" y1="41" x2="96" y2="46" stroke="white" stroke-width="1.5" stroke-opacity="0.45" stroke-linecap="round"/>
+        <polygon points="51,14 66,26 36,26" fill="white"/>
+        <rect x="34" y="26" width="34" height="13" rx="2" fill="white"/>
+        <rect x="39" y="28" width="2.5" height="9" rx="1" fill="#0369a1"/>
+        <rect x="46" y="28" width="2.5" height="9" rx="1" fill="#0369a1"/>
+        <rect x="53" y="28" width="2.5" height="9" rx="1" fill="#0369a1"/>
+        <rect x="60" y="28" width="2.5" height="9" rx="1" fill="#0369a1"/>
+        <rect x="31" y="38" width="40" height="5" rx="2" fill="white"/>
+        <polygon points="37,43 65,43 62,90 40,90" fill="white"/>
+        <polygon points="37,55 65,47 65,58 37,67" fill="#0369a1"/>
+        <polygon points="37,72 65,64 65,75 37,83" fill="#0369a1"/>
+        <rect x="33" y="89" width="36" height="5" rx="2" fill="white"/>
+        <rect x="33" y="96" width="62" height="10" rx="3" fill="white"/>
+      </svg>
+      <div>
+        <div class="logo">LIGHTHOUSE <span style="font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:0.5px;color:#fff;background:var(--accent);padding:3px 8px;border-radius:5px;vertical-align:middle;margin-left:4px;">DEMO — FICTIONAL DATA</span></div>
+        <div class="tagline">Navigating the job market fog. Finding you back home.</div>
+        <div class="tagline" style="opacity:0.5;font-style:italic;">· sample profile: John Doe · all companies and roles below are made up ·</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
+      <div class="header-stats">
+        <div class="stat-pill">
+          <div class="num" id="stat-total">0</div>
+          <div class="lbl">Assessed</div>
+        </div>
+        <div class="stat-pill">
+          <div class="num" id="stat-applied">0</div>
+          <div class="lbl">Applied</div>
+        </div>
+        <div class="stat-pill">
+          <div class="num" id="stat-active">0</div>
+          <div class="lbl">Interviewing</div>
+        </div>
+        <div class="stat-pill">
+          <div class="num" id="stat-response">0%</div>
+          <div class="lbl">Response</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span style="color:var(--text3);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;" id="last-export-label"></span>
+        <button class="btn btn-ghost btn-sm" onclick="importData()" title="Load a previously exported JSON file">Import</button>
+        <button class="btn btn-sm" onclick="exportData()" title="Download your pipeline as a JSON file">Export</button>
+      </div>
+    </div>
+  </div>
+  <!-- Hidden file input for import -->
+  <input type="file" id="import-file-input" accept=".json" style="display:none;" onchange="handleImportFile(event)">
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <div class="tab active" data-tab="pipeline">Pipeline</div>
+    <div class="tab" data-tab="intel">Intelligence</div>
+    <div class="tab" data-tab="config">Config</div>
+    <div class="tab" data-tab="instructions">Instructions</div>
+  </div>
+
+  <!-- PIPELINE TAB -->
+  <div class="panel active" id="tab-pipeline">
+    <div id="pipeline-content"></div>
+  </div>
+
+  <!-- INTELLIGENCE TAB -->
+  <div class="panel" id="tab-intel">
+    <div id="intel-empty" class="empty-state" style="display:none;">
+      <div class="empty-icon">◈</div>
+      <p>Score and save at least 5 roles to unlock pattern intelligence.</p>
+    </div>
+    <div id="intel-content">
+      <div class="intel-grid">
+        <div class="intel-card">
+          <div class="intel-card-title">Funnel Summary</div>
+          <div id="funnel-stats"></div>
+        </div>
+        <div class="intel-card">
+          <div class="intel-card-title">Interview Funnel</div>
+          <div id="interview-funnel"></div>
+        </div>
+        <div class="intel-card">
+          <div class="intel-card-title">Verdict Distribution</div>
+          <div id="verdict-dist"></div>
+        </div>
+        <div class="intel-card">
+          <div class="intel-card-title">Domain Breakdown</div>
+          <div id="domain-dist"></div>
+        </div>
+        <div class="intel-card" style="grid-column: 1 / -1;">
+          <div class="intel-card-title">Patterns &amp; Insights</div>
+          <div id="insights-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISCOVERY TAB -->
+  <div class="panel" id="tab-discovery">
+    <div class="add-seed-notice">
+      ◈ Phase 1: Manual intake. Paste roles from LinkedIn alerts, email, or any source above to score &amp; track. Proactive RSS discovery coming in Phase 2.
+    </div>
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-title">Target Companies (Watchlist)</div>
+      <div style="display:flex;gap:8px;margin-bottom:12px;">
+        <input type="text" id="company-input" placeholder="Add a company to watch..." style="flex:1;">
+        <button class="btn btn-sm" onclick="addWatchCompany()">Add</button>
+      </div>
+      <div id="watchlist" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Seed Companies (pre-loaded from your search history)</div>
+      <div style="color:var(--text3);font-size:12px;margin-bottom:10px;">These are companies already in your pipeline or network. Click to add to watchlist.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;" id="seed-companies"></div>
+    </div>
+  </div>
+
+  <!-- INSTRUCTIONS TAB -->
+  <div class="panel" id="tab-instructions">
+    <div style="max-width:760px;">
+
+      <!-- ── SECTION INTRO ── -->
+      <div style="font-family:var(--sans);font-size:13px;color:var(--text3);line-height:1.7;margin-bottom:24px;">
+        Lighthouse is the hub of a three-part job search system. This page walks through how to set everything up and use it day to day. The Job Scorer bot is required. The Career Coach bot is optional but recommended.
+      </div>
+
+      <!-- ── STEP 1: LIGHTHOUSE + CONFIG ── -->
+      <div class="instr-section">
+        <div class="instr-section-eyebrow">Step 1 — Required</div>
+        <div class="instr-section-title">Set up Lighthouse</div>
+        <div class="instr-body">
+          <p>You're already here. Lighthouse is your pipeline tracker, identity file generator, and the hub that everything else connects to. Before setting up anything else, complete your profile in the <strong>Config tab</strong>.</p>
+          <div class="instr-steps">
+            <div class="instr-step"><div class="instr-num">1</div><div>Open the <strong>Config tab</strong>. Fill in the three sections: Identity (who you are and what you're looking for), Scorer Requirements (your hard gates for scoring), and optionally Cover Letter style.</div></div>
+            <div class="instr-step"><div class="instr-num">2</div><div>Hit <strong>Save</strong> on each section as you complete it. This writes your <code>identity.md</code> file to the Lighthouse folder automatically.</div></div>
+            <div class="instr-step"><div class="instr-num">3</div><div>Use the <strong>Copy</strong> buttons at the bottom of Config to get your scorer instructions and identity file. You'll need these in the next step.</div></div>
+          </div>
+          <div class="instr-note">If you already have an <code>identity.md</code> file from a previous session or another tool, drop it into the Lighthouse app folder and refresh — the app will read it automatically and populate your profile.</div>
+        </div>
+      </div>
+
+      <!-- ── STEP 2: JOB SCORER BOT ── -->
+      <div class="instr-section">
+        <div class="instr-section-eyebrow">Step 2 — Required</div>
+        <div class="instr-section-title">Set up your Job Scorer bot</div>
+        <div class="instr-body">
+          <p>The Job Scorer is an AI bot — a Claude Project, a ChatGPT custom GPT, a Gemini Gem, or any AI tool that lets you set persistent instructions and attach files. It does the actual scoring work. You set it up once and reuse it every day.</p>
+          <div class="instr-steps">
+            <div class="instr-step"><div class="instr-num">1</div><div>Create a new project or custom bot in your preferred AI tool.</div></div>
+            <div class="instr-step"><div class="instr-num">2</div><div>In the <strong>instructions field</strong>, paste the scorer instructions from Lighthouse Config (the middle Copy button).</div></div>
+            <div class="instr-step"><div class="instr-num">3</div><div><strong>Attach</strong> your <code>identity.md</code> file to the project. This is where the bot learns who you are — career history, target roles, compensation expectations, resume variants.</div></div>
+            <div class="instr-step"><div class="instr-num">4</div><div>If you have a cover letter style guide, <strong>attach</strong> <code>cover_letter_style.md</code> as well. Without it, the bot scores but omits cover letter drafts.</div></div>
+          </div>
+          <div class="instr-note">When you update your <code>identity.md</code> in Lighthouse (new resume variants, changed target roles, updated comp floor), replace the attached file in your scorer bot too.</div>
+        </div>
+      </div>
+
+      <!-- ── DAILY WORKFLOW ── -->
+      <div class="instr-section">
+        <div class="instr-section-eyebrow">Daily use</div>
+        <div class="instr-section-title">Score, track, repeat</div>
+        <div class="instr-body">
+          <div class="instr-steps">
+            <div class="instr-step"><div class="instr-num">1</div><div><strong>Find roles</strong> from LinkedIn, job boards, recruiter outreach, or anywhere else. When something looks interesting, paste the job description into your Job Scorer bot.</div></div>
+            <div class="instr-step"><div class="instr-num">2</div><div>The bot returns a <strong>score, verdict, resume variant recommendation, flags, and cover letter angles</strong>. Review the output. If you decide to apply, tell the bot: <em>"I applied to this one."</em></div></div>
+            <div class="instr-step"><div class="instr-num">3</div><div>For roles you're passing on, no action needed — they'll be marked accordingly in the export.</div></div>
+            <div class="instr-step"><div class="instr-num">4</div><div>At the end of the day (or whenever you've scored a batch), tell the bot: <em>"Export today's scored roles as JSON."</em> Save the file it produces.</div></div>
+            <div class="instr-step"><div class="instr-num">5</div><div>Come back to Lighthouse. Hit <strong>Import</strong> in the top right. Select the JSON file. Lighthouse merges it into your pipeline — new roles are added, existing ones are updated without overwriting any status changes you've made here.</div></div>
+            <div class="instr-step"><div class="instr-num">6</div><div>As roles progress — recruiter calls, interviews, offers — update their status directly in the Pipeline tab by expanding the role card. Use <strong>Save Changes</strong> to commit.</div></div>
+          </div>
+          <div class="instr-note">The pipeline is your record of truth. The scorer bot is ephemeral — it scores and exports. Lighthouse holds the history.</div>
+        </div>
+      </div>
+
+      <!-- ── CAREER COACH (OPTIONAL) ── -->
+      <div class="instr-section instr-section-optional">
+        <div class="instr-section-eyebrow">Optional companion</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+          <div class="instr-section-title" style="margin-bottom:0;">Career Coach bot</div>
+          <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;">
+            <button class="btn btn-sm" style="background:#5b21b6;" onclick="copyCoachInstructions()" id="coach-copy-btn">Copy Instructions</button>
+            <button class="btn btn-ghost btn-sm" onclick="toggleCoachDetails()" id="coach-toggle-btn" style="color:#5b21b6;border-color:rgba(91,33,182,0.3);">Show details ▾</button>
+          </div>
+        </div>
+        <div style="font-family:var(--sans);font-size:13px;color:var(--text3);margin-top:6px;margin-bottom:0;">A separate AI bot that acts as your career sounding board — thought partner, interview prep, search accountability.</div>
+
+        <!-- Accordion body — collapsed by default -->
+        <div id="coach-details" style="display:none;margin-top:16px;">
+          <div class="instr-body">
+            <p>Set it up the same way as the Job Scorer bot, with different instructions and files:</p>
+            <div class="instr-steps">
+              <div class="instr-step"><div class="instr-num">1</div><div>Create a new project in your preferred AI tool. In the <strong>instructions field</strong>, paste the career coach instructions using the Copy button above.</div></div>
+              <div class="instr-step"><div class="instr-num">2</div><div><strong>Attach</strong> <code>identity.md</code> — the same file used by the Job Scorer. This is the foundation of who you are.</div></div>
+              <div class="instr-step"><div class="instr-num">3</div><div><strong>Attach</strong> your pipeline export from Lighthouse (<strong>Export</strong> button, top right). This gives the coach visibility into what you've applied to, where things stand, and what's been rejected or ghosted.</div></div>
+              <div class="instr-step"><div class="instr-num">4</div><div>Maintain a <code>network.md</code> file — a running log of recruiter outreach, former colleague conversations, warm leads, and relationship status. Attach it to this project. This file lives in the coach project and is maintained there — it is not part of Lighthouse.</div></div>
+            </div>
+            <div class="instr-note" style="border-left-color:rgba(91,33,182,0.35);background:rgba(91,33,182,0.04);color:#3b0764;">
+              <strong>Instructions preview</strong>
+              <div style="font-family:'DM Mono',monospace;font-size:11px;color:#4c1d95;line-height:1.7;white-space:pre-wrap;margin-top:8px;" id="coach-instructions-preview"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── REFERENCE ── -->
+      <div class="instr-section">
+        <div class="instr-section-eyebrow">Reference</div>
+        <div class="instr-section-title">Status &amp; verdict guide</div>
+        <div class="instr-body">
+          <div style="display:flex;gap:32px;flex-wrap:wrap;">
+            <div style="flex:1;min-width:260px;">
+              <div style="font-family:var(--sans);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--text3);margin-bottom:10px;">Pipeline statuses</div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <div style="display:flex;align-items:center;gap:10px;"><span class="status-badge status-scored">scored</span><span style="color:var(--text2);font-size:12px;font-family:var(--sans);">Assessed — no action taken yet</span></div>
+                <div style="display:flex;align-items:center;gap:10px;"><span class="status-badge status-applied">applied</span><span style="color:var(--text2);font-size:12px;font-family:var(--sans);">Submitted — awaiting response</span></div>
+                <div style="display:flex;align-items:center;gap:10px;"><span class="status-badge status-interview-recruiter">interview-recruiter</span><span style="color:var(--text2);font-size:12px;font-family:var(--sans);">Recruiter screen</span></div>
+                <div style="display:flex;align-items:center;gap:10px;"><span class="status-badge status-interview-hiringmgr">interview-hiringmgr</span><span style="color:var(--text2);font-size:12px;font-family:var(--sans);">Hiring manager conversation</span></div>
+                <div style="display:flex;align-items:center;gap:10px;"><span class="status-badge status-interview-panel">interview-panel</span><span style="color:var(--text2);font-size:12px;font-family:var(--sans);">Panel, loop, or exec round</span></div>
+                <div style="display:flex;align-items:center;gap:10px;"><span class="status-badge status-offer">offer</span><span style="color:var(--text2);font-size:12px;font-family:var(--sans);">Offer extended</span></div>
+                <div style="display:flex;align-items:center;gap:10px;"><span class="status-badge status-ghosted">ghosted</span><span style="color:var(--text2);font-size:12px;font-family:var(--sans);">In process — they went silent</span></div>
+                <div style="display:flex;align-items:center;gap:10px;"><span class="status-badge status-shelved">shelved</span><span style="color:var(--text2);font-size:12px;font-family:var(--sans);">Never got off the ground</span></div>
+                <div style="display:flex;align-items:center;gap:10px;"><span class="status-badge status-rejected">rejected</span><span style="color:var(--text2);font-size:12px;font-family:var(--sans);">Explicit rejection received</span></div>
+                <div style="display:flex;align-items:center;gap:10px;"><span class="status-badge status-passed">passed</span><span style="color:var(--text2);font-size:12px;font-family:var(--sans);">You chose not to pursue</span></div>
+              </div>
+            </div>
+            <div style="flex:1;min-width:200px;">
+              <div style="font-family:var(--sans);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--text3);margin-bottom:10px;">Scorer verdicts</div>
+              <div style="display:flex;flex-direction:column;gap:7px;">
+                <div style="display:flex;align-items:center;gap:8px;"><span class="verdict-badge verdict-priority">Priority</span><span style="color:var(--text3);font-size:12px;font-family:var(--sans);">85%+ — apply immediately</span></div>
+                <div style="display:flex;align-items:center;gap:8px;"><span class="verdict-badge verdict-strong">Strong</span><span style="color:var(--text3);font-size:12px;font-family:var(--sans);">70–84% — high priority</span></div>
+                <div style="display:flex;align-items:center;gap:8px;"><span class="verdict-badge verdict-maybe">Maybe</span><span style="color:var(--text3);font-size:12px;font-family:var(--sans);">55–69% — worth considering</span></div>
+                <div style="display:flex;align-items:center;gap:8px;"><span class="verdict-badge verdict-borderline">Borderline</span><span style="color:var(--text3);font-size:12px;font-family:var(--sans);">40–54% — proceed carefully</span></div>
+                <div style="display:flex;align-items:center;gap:8px;"><span class="verdict-badge verdict-skip">Skip</span><span style="color:var(--text3);font-size:12px;font-family:var(--sans);">&lt;40% — not worth your time</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONFIG TAB -->
+  <div class="panel" id="tab-config">
+    <div id="cfg-view-mode" style="display:none;">
+      <!-- COMPLETED STATE: summary cards -->
+      <div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:20px;">
+        <span style="font-family:var(--sans);font-size:11px;color:var(--text3);align-self:center;" id="cfg-identity-status"></span>
+        <button class="btn btn-ghost btn-sm" onclick="switchToEditMode()">Edit Profile</button>
+        <button class="btn btn-sm" onclick="generateAllOutputs()">Regenerate Files</button>
+      </div>
+
+      <!-- Summary cards -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;">
+        <div class="cfg-summary-card">
+          <div class="cfg-summary-card-title">① Identity</div>
+          <div id="cfg-sum-identity" class="cfg-summary-body"></div>
+          <button class="btn btn-ghost btn-sm" style="margin-top:12px;" onclick="scrollToSection('identity')">Edit</button>
+        </div>
+        <div class="cfg-summary-card">
+          <div class="cfg-summary-card-title">② Scorer Requirements</div>
+          <div id="cfg-sum-scorer" class="cfg-summary-body"></div>
+          <button class="btn btn-ghost btn-sm" style="margin-top:12px;" onclick="scrollToSection('reqs')">Edit</button>
+        </div>
+        <div class="cfg-summary-card">
+          <div class="cfg-summary-card-title">③ Cover Letter</div>
+          <div id="cfg-sum-cl" class="cfg-summary-body"></div>
+          <button class="btn btn-ghost btn-sm" style="margin-top:12px;" onclick="scrollToSection('cl')">Edit</button>
+        </div>
+      </div>
+
+      <!-- Output blocks -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;">
+        <div class="cfg-output-block">
+          <div class="cfg-output-block-title">identity.md</div>
+          <div class="cfg-output-block-desc">Attach to all three projects</div>
+          <div id="status-identity" class="cfg-file-status"></div>
+          <button class="btn btn-sm" id="copy-identity-btn" style="margin-top:10px;width:100%;" onclick="copyOutput('identity')">Copy identity.md</button>
+        </div>
+        <div class="cfg-output-block">
+          <div class="cfg-output-block-title">Scorer Instructions</div>
+          <div class="cfg-output-block-desc">Paste into Job Scorer project instructions field</div>
+          <div id="status-scorer" class="cfg-file-status"></div>
+          <button class="btn btn-sm" id="copy-scorer-btn" style="margin-top:10px;width:100%;" onclick="copyOutput('scorer')">Copy Instructions</button>
+        </div>
+        <div class="cfg-output-block cfg-output-optional" id="cl-output-block">
+          <div class="cfg-output-block-title">cover_letter_style.md <span style="font-size:10px;font-weight:400;opacity:0.7;">optional</span></div>
+          <div class="cfg-output-block-desc">Attach to Job Scorer project</div>
+          <div id="status-cl" class="cfg-file-status"></div>
+          <button class="btn btn-ghost btn-sm" style="margin-top:10px;width:100%;" id="cl-copy-btn" onclick="copyOutput('cl')">Copy Style Guide</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT MODE FORM -->
+    <div id="cfg-edit-mode">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div style="font-family:var(--sans);font-size:14px;font-weight:600;color:var(--text);">Edit Search Profile</div>
+        <button class="btn btn-ghost btn-sm" id="cfg-cancel-edit" onclick="cancelEdit()" style="display:none;">Cancel</button>
+      </div>
+      <div style="background:rgba(3,105,161,0.05);border:1px solid rgba(3,105,161,0.18);border-radius:8px;padding:12px 18px;margin-bottom:24px;font-family:var(--sans);font-size:13px;color:#0369a1;line-height:1.6;">
+        Fill in your search profile below. Lighthouse will generate three files: an <strong>identity.md</strong> attached to all projects, <strong>scorer instructions</strong> pasted into your Job Scorer project, and an optional <strong>cover letter style guide</strong> attached to the scorer.
+        <span id="cfg-identity-source-note" style="display:none;margin-left:8px;font-style:italic;">identity.md loaded from your job-tracker folder.</span>
+      </div>
+
+      <!-- ① IDENTITY SECTION -->
+      <div class="cfg-zone-header">
+        <div class="cfg-zone-number">①</div>
+        <div style="flex:1;">
+          <div class="cfg-zone-title">Identity</div>
+          <div class="cfg-zone-desc">Produces <code>identity.md</code> — attach to all three projects</div>
+        </div>
+        <button class="btn btn-sm" id="btn-save-identity" onclick="saveSection('identity')" title="Save identity fields and write identity.md">Save Identity</button>
+      </div>
+
+      <div class="cfg-section" id="cfg-identity">
+        <div class="cfg-section-header" onclick="toggleCfgSection('identity')">
+          <span class="cfg-section-title">Who You Are</span>
+          <span class="cfg-chevron" id="chev-identity">▾</span>
+        </div>
+        <div class="cfg-section-body" id="body-identity">
+          <div class="cfg-hint">The basics that anchor your identity across all three projects.</div>
+          <div class="cfg-grid2">
+            <div class="field-row"><label class="field-label" for="cfg-name">Full Name</label><input type="text" id="cfg-name" placeholder="e.g. John Doe"></div>
+            <div class="field-row"><label class="field-label" for="cfg-title">Current / Most Recent Title</label><input type="text" id="cfg-title" placeholder="e.g. Director of Analytics"></div>
+            <div class="field-row"><label class="field-label" for="cfg-years">Years of Experience</label><input type="text" id="cfg-years" placeholder="e.g. ~10 years"></div>
+            <div class="field-row"><label class="field-label" for="cfg-location">Location</label><input type="text" id="cfg-location" placeholder="e.g. New York, NY"></div>
+          </div>
+          <div class="field-row">
+            <label class="field-label" for="cfg-identity-desc">How you describe yourself professionally</label>
+            <span class="cfg-eg" style="margin-bottom:6px;">Your level, what you want more of, what you want less of, how you work best. e.g. "People leader who thrives building teams from scratch at growth-stage companies."</span>
+            <textarea id="cfg-identity-desc" rows="3" placeholder="Your honest self-description. The more specific, the better the scorer understands what good looks like for you."></textarea>
+          </div>
+          <div class="field-row">
+            <label class="field-label" for="cfg-wlb">Work priorities &amp; constraints</label>
+            <span class="cfg-eg" style="margin-bottom:6px;">What you'll trade and what you won't. e.g. "Fully remote required." · "No travel above 20%." · "Will trade comp for strong culture."</span>
+            <textarea id="cfg-wlb" rows="2" placeholder="e.g. Remote-first strongly preferred. Will trade some compensation for meaningful scope and strong team culture."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="cfg-section" id="cfg-career">
+        <div class="cfg-section-header" onclick="toggleCfgSection('career')">
+          <span class="cfg-section-title">Career Summary</span>
+          <span class="cfg-chevron" id="chev-career">▾</span>
+        </div>
+        <div class="cfg-section-body" id="body-career">
+          <div class="cfg-hint">Paste your resume here. The scorer extracts proof points — team sizes, metrics, scope, wins — to reference when evaluating roles and writing cover letter angles. The better your resume leads with outcomes, the sharper the scoring.</div>
+          <div class="field-row">
+            <label class="field-label" for="cfg-resume-paste">Your Resume</label>
+            <span class="cfg-eg" style="margin-bottom:6px;">Plain text is fine. Copy from Word, Google Doc, or PDF. Formatting doesn't matter — content does.</span>
+            <textarea id="cfg-resume-paste" rows="14" placeholder="Paste your full resume here..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="cfg-section" id="cfg-targets">
+        <div class="cfg-section-header" onclick="toggleCfgSection('targets')">
+          <span class="cfg-section-title">Target Roles</span>
+          <span class="cfg-chevron" id="chev-targets">▾</span>
+        </div>
+        <div class="cfg-section-body" id="body-targets">
+          <div class="cfg-hint">Define what good looks like — role scope, company type, and domain. Be specific about what you want and what you don't.</div>
+          <div class="field-row">
+            <label class="field-label" for="cfg-titles">Preferred titles</label>
+            <span class="cfg-eg" style="margin-bottom:6px;">Comma-separated — e.g. "Senior Manager of Analytics, Director of Data Science, Head of Business Intelligence"</span>
+            <input type="text" id="cfg-titles" placeholder="e.g. Senior Manager of Analytics, Director of Data Science">
+          </div>
+          <div class="field-row">
+            <label class="field-label" for="cfg-company-types">Preferred company types</label>
+            <span class="cfg-eg" style="margin-bottom:6px;">e.g. "Early-stage startup, Series B–D" · "Software or SaaS — not a services or consulting firm"</span>
+            <input type="text" id="cfg-company-types" placeholder="e.g. Software or SaaS company, growth-stage preferred">
+          </div>
+          <div class="field-row">
+            <label class="field-label" for="cfg-domain">Domain stance</label>
+            <span class="cfg-eg" style="margin-bottom:6px;">e.g. "Open to all domains." · "Prefer FinTech or Healthcare but not exclusive." · "Avoiding retail and logistics."</span>
+            <textarea id="cfg-domain" rows="2" placeholder="e.g. Open to all industries. Will follow the best role regardless of domain."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="cfg-section" id="cfg-comp">
+        <div class="cfg-section-header" onclick="toggleCfgSection('comp')">
+          <span class="cfg-section-title">Compensation</span>
+          <span class="cfg-chevron" id="chev-comp">▾</span>
+        </div>
+        <div class="cfg-section-body" id="body-comp">
+          <div class="cfg-hint">The scorer uses this to assess whether a role credibly pays what you need given company size, stage, and industry norms.</div>
+          <div class="field-row">
+            <label class="field-label" for="cfg-comp-floor">Base salary floor</label>
+            <span class="cfg-eg" style="margin-bottom:6px;">The number below which you won't go — e.g. $100,000 · $150,000 · $200,000</span>
+            <input type="text" id="cfg-comp-floor" placeholder="e.g. $100,000">
+          </div>
+          <div class="field-row">
+            <label class="field-label" for="cfg-comp-notes">Additional notes</label>
+            <span class="cfg-eg" style="margin-bottom:6px;">e.g. "Floor is hard, no exceptions." · "Floor is fungible by $10–15K for strong culture fit." · "Targeting total comp, not just base."</span>
+            <textarea id="cfg-comp-notes" rows="2" placeholder="e.g. Floor is fungible by ~$10K for strong culture fit or meaningful equity."></textarea>
+          </div>
+          <input type="hidden" id="cfg-comp-flex" value="">
+        </div>
+      </div>
+
+      <div class="cfg-section" id="cfg-resumes">
+        <div class="cfg-section-header" onclick="toggleCfgSection('resumes')">
+          <span class="cfg-section-title">Resume Variants <span style="font-size:11px;font-weight:400;color:var(--text3);margin-left:6px;">optional</span></span>
+          <span class="cfg-chevron" id="chev-resumes">▾</span>
+        </div>
+        <div class="cfg-section-body" id="body-resumes">
+          <div class="cfg-hint">Only fill this in if you maintain multiple resume versions. Leave blank and the scorer skips variant recommendations entirely. <strong>Example:</strong> Name: "FinTech Resume" · Triggers: "payments, banking, credit, financial services."</div>
+          <div id="cfg-resume-entries"></div>
+          <button class="btn btn-ghost btn-sm" style="margin-top:8px;" onclick="addResumeVariant()">+ Add Variant</button>
+        </div>
+      </div>
+
+      <div class="cfg-section" id="cfg-extended">
+        <div class="cfg-section-header" onclick="toggleCfgSection('extended')">
+          <span class="cfg-section-title">Extended Context</span>
+          <span class="cfg-chevron" id="chev-extended">▾</span>
+        </div>
+        <div class="cfg-section-body" id="body-extended">
+          <div class="cfg-hint" style="border-left-color:rgba(91,33,182,0.4);background:rgba(91,33,182,0.04);color:#3b0764;">Freeform narrative that grows over time. This is where your job search project will append new learnings — decision-making frameworks, interview notes, situational context, emerging patterns. Paste existing narrative here or leave blank to start. Claude amends this section, never the structured fields above.</div>
+          <div class="field-row">
+            <label class="field-label" for="cfg-extended-ctx">Narrative context</label>
+            <span class="cfg-eg" style="margin-bottom:6px;">Paste any existing identity narrative here. Your Career Transition project will append new content to this section over time.</span>
+            <textarea id="cfg-extended-ctx" rows="12" placeholder="Extended context will accumulate here as your search progresses. Leave blank to start fresh."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- ② SCORER REQUIREMENTS SECTION -->
+      <div class="cfg-zone-header" style="margin-top:32px;">
+        <div class="cfg-zone-number">②</div>
+        <div style="flex:1;">
+          <div class="cfg-zone-title">Scorer Requirements</div>
+          <div class="cfg-zone-desc">Produces scorer instructions — paste into your Job Scorer project instructions field</div>
+        </div>
+        <button class="btn btn-sm" id="btn-save-scorer" onclick="saveSection('scorer')" title="Save requirements and rebuild scorer instructions">Save Requirements</button>
+      </div>
+
+      <div class="cfg-section" id="cfg-reqs">
+        <div class="cfg-section-header" onclick="toggleCfgSection('reqs')">
+          <span class="cfg-section-title">Hard Requirements &amp; Exclusions</span>
+          <span class="cfg-chevron" id="chev-reqs">▾</span>
+        </div>
+        <div class="cfg-section-body" id="body-reqs">
+          <div class="cfg-hint">Hard requirements must ALL be present for a score above 65%. Hard exclusions trigger a Skip verdict regardless of other signals. Be specific — vague requirements produce vague scoring.</div>
+          <div class="cfg-grid2">
+            <div class="field-row">
+              <label class="field-label" for="cfg-hard-reqs">Hard Requirements</label>
+              <span class="cfg-eg" style="margin-bottom:6px;">One per line — all must be present for a score above 65%</span>
+              <textarea id="cfg-hard-reqs" rows="6" placeholder="e.g.&#10;Role has meaningful scope in my core discipline&#10;Team to manage or significant cross-functional leadership&#10;Type of company I want to work at&#10;Compensation credibly in my target range"></textarea>
+            </div>
+            <div class="field-row">
+              <label class="field-label" for="cfg-hard-excls">Hard Exclusions</label>
+              <span class="cfg-eg" style="margin-bottom:6px;">One per line — any of these triggers a Skip regardless of other signals</span>
+              <textarea id="cfg-hard-excls" rows="6" placeholder="e.g.&#10;Pure individual contributor with no leadership path&#10;Company type I've ruled out&#10;Title level I'm not pursuing&#10;Function or domain I'm actively avoiding"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ③ COVER LETTER SECTION -->
+      <div class="cfg-zone-header" style="margin-top:32px;">
+        <div class="cfg-zone-number">③</div>
+        <div style="flex:1;">
+          <div class="cfg-zone-title">Cover Letter Assistant <span style="font-size:12px;font-weight:400;color:var(--text3);margin-left:6px;">optional</span></div>
+          <div class="cfg-zone-desc">Produces <code>cover_letter_style.md</code> — attach to Job Scorer project. Skip this section and the scorer omits cover letters.</div>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="btn-save-cl" onclick="saveSection('cl')" title="Save cover letter style and write cover_letter_style.md">Save Style</button>
+      </div>
+
+      <div class="cfg-section" id="cfg-cl">
+        <div class="cfg-section-header" onclick="toggleCfgSection('cl')">
+          <span class="cfg-section-title">Cover Letter Style</span>
+          <span class="cfg-chevron" id="chev-cl">▾</span>
+        </div>
+        <div class="cfg-section-body" id="body-cl">
+          <div class="cfg-hint">Choose one path. Leave both blank and the scorer will omit cover letters entirely.</div>
+          <div style="display:flex;gap:16px;margin-bottom:18px;flex-wrap:wrap;">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-family:var(--sans);font-size:13px;color:var(--text2);">
+              <input type="radio" name="cl-path" value="paste" id="cl-path-paste" onchange="toggleCLPath()" style="accent-color:var(--accent);">
+              I have a style guide or sample to paste in
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-family:var(--sans);font-size:13px;color:var(--text2);">
+              <input type="radio" name="cl-path" value="prefs" id="cl-path-prefs" onchange="toggleCLPath()" style="accent-color:var(--accent);">
+              I want to define my preferences from scratch
+            </label>
+          </div>
+          <div id="cl-paste-area" style="display:none;">
+            <div class="field-row">
+              <label class="field-label" for="cfg-cl-paste">Paste your style guide or a sample cover letter</label>
+              <textarea id="cfg-cl-paste" rows="10" placeholder="Paste your cover letter style guide, template, or a strong sample here."></textarea>
+            </div>
+          </div>
+          <div id="cl-prefs-area" style="display:none;">
+            <div class="cfg-grid2">
+              <div class="field-row">
+                <label class="field-label" for="cfg-cl-tone">Tone</label>
+                <span class="cfg-eg" style="margin-bottom:6px;">e.g. "Confident and direct, not formal"</span>
+                <input type="text" id="cfg-cl-tone" placeholder="e.g. Confident, direct, conversational">
+              </div>
+              <div class="field-row">
+                <label class="field-label" for="cfg-cl-length">Target length</label>
+                <span class="cfg-eg" style="margin-bottom:6px;">e.g. "200–250 words"</span>
+                <input type="text" id="cfg-cl-length" placeholder="e.g. 200-250 words">
+              </div>
+            </div>
+            <div class="field-row">
+              <label class="field-label" for="cfg-cl-avoid">Things to always avoid</label>
+              <span class="cfg-eg" style="margin-bottom:6px;">e.g. "No em-dashes, no generic openers, no 'I am excited to apply'"</span>
+              <textarea id="cfg-cl-avoid" rows="3" placeholder="e.g. No em-dashes. No AI-sounding openers. Lead with a specific accomplishment."></textarea>
+            </div>
+            <div class="field-row">
+              <label class="field-label" for="cfg-cl-structure">Structure notes</label>
+              <span class="cfg-eg" style="margin-bottom:6px;">e.g. "3 paragraphs: hook, evidence, close"</span>
+              <textarea id="cfg-cl-structure" rows="2" placeholder="e.g. 3 paragraphs. Hook with a specific metric. Close with direct invitation to talk."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GENERATE -->
+      <div style="display:flex;gap:12px;align-items:center;margin-top:28px;padding-top:20px;border-top:2px solid var(--border);">
+        <button class="btn" onclick="generateAllOutputs()">Generate All Files</button>
+        <span style="font-family:var(--sans);color:var(--text3);font-size:12px;">Generates identity.md, scorer instructions, and cover letter style (if provided).</span>
+      </div>
+    </div>
+  </div>
+
+<script>
+// ── Constants ────────────────────────────────────────────────
+const STORE_KEY = 'lighthouse_demo_v1';
+const SCHEMA_VERSION = 4;
+
+// ── Demo mode: self-contained fictional data, no server required ─────────────
+// Everything below (DEMO_CONFIG, DEMO_DATA) is a made-up persona ("John Doe") and
+// a made-up pipeline of fictional companies. Edits made while browsing this demo
+// are kept in this browser's localStorage only — nothing is sent anywhere.
+const DEMO_CONFIG = {
+  "name": "John Doe",
+  "title": "Financial Analyst at Cedar & Vine Retail — actively exploring senior analyst and data engineering roles",
+  "identityDesc": "Started in financial planning and analysis, moved into cross-functional business analysis over the last two years. Comfortable owning a dashboard end to end: pulling the data, building the model, presenting the recommendation. Looking to either deepen into a senior analyst seat or make a lateral move into data engineering, depending on what the next company actually needs.",
+  "targetTitles": "Business Analyst, Senior Analyst, Financial Analyst, Data Analyst, Data Engineer, BI Analyst",
+  "companyTypes": "100-1,000 employees, established enough to have real data infrastructure, small enough that one analyst's work still visibly moves a decision",
+  "domain": "Not a hard filter. Retail and logistics experience so far, open to healthcare, insurance, fintech, or SaaS. Prefers not to return to a pure reporting-factory environment.",
+  "compFloor": "$85K base minimum. $100K+ is the comfortable target. $115K+ is ideal for a senior-level seat.",
+  "resumePaste": "Four years of experience spanning FP&A and cross-functional analytics. Built recurring revenue and headcount forecasting models used directly by department leads, then moved into a business analyst role where the work shifted to SQL-heavy ad hoc analysis and dashboard ownership. Comfortable in Excel, SQL, and one BI tool; picking up Python and dbt to make the jump into data engineering credible.",
+  "extendedCtx": "## Operating Style\n- Prefers a clear ask with room to figure out the \"how.\" Does not need every requirement spelled out, but needs to know what decision the analysis is supposed to support.\n- Most engaged when the work has a visible downstream consequence, a number that changes a plan, not a report that gets filed and forgotten.\n- Picks up new tools fast when there is a real problem attached to learning them; slower to pick up a tool for its own sake.\n\n## The Manager Fit Filter\nThe clearest predictor of whether a role has worked out is whether the direct manager treats analysis as a decision input or as a deliverable to check off a list. The best fit so far was a logistics role where the manager looped John into the actual planning meeting, not just the request that came out of it. The worst fit was a role where every dashboard request arrived through a ticket queue with no context on the decision behind it.\n\n## Interview Notes\n- Comfortable walking through a past forecasting model end to end: the assumptions, what changed the recommendation, and what the business actually did with it afterward.\n- Weakest area historically has been distributed-systems and pipeline-orchestration questions in data engineering interviews. Studying dbt and basic Airflow concepts rather than avoiding those interview rounds.\n\n## Search Notes\nTracking analyst and data engineering postings across mid-size companies via company career pages and LinkedIn alerts. Cross-checks Glassdoor rating before applying anywhere below 3.5.\n\n---\n\n*This file grows over time, update it as patterns emerge: after a strong interview, after a rejection with useful feedback, after realizing a stated preference doesn't hold up in practice.*",
+  "variants": [
+    { "name": "Analyst Resume", "triggers": "business analyst, financial analyst, senior analyst, reporting, forecasting, FP&A" },
+    { "name": "Data Engineer Resume", "triggers": "data engineer, ETL, pipelines, dbt, warehouse, analytics engineering" }
+  ],
+  "hardReqs": "SQL proficiency demonstrated through past work\nAt least one BI tool (Looker, Tableau, or Power BI)\nSome direct stakeholder-facing work, not purely back-office reporting",
+  "hardExcls": "Pure data-entry or report-distribution role with no analysis scope\nContract-to-hire under 6 months\nCompensation below $85K base with no equity or bonus offsetting the gap",
+  "clPath": "paste",
+  "clPaste": "# John Doe — Cover Letter Style Guide\n### Instructions for the Job Scorer / Cover Letter Generation Application\n\n---\n\n## Who John Is (Core Positioning)\n\nJohn Doe is an analyst with four years of experience spanning financial planning and cross-functional business analysis. He is transitioning toward either a senior analyst seat or a lateral move into data engineering. He is best described as a **builder-analyst**: someone who does not just report the number, but builds the model that produces it.\n\n**Key Roles Held:**\n- Financial Analyst\n- Business Analyst\n- (Target) Senior Analyst / Data Engineer\n\n**Industries with Experience:** Retail, Logistics\n**Open To:** Healthcare, Insurance, FinTech, SaaS\n\n---\n\n## Core Career Proof Points (Always Available to Use)\n\n### Cedar & Vine Retail *(Financial Analyst, most recent employer)*\n- Built the quarterly headcount and revenue forecasting model used directly by department leads\n- Reduced monthly close reporting time by 30% by converting a manual Excel process into a repeatable SQL and dashboard pipeline\n- Partnered directly with the FP&A director to prepare board-level forecast variance explanations\n\n### Northfield Logistics *(Business Analyst, prior employer)*\n- Owned the on-time delivery dashboard used by regional operations managers to flag underperforming routes\n- Ran the root-cause analysis behind a recurring late-shipment pattern, traced it to a scheduling handoff issue, and the fix improved on-time rate by 6 points\n- Wrote the first documented SQL data dictionary for the operations team, still in use today\n\n---\n\n## Structural Formula (3 Paragraphs)\n\n### Paragraph 1 — The Hook (3-5 sentences)\nOpen with the company and a specific observation about what they are building or the problem they are solving, then connect it directly to John's work.\n\n> **Formula:** \"[Company] is [doing/building X]. That is close to the work I have been doing at [Employer], [one-line specific connection].\"\n\n**Do NOT open with:** \"I am writing to express my interest in the [Role] position at [Company].\"\n\n### Paragraph 2 — The Evidence (4-6 sentences)\n2-3 specific examples from the proof points above, each anchored with a real metric, connected to what the company's posting actually asks for.\n\n### Paragraph 3 — The Close (2-3 sentences)\nA short, confident close naming the specific part of the role John is most excited about, then a direct invitation to talk.\n\n---\n\n## Tone & Voice Guidelines\n\n### Critical Punctuation Rule\n**Never use em dashes.** Restructure the sentence into two sentences, a comma, or parentheses instead.\n\n### Do This\n- Lead with the company, not with \"I.\"\n- Use real numbers every time: \"30% reduction,\" \"6-point improvement,\" \"first documented data dictionary.\"\n- Keep it under 250 words.\n- Sound like a peer describing relevant work, not an applicant asking for a favor.\n\n### Avoid This\n- \"I am writing to express my strong interest in...\"\n- \"I am a hard worker who...\"\n- \"Thank you for your consideration. I look forward to hearing from you.\"\n- Repeating the job title more than twice.\n\n---\n\n## Format & Length Rules\n- **Salutation:** Always \"Dear Hiring Team,\"\n- **Length:** 200–250 words\n- **Paragraphs:** 3. No headers, no bullet points, no bold text.\n- **Closing:** \"Sincerely,\" then a line break, then \"John Doe\"\n\n---\n\n## Full Template (Fill in Brackets)\n\n```\nDear Hiring Team,\n\n[COMPANY] is [specific observation about what they are building or solving]. That is\nclose to the work I have been doing at [EMPLOYER], [one-line specific connection].\n\nAt [EMPLOYER 1], I [specific action], [specific outcome with a number]. At [EMPLOYER 2],\nI [specific action], which required [relevant skill]. [Optional connecting sentence\ntying both examples to this company's actual need].\n\nThe [specific part of the role] is where I think I can contribute fastest. I would\nwelcome a conversation about [specific topic: the team's current reporting gaps, the\ndata stack, or where the role needs the most help first].\n\nSincerely,\n\nJohn Doe\n```\n\n---\n\n*Style guide built as a working template. Update proof points as new roles are scored, interviewed for, and applied to.*",
+  "years": "4",
+  "location": "Remote (US-based), open to hybrid within a reasonable commute",
+  "wlb": "Wants real ownership of a problem, not just report requests. Prefers teams that let an analyst push back on the ask instead of just filling it.",
+  "compFlex": "",
+  "compNotes": "Willing to trade some comp for a genuine growth path toward data engineering if the base is at least $85K and the team has a track record of promoting analysts internally.",
+  "clTone": "", "clLength": "", "clAvoid": "", "clStructure": ""
+};
+
+const DEMO_DATA = {
+  "schemaVersion": 4,
+  "roles": [
+    { "id":"demo01","title":"Senior Analyst","company":"Brightleaf Health","status":"interview-hiringmgr","verdict":"priority","score":91,"domain":"Healthcare","resumeVariant":"Analyst Resume","dateAdded":"2026-06-10","source":"Job Scorer Project","url":"","angles":["Cedar & Vine quarterly forecasting model as evidence of end-to-end ownership","Northfield on-time delivery dashboard as a cross-functional analytics proof point"],"flags":{"positive":["Glassdoor 4.3","Direct manager access, small analytics team of 4","Comp $95K-115K, clears floor comfortably"],"negative":[],"caution":["Healthcare claims data has a learning curve, no direct claims experience yet"]},"notes":"Strong scope match: single analyst owning a reporting rebuild end to end. Team is small enough that this hire directly shapes how the function runs.","feedbackExternal":"Recruiter noted the hiring manager was impressed with the forecasting model walkthrough and wants a second conversation focused on SQL depth.","feedbackMine":"","lastModified":"2026-07-28","peakStatus":"interview-hiringmgr" },
+    { "id":"demo02","title":"Data Engineer","company":"Meridian Cloud Systems","status":"scored","verdict":"strong","score":82,"domain":"B2B SaaS","resumeVariant":"Data Engineer Resume","dateAdded":"2026-07-02","source":"Job Scorer Project","url":"","angles":["Framing the FP&A automation work as a lightweight ETL pipeline built solo","dbt learning in progress as evidence of deliberate skill-building toward the role"],"flags":{"positive":["Glassdoor 4.1","Small data team, high ownership per hire","Posting explicitly welcomes analyst-to-DE transitions"],"negative":["No production pipeline experience yet, only internal automation scripts"],"caution":["Comp range not listed, unconfirmed whether it clears $85K floor"]},"notes":"Rare posting that explicitly frames itself as a good first data engineering seat for a strong analyst. Worth applying even without formal DE title history.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-07-02","peakStatus":"scored" },
+    { "id":"demo03","title":"Data Analyst","company":"Coastal Freight Co","status":"passed","verdict":"borderline","score":55,"domain":"Logistics","resumeVariant":"Analyst Resume","dateAdded":"2026-06-18","source":"Job Scorer Project","url":"","angles":[],"flags":{"positive":["Logistics domain overlap with Northfield experience"],"negative":["Role is largely dashboard maintenance on an existing template, limited build scope"],"caution":["Comp listed at $70K-80K, below floor"]},"notes":"Scope is narrower than current role, mostly maintaining dashboards someone else built. Passed given comp is below floor and growth path is unclear.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-06-20","peakStatus":null },
+    { "id":"demo04","title":"BI Analyst","company":"Palmerton Media Group","status":"scored","verdict":"skip","score":28,"domain":"Media/Entertainment","resumeVariant":"Analyst Resume","dateAdded":"2026-06-25","source":"Job Scorer Project","url":"","angles":[],"flags":{"positive":[],"negative":["Role is report-distribution only, explicitly no modeling or forecasting scope","Contract-to-hire, 3-month term"],"caution":[]},"notes":"Hard exclusion on scope: posting describes a ticket-queue reporting function with no analysis ownership. Contract length also falls below the 6-month floor.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-06-25","peakStatus":"scored" },
+    { "id":"demo05","title":"Senior Data Engineer","company":"Ashford Commerce","status":"applied","verdict":"strong","score":85,"domain":"E-commerce","resumeVariant":"Data Engineer Resume","dateAdded":"2026-07-15","source":"Job Scorer Project","url":"","angles":["SQL data dictionary work at Northfield as evidence of documentation discipline","Automated close-reporting pipeline at Cedar & Vine as a proof point for pipeline ownership under real deadline pressure"],"flags":{"positive":["Comp $100K-130K","Glassdoor 4.4","Team explicitly pairs junior DE hires with a senior mentor for the first 90 days"],"negative":[],"caution":["Title says Senior but years-of-experience requirement is flexible per the posting, worth confirming in screen"]},"notes":"Best comp and mentorship structure seen so far for a DE-track role. Applied despite title mismatch since posting explicitly said experience flexible.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-07-20","peakStatus":"applied" },
+    { "id":"demo06","title":"Business Intelligence Analyst","company":"Lakeview Mutual Insurance","status":"interview-recruiter","verdict":"maybe","score":68,"domain":"Insurance","resumeVariant":"Analyst Resume","dateAdded":"2026-06-05","source":"Job Scorer Project","url":"","angles":["Forecast variance work at Cedar & Vine as a proof point for board-level reporting"],"flags":{"positive":["Comp clears floor at $90K-105K"],"negative":["No clear path to data engineering, function is BI-only long term"],"caution":["Glassdoor 3.4, unremarkable, worth asking about team turnover in recruiter screen"]},"notes":"Solid comp and scope, but no visible growth path toward data engineering. Worth a recruiter conversation to understand team trajectory before going further.","feedbackExternal":"Recruiter said team has been stable for 2 years and next step would be a hiring manager screen focused on SQL and stakeholder examples.","feedbackMine":"","lastModified":"2026-07-10","peakStatus":"interview-recruiter" },
+    { "id":"demo07","title":"Data Engineer II","company":"Windmere Travel","status":"scored","verdict":"strong","score":80,"domain":"Travel/Hospitality","resumeVariant":"Data Engineer Resume","dateAdded":"2026-07-28","source":"Job Scorer Project","url":"","angles":["dbt self-study as direct evidence of preparing for this exact tool stack"],"flags":{"positive":["Stack listed is dbt + Snowflake, matches current self-study directly","Glassdoor 4.0"],"negative":[],"caution":["Posting says 2+ years DE experience preferred, current profile is a lateral move not a direct match"]},"notes":"Strong tool-stack match given current dbt self-study. Title says DE II which may be a stretch, but worth applying given the direct tooling overlap.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-07-28","peakStatus":"scored" },
+    { "id":"demo08","title":"Financial Analyst","company":"Harrow Manufacturing","status":"passed","verdict":"borderline","score":48,"domain":"Manufacturing","resumeVariant":"Analyst Resume","dateAdded":"2026-06-12","source":"Job Scorer Project","url":"","angles":[],"flags":{"positive":["Comp clears floor at $88K"],"negative":["Role is largely manual monthly close support with minimal forecasting ownership","Glassdoor 2.6, multiple reviews cite unstable leadership"],"caution":[]},"notes":"Comp clears the floor but scope is a step back toward pure close support, and the Glassdoor pattern on leadership instability is a real caution. Passed.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-06-14","peakStatus":null },
+    { "id":"demo09","title":"Analytics Associate","company":"Bluepeak EdTech","status":"scored","verdict":"maybe","score":60,"domain":"EdTech","resumeVariant":"Analyst Resume","dateAdded":"2026-07-08","source":"Job Scorer Project","url":"","angles":[],"flags":{"positive":["Small mission-driven team, direct founder access","Glassdoor 4.6"],"negative":["Associate title and comp band ($70K-82K) likely below floor"],"caution":["Comp not confirmed in posting, worth clarifying before applying further"]},"notes":"Great culture signal and real ownership scope, but title and likely comp band sit below the $85K floor. Save-for-later unless comp clarifies higher.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-07-08","peakStatus":"scored" },
+    { "id":"demo10","title":"Senior Business Analyst","company":"Fairmont Telecom","status":"offer","verdict":"priority","score":94,"domain":"Telecom","resumeVariant":"Analyst Resume","dateAdded":"2026-05-20","source":"Job Scorer Project","url":"","angles":["Root-cause analysis on the Northfield late-shipment pattern as evidence of independent problem framing","Cedar & Vine forecasting model as evidence of model ownership at senior scope"],"flags":{"positive":["Comp $105K-125K, clears comfortable target","Glassdoor 4.2","Hiring manager explicitly wants someone to own model build, not just distribute reports"],"negative":[],"caution":[]},"notes":"Best overall match seen this search: senior title, strong comp, real model-ownership scope, and a hiring manager who described the role in terms of decisions it should change, not reports it should produce.","feedbackExternal":"Hiring manager said the panel was unanimous and the offer would be extended within the week; final comp still being finalized with HR.","feedbackMine":"","lastModified":"2026-08-05","peakStatus":"offer" },
+    { "id":"demo11","title":"Data Analyst","company":"Ironwood Financial Group","status":"rejected","verdict":"strong","score":76,"domain":"FinTech","resumeVariant":"Analyst Resume","dateAdded":"2026-05-15","source":"Job Scorer Project","url":"","angles":["FP&A background as direct domain overlap for a fintech analytics team"],"flags":{"positive":["Comp $92K-108K","FinTech domain overlap with FP&A background"],"negative":[],"caution":["Glassdoor 3.6, unremarkable"]},"notes":"Good fit on paper, domain overlap with FP&A background was a real asset in the recruiter screen. Lost out to an internal candidate after the hiring manager round.","feedbackExternal":"Recruiter said the team ultimately promoted an internal candidate and encouraged reapplying if a similar opening comes up.","feedbackMine":"","lastModified":"2026-06-30","peakStatus":"interview-hiringmgr" },
+    { "id":"demo12","title":"Business Analyst","company":"Vantage Point Analytics","status":"applied","verdict":"strong","score":78,"domain":"Professional Services/Consulting","resumeVariant":"Analyst Resume","dateAdded":"2026-07-22","source":"Job Scorer Project","url":"","angles":["Cross-client dashboard variety framed as a strength for a consulting-facing analyst role"],"flags":{"positive":["Comp $88K-102K","Glassdoor 4.0","Explicit exposure to multiple industries per year, useful for someone still figuring out domain preference"],"negative":[],"caution":["Travel expectation unclear from posting, worth confirming before interview"]},"notes":"Consulting structure would expose John to more industries quickly, useful while domain preference is still open. Applied, need to confirm travel expectations in screen.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-07-25","peakStatus":"applied" },
+    { "id":"demo13","title":"Financial Analyst","company":"Greenfield Grocers","status":"scored","verdict":"maybe","score":62,"domain":"Retail/CPG","resumeVariant":"Analyst Resume","dateAdded":"2026-08-01","source":"Job Scorer Project","url":"","angles":[],"flags":{"positive":["Retail domain overlap with Cedar & Vine background"],"negative":["Scope looks close to current role, limited growth signal in posting"],"caution":["Comp not listed, likely near floor given company size"]},"notes":"Comfortable domain match but scope reads as a lateral move rather than a step up. Worth applying only if comp confirms above current level.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-08-01","peakStatus":"scored" }
+  ],
+  "watchlist": [],
+  "feedbackLog": [],
+  "config": DEMO_CONFIG,
+  "savedAt": null
+};
+
+// Ordered pipeline stages (furthest-along first for display)
+const STAGE_ORDER = [
+  'offer',
+  'interview-panel',
+  'interview-hiringmgr',
+  'interview-recruiter',
+  'applied',
+  'scored'
+];
+
+// Terminal statuses — collapsed by default
+const TERMINAL = ['ghosted', 'shelved', 'rejected', 'passed'];
+
+// Stage ordinal for peakStatus advancement (higher = further along)
+const STAGE_ORDINAL = {
+  'scored': 0,
+  'new': 0,           // legacy alias
+  'applied': 1,
+  'interview-recruiter': 2,
+  'interviewing': 2,  // legacy alias
+  'interview-hiringmgr': 3,
+  'interview-panel': 4,
+  'offer': 5
+};
+
+// Human-readable labels for statuses
+const STATUS_LABELS = {
+  'offer':               'Offer',
+  'interview-panel':     'Interview – Panel',
+  'interview-hiringmgr': 'Interview – Hiring Manager',
+  'interview-recruiter': 'Interview – Recruiter',
+  'applied':             'Applied',
+  'scored':              'Scored',
+  'ghosted':             'Ghosted',
+  'shelved':             'Shelved',
+  'rejected':            'Rejected',
+  'passed':              'Passed'
+};
+
+const STAGE_LABEL_CLASS = {
+  'offer':               'label-offer',
+  'interview-panel':     'label-panel',
+  'interview-hiringmgr': 'label-hm',
+  'interview-recruiter': 'label-recruiter',
+  'applied':             'label-applied',
+  'scored':              'label-scored'
+};
+
+// All selectable statuses for the dropdown (active + terminal)
+const ALL_STATUSES = [
+  'scored',
+  'applied',
+  'interview-recruiter',
+  'interview-hiringmgr',
+  'interview-panel',
+  'offer',
+  'ghosted',
+  'shelved',
+  'rejected',
+  'passed'
+];
+
+// ── Storage helpers (demo mode: localStorage only, no server) ────────────────
+function getDefaultStore() {
+  return JSON.parse(JSON.stringify(DEMO_DATA));
+}
+
+function stampTime(data) {
+  data.savedAt = new Date().toISOString();
+  return data;
+}
+
+async function save(data) {
+  stampTime(data);
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+async function load() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  return getDefaultStore();
+}
+
+// ── Config persistence (demo mode: localStorage only, no server) ─────────────
+async function saveConfig(cfg) {
+  store.config = cfg;
+  await save(store);
+}
+
+async function loadConfig() {
+  return store.config || DEMO_CONFIG;
+}
+
+let store = getDefaultStore();
+
+// ── Schema migration ─────────────────────────────────────────
+function migrateStore(data) {
+  if (!data.schemaVersion || data.schemaVersion < 1) {
+    data.schemaVersion = 1;
+    data.watchlist = data.watchlist || [];
+    data.feedbackLog = data.feedbackLog || [];
+    (data.roles || []).forEach(r => {
+      r.feedback = r.feedback || '';
+      r.source = r.source || '';
+      r.url = r.url || '';
+      r.angles = r.angles || [];
+      r.flags = r.flags || { positive:[], negative:[], caution:[] };
+      r.domain = r.domain || '';
+      r.resumeVariant = r.resumeVariant || '';
+    });
+  }
+  if (data.schemaVersion < 2) {
+    (data.roles || []).forEach(r => {
+      r.feedbackExternal = r.feedback || '';
+      r.feedbackMine = '';
+      delete r.feedback;
+    });
+    data.schemaVersion = 2;
+  }
+  if (data.schemaVersion < 3) {
+    data.schemaVersion = 3;
+  }
+  // v3 -> v4: rename 'new' -> 'scored', add lastModified + peakStatus, split 'interviewing'
+  if (data.schemaVersion < 4) {
+    (data.roles || []).forEach(r => {
+      // Rename 'new' to 'scored'
+      if (r.status === 'new') r.status = 'scored';
+      // Legacy 'interviewing' -> 'interview-recruiter' (conservative default)
+      if (r.status === 'interviewing') r.status = 'interview-recruiter';
+      // Stamp lastModified if missing
+      if (!r.lastModified) r.lastModified = r.dateAdded || new Date().toISOString().split('T')[0];
+      // Initialize peakStatus based on current status
+      if (!r.peakStatus) r.peakStatus = toActivePeak(r.status);
+    });
+    data.schemaVersion = 4;
+  }
+  return data;
+}
+
+// Returns the peak-trackable status string (terminals don't count as peak)
+function toActivePeak(status) {
+  if (TERMINAL.includes(status)) return null;
+  return status;
+}
+
+// Advance peakStatus only forward
+function advancePeak(role, newStatus) {
+  const newOrdinal = STAGE_ORDINAL[newStatus] ?? -1;
+  const curOrdinal = STAGE_ORDINAL[role.peakStatus] ?? -1;
+  if (newOrdinal > curOrdinal && !TERMINAL.includes(newStatus)) {
+    role.peakStatus = newStatus;
+  }
+}
+
+// ── Utilities ────────────────────────────────────────────────
+function uid() {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2,5);
+}
+
+function formatDate(isoOrDate) {
+  if (!isoOrDate) return '—';
+  const d = new Date(isoOrDate);
+  if (isNaN(d)) return isoOrDate;
+  return (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+}
+
+function getVerdictClass(v) {
+  const map = { priority:'verdict-priority', strong:'verdict-strong', maybe:'verdict-maybe', borderline:'verdict-borderline', skip:'verdict-skip' };
+  return map[v] || 'verdict-maybe';
+}
+
+function getScoreColor(s) {
+  if (s >= 85) return '#158a3e';
+  if (s >= 70) return '#0369a1';
+  if (s >= 55) return '#92400e';
+  if (s >= 40) return '#b45309';
+  return '#991b1b';
+}
+
+// ── Domain bucketing for Intelligence ───────────────────────
+function bucketDomain(domain) {
+  const d = (domain || '').toLowerCase();
+  if (/fintech|payments|banking|credit|financial|lending|wealth|insurtech|insurance/.test(d)) return 'FinTech / Insurance';
+  if (/health|medical|pharma|clinical|biotech|oncology|mental/.test(d)) return 'Healthcare / Life Sciences';
+  if (/marketplace|gig|staffing|logistics|delivery|travel/.test(d)) return 'Marketplace / Logistics';
+  if (/saas|developer|cloud|data|platform|infrastructure|devops|observability|security|enterprise/.test(d)) return 'SaaS / Developer Tools';
+  if (/edtech|education|nonprofit/.test(d)) return 'EdTech / Nonprofit';
+  if (/consumer|social|gaming|media|creator|adtech|streaming/.test(d)) return 'Consumer / Media';
+  if (/govtech|public sector/.test(d)) return 'GovTech';
+  return 'Other';
+}
+
+// ── Tab switching ────────────────────────────────────────────
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+    if (tab.dataset.tab === 'pipeline')      renderPipeline();
+    if (tab.dataset.tab === 'intel')         renderIntel();
+    if (tab.dataset.tab === 'discovery')     renderDiscovery();
+    if (tab.dataset.tab === 'instructions')  renderCoachInstructions();
+    updateStats();
+  });
+});
+
+// ── Stats ────────────────────────────────────────────────────
+function updateStats() {
+  const roles = store.roles;
+  const INTERVIEW_STATUSES = ['interview-recruiter','interview-hiringmgr','interview-panel'];
+  const applied  = roles.filter(r => ['applied','interview-recruiter','interview-hiringmgr','interview-panel','offer'].includes(r.status));
+  const active   = roles.filter(r => INTERVIEW_STATUSES.includes(r.status));
+  const responded = roles.filter(r => [...INTERVIEW_STATUSES, 'offer'].includes(r.status));
+  const responseRate = applied.length > 0 ? Math.round((responded.length / applied.length) * 100) : 0;
+  document.getElementById('stat-total').textContent    = roles.length;
+  document.getElementById('stat-applied').textContent  = applied.length;
+  document.getElementById('stat-active').textContent   = active.length;
+  document.getElementById('stat-response').textContent = responseRate + '%';
+}
+
+// ── Pipeline rendering ───────────────────────────────────────
+function renderPipeline() {
+  const container = document.getElementById('pipeline-content');
+  const roles = store.roles;
+
+  if (roles.length === 0) {
+    container.innerHTML = `<div class="empty-state"><div class="empty-icon">◎</div><p>No roles tracked yet. Score a role in your Job Scorer Project and import it here.</p></div>`;
+    return;
+  }
+
+  let html = '';
+
+  // Active groups in display order
+  for (const stage of STAGE_ORDER) {
+    const group = roles
+      .filter(r => r.status === stage)
+      .sort((a,b) => b.score - a.score);
+    if (group.length === 0) continue;
+    const labelClass = STAGE_LABEL_CLASS[stage] || '';
+    html += `<div class="pipeline-group">
+      <div class="pipeline-group-header">
+        <span class="pipeline-group-label ${labelClass}">${STATUS_LABELS[stage]}</span>
+        <span class="pipeline-group-count">${group.length}</span>
+      </div>
+      <div class="role-list">${group.map(r => renderRoleCard(r)).join('')}</div>
+    </div>`;
+  }
+
+  // Terminal groups — count total
+  const terminalRoles = roles.filter(r => TERMINAL.includes(r.status));
+  const termCounts = {};
+  TERMINAL.forEach(t => { termCounts[t] = roles.filter(r => r.status === t).length; });
+  const termLabel = TERMINAL.map(t => `${STATUS_LABELS[t]} (${termCounts[t]})`).join(' · ');
+
+  html += `<div>
+    <div class="terminal-toggle" id="terminal-toggle" onclick="toggleTerminal()">
+      <span class="terminal-toggle-arrow">▶</span>
+      <span>Closed Roles &nbsp;—&nbsp; ${termLabel}</span>
+    </div>
+    <div class="terminal-section" id="terminal-section">`;
+
+  for (const stage of TERMINAL) {
+    const group = roles
+      .filter(r => r.status === stage)
+      .sort((a,b) => b.score - a.score);
+    if (group.length === 0) continue;
+    html += `<div class="pipeline-group" style="margin-top:16px;">
+      <div class="pipeline-group-header">
+        <span class="pipeline-group-label">${STATUS_LABELS[stage]}</span>
+        <span class="pipeline-group-count">${group.length}</span>
+      </div>
+      <div class="role-list">${group.map(r => renderRoleCard(r)).join('')}</div>
+    </div>`;
+  }
+  html += `</div></div>`;
+
+  container.innerHTML = html;
+}
+
+function toggleTerminal() {
+  const toggle  = document.getElementById('terminal-toggle');
+  const section = document.getElementById('terminal-section');
+  if (!toggle || !section) return;
+  toggle.classList.toggle('open');
+  section.classList.toggle('open');
+}
+
+function renderRoleCard(r) {
+  const peakDisplay = r.peakStatus && r.peakStatus !== r.status
+    ? `<span style="color:var(--text3);font-size:10px;">peak: ${STATUS_LABELS[r.peakStatus] || r.peakStatus}</span>`
+    : '';
+  const lastUpdated = r.lastModified
+    ? `<span class="last-updated">Updated ${formatDate(r.lastModified)}</span>`
+    : '';
+
+  return `
+    <div class="role-card" id="rc-${r.id}" onclick="toggleExpand('${r.id}')">
+      <div>
+        <div class="role-title">${r.title}</div>
+        <div class="role-company">${r.company}${r.domain ? ' · ' + r.domain : ''}</div>
+        <div class="role-meta">
+          <span class="verdict-badge ${getVerdictClass(r.verdict)}">${r.verdict}</span>
+          <span class="status-badge status-${r.status}">${STATUS_LABELS[r.status] || r.status}</span>
+          ${peakDisplay}
+          <span class="role-date">Added ${r.dateAdded}</span>
+          ${lastUpdated}
+          ${r.source ? `<span style="color:var(--text3);font-size:10px;">${r.source}</span>` : ''}
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:${getScoreColor(r.score)};">${r.score}%</div>
+        <div style="color:var(--text3);font-size:10px;">${r.resumeVariant || ''}</div>
+      </div>
+      <div class="role-expanded">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+          <div>
+            <div class="exp-section-title">Role Title</div>
+            <input type="text" id="title-${r.id}" value="${r.title || ''}" onclick="event.stopPropagation()" style="font-size:12px;">
+          </div>
+          <div>
+            <div class="exp-section-title">Company</div>
+            <input type="text" id="company-${r.id}" value="${r.company || ''}" onclick="event.stopPropagation()" style="font-size:12px;">
+          </div>
+          <div>
+            <div class="exp-section-title">Source</div>
+            <input type="text" id="source-${r.id}" value="${r.source || ''}" onclick="event.stopPropagation()" placeholder="e.g. LinkedIn, Recruiter – JT Mitchell" style="font-size:12px;">
+          </div>
+          <div>
+            <div class="exp-section-title">Posting URL</div>
+            <input type="text" id="url-${r.id}" value="${r.url || ''}" onclick="event.stopPropagation()" placeholder="https://..." style="font-size:12px;">
+          </div>
+        </div>
+        <div class="expanded-grid">
+          <div>
+            <div class="exp-section-title">Cover Letter Angles</div>
+            ${(r.angles || []).map(a => `<div class="exp-text" style="margin-bottom:4px;">· ${a}</div>`).join('') || '<div class="exp-text">—</div>'}
+          </div>
+          <div>
+            <div class="exp-section-title">Flags</div>
+            ${(r.flags?.positive || []).map(f => `<div class="flag-item"><span class="flag-green">+</span><span>${f}</span></div>`).join('')}
+            ${(r.flags?.caution  || []).map(f => `<div class="flag-item"><span class="flag-amber">~</span><span>${f}</span></div>`).join('')}
+            ${(r.flags?.negative || []).map(f => `<div class="flag-item"><span class="flag-red">−</span><span>${f}</span></div>`).join('')}
+          </div>
+        </div>
+        ${r.notes ? `<div style="margin-top:10px;"><div class="exp-section-title">Notes</div><div class="exp-text">${r.notes}</div></div>` : ''}
+
+        <div class="status-select-row" onclick="event.stopPropagation()">
+          <div>
+            <div class="exp-section-title" style="margin-bottom:3px;">Current Status</div>
+            <select id="status-${r.id}">
+              ${ALL_STATUSES.map(function(s){ return '<option value="' + s + '" ' + (r.status === s ? 'selected' : '') + '>' + STATUS_LABELS[s] + '</option>'; }).join('')}
+            </select>
+          </div>
+          <div>
+            <div class="exp-section-title" style="margin-bottom:3px;">Furthest Stage Reached</div>
+            <select id="peak-${r.id}">
+              ${['scored','applied','interview-recruiter','interview-hiringmgr','interview-panel','offer'].map(function(s){ return '<option value="' + s + '" ' + ((r.peakStatus||r.status) === s ? 'selected' : '') + '>' + STATUS_LABELS[s] + '</option>'; }).join('')}
+            </select>
+          </div>
+          ${r.url ? `<a href="${r.url}" target="_blank" style="color:var(--blue);font-size:11px;align-self:flex-end;margin-bottom:2px;" onclick="event.stopPropagation()">View posting ↗</a>` : '<span style="font-size:11px;color:var(--text3);align-self:flex-end;margin-bottom:2px;">No URL saved</span>'}
+          <button class="btn btn-ghost btn-sm" style="align-self:flex-end;" onclick="event.stopPropagation();deleteRole('${r.id}')">Remove</button>
+        </div>
+
+        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div>
+            <div class="exp-section-title" style="color:var(--blue);">External feedback received</div>
+            <div style="color:var(--text3);font-size:10px;margin-bottom:4px;">What others told you — HR, recruiters, interviewers.</div>
+            <textarea id="ext-${r.id}" class="feedback-input" rows="3" placeholder="e.g. HR contact said they want big tech experience..." onclick="event.stopPropagation()">${r.feedbackExternal || ''}</textarea>
+          </div>
+          <div>
+            <div class="exp-section-title" style="color:var(--accent);">Your own observations</div>
+            <div style="color:var(--text3);font-size:10px;margin-bottom:4px;">Why you passed, what felt off, what surprised you.</div>
+            <textarea id="mine-${r.id}" class="feedback-input" rows="3" placeholder="e.g. Scope was too narrow, team structure unclear..." onclick="event.stopPropagation()">${r.feedbackMine || ''}</textarea>
+          </div>
+        </div>
+        <div style="margin-top:12px;display:flex;align-items:center;gap:10px;" onclick="event.stopPropagation()">
+          <button class="btn btn-sm" onclick="event.stopPropagation();saveRoleEdits('${r.id}')">Save Changes</button>
+          <span id="save-confirm-${r.id}" style="font-size:11px;color:#158a3e;opacity:0;transition:opacity 0.4s;">Saved</span>
+        </div>
+      </div>
+    </div>`;
+}
+
+function toggleExpand(id) {
+  document.getElementById('rc-' + id)?.classList.toggle('expanded');
+}
+
+function saveRoleEdits(id) {
+  const role = store.roles.find(r => r.id === id);
+  if (!role) return;
+  const titleEl   = document.getElementById('title-'   + id);
+  const companyEl = document.getElementById('company-' + id);
+  const sourceEl  = document.getElementById('source-'  + id);
+  const urlEl     = document.getElementById('url-'     + id);
+  if (titleEl)   role.title   = titleEl.value.trim()   || role.title;
+  if (companyEl) role.company = companyEl.value.trim() || role.company;
+  if (sourceEl)  role.source  = sourceEl.value.trim();
+  if (urlEl)     role.url     = urlEl.value.trim();
+
+  const statusEl = document.getElementById('status-' + id);
+  const peakEl   = document.getElementById('peak-' + id);
+  const extEl    = document.getElementById('ext-' + id);
+  const mineEl   = document.getElementById('mine-' + id);
+
+  if (statusEl) {
+    const newStatus = statusEl.value;
+    // Advance peak automatically unless user overrode it
+    advancePeak(role, newStatus);
+    role.status = newStatus;
+  }
+  // Allow manual peak override
+  if (peakEl) role.peakStatus = peakEl.value;
+  if (extEl)  role.feedbackExternal = extEl.value;
+  if (mineEl) role.feedbackMine = mineEl.value;
+
+  // Stamp lastModified
+  role.lastModified = new Date().toISOString().split('T')[0];
+
+  save(store);
+  updateStats();
+
+  const confirm = document.getElementById('save-confirm-' + id);
+  if (confirm) { confirm.style.opacity='1'; setTimeout(()=>{ confirm.style.opacity='0'; }, 2000); }
+
+  // Re-render pipeline so card moves to correct group
+  setTimeout(() => renderPipeline(), 400);
+}
+
+function deleteRole(id) {
+  if (!confirm('Remove this role from your pipeline?')) return;
+  store.roles = store.roles.filter(r => r.id !== id);
+  save(store);
+  renderPipeline();
+  updateStats();
+}
+
+// ── Intelligence ─────────────────────────────────────────────
+function renderIntel() {
+  const roles = store.roles;
+  if (roles.length < 3) {
+    document.getElementById('intel-empty').style.display = 'block';
+    document.getElementById('intel-content').style.display = 'none';
+    return;
+  }
+  document.getElementById('intel-empty').style.display = 'none';
+  document.getElementById('intel-content').style.display = 'block';
+
+  const INTERVIEW_STATUSES = ['interview-recruiter','interview-hiringmgr','interview-panel'];
+  const applied    = roles.filter(r => ['applied',...INTERVIEW_STATUSES,'offer'].includes(r.status));
+  const responding = roles.filter(r => [...INTERVIEW_STATUSES,'offer'].includes(r.status));
+  const avgScore   = Math.round(roles.reduce((a,r)=>a+r.score,0)/roles.length);
+
+  // Funnel summary
+  document.getElementById('funnel-stats').innerHTML = `
+    <div class="pattern-item"><span class="pattern-label">Total assessed</span><span class="pattern-val" style="color:var(--text)">${roles.length}</span></div>
+    <div class="pattern-item"><span class="pattern-label">Applied</span><span class="pattern-val" style="color:var(--blue)">${applied.length}</span></div>
+    <div class="pattern-item"><span class="pattern-label">In interview process</span><span class="pattern-val" style="color:var(--accent)">${responding.length}</span></div>
+    <div class="pattern-item"><span class="pattern-label">Avg fit score</span><span class="pattern-val" style="color:${getScoreColor(avgScore)}">${avgScore}%</span></div>
+    <div class="pattern-item"><span class="pattern-label">Response rate</span><span class="pattern-val" style="color:var(--accent)">${applied.length > 0 ? Math.round((responding.length/applied.length)*100) : 0}%</span></div>
+  `;
+
+  // Interview funnel — uses peakStatus to show where roles fell out
+  const allTracked = roles.filter(r => r.peakStatus && STAGE_ORDINAL[r.peakStatus] >= 1);
+  const funnelStages = [
+    { key:'applied',              label:'Applied' },
+    { key:'interview-recruiter',  label:'Recruiter Screen' },
+    { key:'interview-hiringmgr',  label:'Hiring Manager' },
+    { key:'interview-panel',      label:'Panel / Exec' },
+    { key:'offer',                label:'Offer' }
+  ];
+  const maxFunnel = allTracked.length || 1;
+  document.getElementById('interview-funnel').innerHTML = funnelStages.map(({key, label}) => {
+    const count = roles.filter(r => (STAGE_ORDINAL[r.peakStatus]||0) >= STAGE_ORDINAL[key]).length;
+    return `<div class="bar-row">
+      <div class="bar-label-row"><span class="bar-label">${label}</span><span class="bar-count">${count}</span></div>
+      <div class="mini-bar"><div class="mini-bar-fill" style="width:${(count/maxFunnel)*100}%"></div></div>
+    </div>`;
+  }).join('');
+
+  // Verdict distribution
+  const verdicts = ['priority','strong','maybe','borderline','skip'];
+  const vCounts = {};
+  verdicts.forEach(v => vCounts[v] = roles.filter(r=>r.verdict===v).length);
+  const maxV = Math.max(...Object.values(vCounts), 1);
+  document.getElementById('verdict-dist').innerHTML = verdicts.map(v => `
+    <div class="bar-row">
+      <div class="bar-label-row"><span class="bar-label">${v.charAt(0).toUpperCase() + v.slice(1)}</span><span class="bar-count">${vCounts[v]}</span></div>
+      <div class="mini-bar"><div class="mini-bar-fill" style="width:${(vCounts[v]/maxV)*100}%;background:${
+        v==='priority'?'var(--priority)':v==='strong'?'var(--strong)':v==='maybe'?'var(--maybe)':v==='borderline'?'var(--borderline)':'var(--skip)'
+      }"></div></div>
+    </div>`).join('');
+
+  // Domain breakdown (bucketed)
+  const bucketMap = {};
+  roles.forEach(r => {
+    const b = bucketDomain(r.domain);
+    bucketMap[b] = (bucketMap[b]||0)+1;
+  });
+  const sortedBuckets = Object.entries(bucketMap).sort((a,b)=>b[1]-a[1]);
+  const maxD = Math.max(...sortedBuckets.map(d=>d[1]),1);
+  document.getElementById('domain-dist').innerHTML = sortedBuckets.map(([d,c]) => `
+    <div class="bar-row">
+      <div class="bar-label-row"><span class="bar-label">${d}</span><span class="bar-count">${c}</span></div>
+      <div class="mini-bar"><div class="mini-bar-fill" style="width:${(c/maxD)*100}%"></div></div>
+    </div>`).join('');
+
+  // Insights
+  document.getElementById('insights-list').innerHTML = generateInsights(roles)
+    .map(i => `<div class="insight-item"><div class="insight-dot ${i.type}"></div><div>${i.text}</div></div>`)
+    .join('');
+}
+
+function generateInsights(roles) {
+  const insights = [];
+  const INTERVIEW_STATUSES = ['interview-recruiter','interview-hiringmgr','interview-panel'];
+  const applied    = roles.filter(r => ['applied',...INTERVIEW_STATUSES,'offer'].includes(r.status));
+  const highFit    = roles.filter(r => r.score >= 70);
+  const notApplied = highFit.filter(r => r.status === 'scored');
+
+  if (notApplied.length > 0) {
+    insights.push({ type:'amber', text:`${notApplied.length} high-fit role(s) scored 70%+ but not yet applied to.` });
+  }
+
+  // Staleness check
+  const today = new Date();
+  const stale = roles.filter(r => {
+    if (!['applied',...INTERVIEW_STATUSES].includes(r.status)) return false;
+    const lm = new Date(r.lastModified || r.dateAdded);
+    const days = Math.round((today - lm) / (1000*60*60*24));
+    return days >= 21;
+  });
+  if (stale.length > 0) {
+    insights.push({ type:'amber', text:`${stale.length} active role(s) haven't been updated in 3+ weeks. Worth a status check.` });
+  }
+
+  if (applied.length >= 3) {
+    const avgApplied = Math.round(applied.reduce((a,r)=>a+r.score,0)/applied.length);
+    insights.push({ type:'', text:`Avg fit score on applied roles: ${avgApplied}%. ${avgApplied < 65 ? 'Consider being more selective.' : 'Good selectivity.'}` });
+  }
+
+  // Interview conversion
+  const recruiterScreen = roles.filter(r => (STAGE_ORDINAL[r.peakStatus]||0) >= STAGE_ORDINAL['interview-recruiter']);
+  const hmScreen = roles.filter(r => (STAGE_ORDINAL[r.peakStatus]||0) >= STAGE_ORDINAL['interview-hiringmgr']);
+  if (recruiterScreen.length >= 3) {
+    const conv = Math.round((hmScreen.length / recruiterScreen.length) * 100);
+    insights.push({ type:'blue', text:`Recruiter → Hiring Manager conversion: ${conv}% (${hmScreen.length} of ${recruiterScreen.length}).` });
+  }
+
+  if (roles.length >= 5 && applied.length === 0) {
+    insights.push({ type:'amber', text:`You've assessed ${roles.length} roles but haven't applied yet. Time to move.` });
+  }
+
+  const bucketMap = {};
+  roles.forEach(r => { const b = bucketDomain(r.domain); bucketMap[b]=(bucketMap[b]||0)+1; });
+  const topBucket = Object.entries(bucketMap).sort((a,b)=>b[1]-a[1])[0];
+  if (topBucket && topBucket[1] >= 3) {
+    const pct = Math.round((topBucket[1]/roles.length)*100);
+    insights.push({ type:'blue', text:`${pct}% of assessed roles are in ${topBucket[0]}. Is that intentional or a search bias?` });
+  }
+
+  if (insights.length === 0) {
+    insights.push({ type:'', text:'Keep scoring roles to unlock deeper patterns and recommendations.' });
+  }
+  return insights;
+}
+
+// ── Discovery / Watchlist ────────────────────────────────────
+const SEED_COMPANIES = ['Solstice Data Co','Ferndale Insurance','Harbor Point Retail','Crestline Manufacturing','Bramblewood Health','Anchor Bay Logistics'];
+
+function renderDiscovery() { renderWatchlist(); renderSeedCompanies(); }
+
+function renderWatchlist() {
+  const el = document.getElementById('watchlist');
+  if (store.watchlist.length === 0) {
+    el.innerHTML = '<span style="color:var(--text3);font-size:12px;">No companies added yet.</span>';
+    return;
+  }
+  el.innerHTML = store.watchlist.map(c => `
+    <div style="display:inline-flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:12px;">
+      <span>${c}</span>
+      <span onclick="removeWatchCompany('${c}')" style="cursor:pointer;color:var(--text3);font-size:10px;">✕</span>
+    </div>`).join('');
+}
+
+function renderSeedCompanies() {
+  const el = document.getElementById('seed-companies');
+  el.innerHTML = SEED_COMPANIES.filter(c => !store.watchlist.includes(c)).map(c => `
+    <button onclick="addSeedCompany('${c}')" style="background:transparent;border:1px dashed var(--border);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--text3);cursor:pointer;font-family:'DM Mono',monospace;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text3)'">${c}</button>`).join('');
+}
+
+function addWatchCompany() {
+  const input = document.getElementById('company-input');
+  const val = input.value.trim();
+  if (!val) return;
+  if (!store.watchlist.includes(val)) { store.watchlist.push(val); save(store); }
+  input.value = '';
+  renderDiscovery();
+}
+
+function addSeedCompany(name) {
+  if (!store.watchlist.includes(name)) { store.watchlist.push(name); save(store); }
+  renderDiscovery();
+}
+
+function removeWatchCompany(name) {
+  store.watchlist = store.watchlist.filter(c => c !== name);
+  save(store);
+  renderDiscovery();
+}
+
+// ── Export ────────────────────────────────────────────────────
+function exportData() {
+  const payload = { schemaVersion: SCHEMA_VERSION, exportedAt: new Date().toISOString(), ...store };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url;
+  const now     = new Date();
+  const dateStr = now.toISOString().split('T')[0];
+  const timeStr = now.toTimeString().slice(0,5).replace(':','');
+  a.download = 'lighthouse_job_tracker_' + dateStr + '_' + timeStr + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  const el = document.getElementById('last-export-label');
+  if (el) el.textContent = 'last export ' + new Date().toLocaleDateString();
+}
+
+// ── Import ────────────────────────────────────────────────────
+function importData() { document.getElementById('import-file-input').click(); }
+
+function roleKey(r) {
+  return (r.title||'').toLowerCase().trim() + '||' + (r.company||'').toLowerCase().trim();
+}
+
+// Status ordinal for import: never downgrade an existing status
+function statusOrdinal(s) {
+  const order = ['scored','new','applied','interview-recruiter','interviewing','interview-hiringmgr','interview-panel','offer','ghosted','shelved','rejected','passed'];
+  const idx = order.indexOf(s);
+  return idx === -1 ? 0 : idx;
+}
+
+function handleImportFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      let parsed = JSON.parse(e.target.result);
+      let incomingRoles = [];
+      if (Array.isArray(parsed)) {
+        incomingRoles = parsed;
+        parsed = { roles: incomingRoles };
+      } else {
+        parsed = migrateStore(parsed);
+        incomingRoles = parsed.roles || [];
+      }
+
+      incomingRoles.forEach(r => {
+        if (!r.id) r.id = uid();
+      });
+
+      const importedIds  = new Set(incomingRoles.map(r => r.id));
+      const importedKeys = new Set(incomingRoles.map(r => roleKey(r)));
+
+      // Build lookup of existing roles by key for status-protection
+      const existingByKey = {};
+      store.roles.forEach(r => { existingByKey[roleKey(r)] = r; });
+      const existingById  = {};
+      store.roles.forEach(r => { existingById[r.id] = r; });
+
+      // Merge incoming: protect status from downgrade
+      const mergedIncoming = incomingRoles.map(incoming => {
+        const existing = existingById[incoming.id] || existingByKey[roleKey(incoming)];
+        if (existing) {
+          // Preserve the higher-ordinal status
+          const keepStatus = statusOrdinal(existing.status) > statusOrdinal(incoming.status)
+            ? existing.status
+            : incoming.status;
+          // Carry over fields the import may not know about
+          return {
+            ...incoming,
+            status:          keepStatus,
+            feedbackExternal: incoming.feedbackExternal || existing.feedbackExternal || '',
+            feedbackMine:     incoming.feedbackMine     || existing.feedbackMine     || '',
+            lastModified:     existing.lastModified     || incoming.lastModified     || incoming.dateAdded,
+            peakStatus:       existing.peakStatus       || toActivePeak(keepStatus),
+            url:              existing.url || incoming.url || ''
+          };
+        }
+        // Brand new role — init fields
+        return {
+          ...incoming,
+          feedbackExternal: incoming.feedbackExternal || '',
+          feedbackMine:     incoming.feedbackMine     || '',
+          lastModified:     incoming.lastModified     || incoming.dateAdded,
+          peakStatus:       incoming.peakStatus       || toActivePeak(incoming.status)
+        };
+      });
+
+      // Local-only roles not present in import at all
+      const localOnly = store.roles.filter(r =>
+        !importedIds.has(r.id) && !importedKeys.has(roleKey(r))
+      );
+
+      store = {
+        schemaVersion: SCHEMA_VERSION,
+        roles:        [...mergedIncoming, ...localOnly],
+        watchlist:    parsed.watchlist    || store.watchlist    || [],
+        feedbackLog:  parsed.feedbackLog  || store.feedbackLog  || []
+      };
+
+      // Ensure all roles are migrated
+      store.roles.forEach(r => {
+        if (r.status === 'new') r.status = 'scored';
+        if (r.status === 'interviewing') r.status = 'interview-recruiter';
+        if (!r.feedbackExternal) r.feedbackExternal = '';
+        if (!r.feedbackMine)     r.feedbackMine     = '';
+        if (!r.source)  r.source  = '';
+        if (!r.url)     r.url     = '';
+        if (!r.angles)  r.angles  = [];
+        if (!r.flags)   r.flags   = { positive:[], negative:[], caution:[] };
+        if (!r.lastModified) r.lastModified = r.dateAdded;
+        if (!r.peakStatus)   r.peakStatus   = toActivePeak(r.status);
+      });
+
+      save(store);
+      updateStats();
+
+      if (parsed.exportedAt) {
+        const el = document.getElementById('last-export-label');
+        if (el) el.textContent = 'last export ' + new Date(parsed.exportedAt).toLocaleDateString();
+      }
+
+      const newCount    = incomingRoles.length;
+      const mergedCount = localOnly.length;
+      alert(
+        'Imported ' + newCount + ' role' + (newCount!==1?'s':'') + '.' +
+        (mergedCount ? ' ' + mergedCount + ' existing local role' + (mergedCount!==1?'s':'') + ' retained.' : '')
+      );
+
+      const activeTab = document.querySelector('.tab.active')?.dataset.tab;
+      if (activeTab === 'pipeline')  renderPipeline();
+      if (activeTab === 'intel')     renderIntel();
+      if (activeTab === 'discovery') renderDiscovery();
+    } catch(err) {
+      alert('Import failed: ' + err.message);
+    }
+    event.target.value = '';
+  };
+  reader.readAsText(file);
+}
+
+// ── Duplicate detection (kept for future use if score tab re-enabled) ────────
+function checkDuplicate(title, company) {
+  const t = (title||'').toLowerCase().trim();
+  const c = (company||'').toLowerCase().trim();
+  const SIX_MONTHS_MS = 1000*60*60*24*183;
+  const now = new Date();
+  const exact = store.roles.find(r => r.title.toLowerCase().trim()===t && r.company.toLowerCase().trim()===c);
+  if (exact) {
+    const ageMs = now - new Date(exact.dateAdded);
+    const ageWeeks = Math.round(ageMs/(1000*60*60*24*7));
+    const ageMonths = Math.round(ageMs/(1000*60*60*24*30));
+    if (ageMs < SIX_MONTHS_MS) {
+      const didApply = ['applied','interview-recruiter','interview-hiringmgr','interview-panel','offer','rejected'].includes(exact.status);
+      return { type:'hard', role:exact, message: didApply
+        ? `You already applied to this role ${ageWeeks < 8 ? ageWeeks+' weeks' : ageMonths+' months'} ago (status: ${exact.status}).`
+        : `This role is already in your pipeline (added ${ageWeeks} weeks ago, status: ${exact.status}).`,
+        canProceed: !didApply };
+    }
+    return { type:'soft', role:exact, message:`You tracked this role ${ageMonths} months ago. Enough time has passed — re-applying is reasonable.`, canProceed:true };
+  }
+  return null;
+}
+
+// ── Config ────────────────────────────────────────────────────
+
+// Generated output storage
+let generatedOutputs = { identity: '', scorer: '', cl: '' };
+let resumeEntries = [];
+
+function toggleCfgSection(id) {
+  const sec = document.getElementById('cfg-' + id);
+  if (sec) sec.classList.toggle('collapsed');
+}
+
+function toggleCLPath() {
+  const val = document.querySelector('input[name="cl-path"]:checked')?.value;
+  document.getElementById('cl-paste-area').style.display  = val === 'paste' ? 'block' : 'none';
+  document.getElementById('cl-prefs-area').style.display  = val === 'prefs' ? 'block' : 'none';
+}
+
+function addResumeVariant(data) {
+  const idx = resumeEntries.length;
+  const d = data || { name:'', triggers:'' };
+  resumeEntries.push(d);
+  const wrap = document.getElementById('cfg-resume-entries');
+  const el = document.createElement('div');
+  el.className = 'resume-entry';
+  el.id = 'resume-entry-' + idx;
+  el.innerHTML = `
+    <button class="entry-remove" onclick="removeResumeVariant(${idx})">✕</button>
+    <div class="cfg-grid2">
+      <div class="field-row"><div class="field-label">Variant Name<span class="cfg-eg" style="visibility:hidden;">comma-separated</span></div><input type="text" id="rv-name-${idx}" value="${escHtml(d.name)}" placeholder="e.g. FinTech Resume"></div>
+      <div class="field-row"><div class="field-label">Trigger Keywords<span class="cfg-eg">comma-separated</span></div><input type="text" id="rv-triggers-${idx}" value="${escHtml(d.triggers)}" placeholder="e.g. payments, banking, credit, lending"></div>
+    </div>`;
+  wrap.appendChild(el);
+}
+
+function removeResumeVariant(idx) {
+  const el = document.getElementById('resume-entry-' + idx);
+  if (el) el.remove();
+  resumeEntries[idx] = null;
+}
+
+function escHtml(s) {
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function readField(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : '';
+}
+
+function collectConfig() {
+  const variants = [];
+  resumeEntries.forEach((_, idx) => {
+    const name     = readField('rv-name-'     + idx);
+    const triggers = readField('rv-triggers-' + idx);
+    if (name) variants.push({ name, triggers });
+  });
+  const clPath = document.querySelector('input[name="cl-path"]:checked')?.value || '';
+  return {
+    name:         readField('cfg-name'),
+    title:        readField('cfg-title'),
+    years:        readField('cfg-years'),
+    location:     readField('cfg-location'),
+    identityDesc: readField('cfg-identity-desc'),
+    wlb:          readField('cfg-wlb'),
+    resumePaste:  readField('cfg-resume-paste'),
+    targetTitles: readField('cfg-titles'),
+    companyTypes: readField('cfg-company-types'),
+    domain:       readField('cfg-domain'),
+    compFloor:    readField('cfg-comp-floor'),
+    compFlex:     readField('cfg-comp-flex'),
+    compNotes:    readField('cfg-comp-notes'),
+    hardReqs:     readField('cfg-hard-reqs'),
+    hardExcls:    readField('cfg-hard-excls'),
+    extendedCtx:  readField('cfg-extended-ctx'),
+    variants,
+    clPath,
+    clPaste:      readField('cfg-cl-paste'),
+    clTone:       readField('cfg-cl-tone'),
+    clLength:     readField('cfg-cl-length'),
+    clAvoid:      readField('cfg-cl-avoid'),
+    clStructure:  readField('cfg-cl-structure'),
+  };
+}
+
+// ── identity.md parser ────────────────────────────────────────
+function parseIdentityMd(content) {
+  const cfg = {};
+
+  function extractSection(heading) {
+    var idx = content.indexOf(heading);
+    if (idx === -1) return '';
+    var start = content.indexOf('\n', idx) + 1;
+    var rest = content.slice(start);
+    var nx = rest.search(/\n## /);
+    return (nx > -1 ? rest.slice(0, nx) : rest).trim();
+  }
+
+  // Handles both "**Field:** value" (generated format) and "- **Field:** value" (existing format)
+  var fieldMap = {
+    'Name': 'name', 'Title': 'title',
+    'Years of Experience': 'years', 'Location': 'location',
+    'Self-description': 'identityDesc', 'Work priorities': 'wlb',
+    'Target roles': 'targetTitles', 'Company types': 'companyTypes',
+    'Domain stance': 'domain', 'Comp floor': 'compFloor', 'Comp notes': 'compNotes',
+    'Current role': 'title', 'Identity': 'identityDesc',
+    'Domain': 'domain', 'Company size': 'companyTypes'
+  };
+
+  content.split('\n').forEach(function(line) {
+    var m = line.match(/^-?\s*\*\*(.+?):\*\*\s*(.*)/);
+    if (m && fieldMap[m[1].trim()]) cfg[fieldMap[m[1].trim()]] = m[2].trim();
+  });
+
+  // Extract name from H1 heading e.g. "# Alex — Identity..." -> "Alex"
+  if (!cfg.name) {
+    var h1 = content.match(/^# ([^\n]+)/m);
+    if (h1) cfg.name = h1[1].split(/[\u2014\-]/)[0].trim();
+  }
+
+  cfg.resumePaste = extractSection('## Career Summary');
+
+  // Extended Context: use the section if it exists, otherwise everything from Operating Style onward
+  cfg.extendedCtx = extractSection('## Extended Context');
+  if (!cfg.extendedCtx) {
+    var extHeadings = ['## Operating Style', '## Non-Negotiables'];
+    for (var i = 0; i < extHeadings.length; i++) {
+      var idx = content.indexOf(extHeadings[i]);
+      if (idx > -1) { cfg.extendedCtx = content.slice(idx).trim(); break; }
+    }
+  }
+
+  // Resume variants
+  cfg.variants = [];
+  var varSection = extractSection('## Resume Variants') || extractSection('## Resumes');
+  varSection.split('\n').forEach(function(l) {
+    var vm = l.match(/^-?\s*\*\*(.+?Resume[^:]*|.+?variant[^:]*):\*\*\s*(.*)/i);
+    if (vm) cfg.variants.push({ name: vm[1].trim(), triggers: vm[2].trim() });
+  });
+
+  // Note: hard requirements/exclusions are NOT parsed from identity.md.
+  // They live in store.config only, set directly via the Scorer Requirements
+  // form fields in Config. identity.md no longer contains a Scorer Requirements
+  // section by design — that content belongs to the scorer instructions output.
+
+  return cfg;
+}
+
+// ── identity.md writer ────────────────────────────────────────
+function buildIdentityMd(cfg) {
+  const lines = [];
+  const name = cfg.name || 'Identity';
+
+  lines.push('# ' + name + ' — Identity');
+  lines.push('');
+
+  lines.push('## Who I Am');
+  lines.push('');
+  if (cfg.name)         lines.push('**Name:** ' + cfg.name);
+  if (cfg.title)        lines.push('**Current role:** ' + cfg.title);
+  if (cfg.years)        lines.push('**Years of Experience:** ' + cfg.years);
+  if (cfg.location)     lines.push('**Location:** ' + cfg.location);
+  if (cfg.identityDesc) lines.push('**Self-description:** ' + cfg.identityDesc);
+  if (cfg.wlb)          lines.push('**Work priorities:** ' + cfg.wlb);
+  lines.push('');
+
+  lines.push('## Sweet Spot');
+  lines.push('');
+  if (cfg.targetTitles) lines.push('**Target roles:** ' + cfg.targetTitles);
+  if (cfg.companyTypes) lines.push('**Company types:** ' + cfg.companyTypes);
+  if (cfg.domain)        lines.push('**Domain stance:** ' + cfg.domain);
+  lines.push('');
+
+  lines.push('## Non-Negotiables');
+  lines.push('');
+  if (cfg.compFloor) lines.push('**Comp floor:** ' + cfg.compFloor);
+  if (cfg.compNotes) lines.push('**Comp notes:** ' + cfg.compNotes);
+  lines.push('');
+
+  if (cfg.resumePaste) {
+    lines.push('## Career Summary');
+    lines.push('');
+    lines.push(cfg.resumePaste);
+    lines.push('');
+  }
+
+  if (cfg.variants && cfg.variants.filter(function(v){return v&&v.name;}).length > 0) {
+    lines.push('## Resume Variants');
+    lines.push('');
+    cfg.variants.forEach(function(v) {
+      if (v && v.name) lines.push('**' + v.name + ':** ' + (v.triggers || ''));
+    });
+    lines.push('');
+  }
+
+  if (cfg.extendedCtx && cfg.extendedCtx.trim()) {
+    lines.push('## Extended Context');
+    lines.push('');
+    lines.push(cfg.extendedCtx);
+    lines.push('');
+  }
+
+  return lines.join('\n');
+}
+
+// ── scorer instructions writer ────────────────────────────────
+function buildScorerInstructions(cfg) {
+  const lines = [];
+  const hasCL = cfg.clPath && (cfg.clPaste || cfg.clTone || cfg.clAvoid);
+  const hasVariants = cfg.variants && cfg.variants.filter(function(v){return v&&v.name;}).length > 0;
+
+  // ── WHAT LIVES WHERE ──────────────────────────────────────────
+  lines.push('You are a job fit scoring engine and cover letter writer for the person described in the attached identity.md file.');
+  lines.push('');
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('WHAT LIVES WHERE — READ THIS FIRST');
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('');
+  lines.push('1. ATTACHED: identity.md');
+  lines.push('   Who this person is — career history, operating style, target roles, compensation');
+  lines.push('   expectations, resume variants, cover letter rules summary, and extended context.');
+  lines.push('   Resume variants and trigger keywords live here under ## Resume Variants.');
+  lines.push('   Refer to this file for proof points when writing cover letters.');
+  lines.push('');
+  if (hasCL) {
+    lines.push('2. ATTACHED: cover_letter_style.md');
+    lines.push('   Full cover letter style guide — tone, structure, opening formula, proof points,');
+    lines.push('   vocabulary, role-type playbooks, and format rules. Follow it precisely.');
+    lines.push('');
+    lines.push('3. THESE INSTRUCTIONS (scorer instructions field)');
+  } else {
+    lines.push('2. THESE INSTRUCTIONS (scorer instructions field)');
+  }
+  lines.push('   Scoring priority order, hard requirements, hard exclusions, scoring signals,');
+  lines.push('   scoring tiers, feedback handling, output format, and tracker export schema.');
+  lines.push('   None of this is repeated in identity.md — it lives here.');
+  lines.push('');
+
+  // ── SCORING PRIORITY ORDER ────────────────────────────────────
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('SCORING PRIORITY ORDER');
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('');
+  lines.push('1. Role fit: does the scope match? Analytics and/or data products ownership,');
+  lines.push('   meaningful cross-functional leadership, ability to drive outcomes not just execute.');
+  lines.push('');
+  lines.push('2. Compensation: does it credibly land in the target range given company size, stage,');
+  lines.push('   and industry norms? Do not auto-fail roles slightly below floor if total comp');
+  lines.push('   including equity is credible and culture signal is strong. Flag the gap.');
+  lines.push('');
+  lines.push('3. Title: preferred level is the guideline — never penalize solely for title if');
+  lines.push('   scope and comp align. The concern about stepping back in title is the');
+  lines.push("   candidate's to weigh, not the scorer's to penalize.");
+  lines.push('');
+
+  // ── HARD REQUIREMENTS ─────────────────────────────────────────
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('HARD REQUIREMENTS — all must be present for a score above 65%');
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('');
+  if (cfg.hardReqs) {
+    cfg.hardReqs.split('\n').filter(function(l){return l.trim();}).forEach(function(l){
+      lines.push('- ' + l.trim());
+    });
+  } else {
+    lines.push('- [No hard requirements configured — fill in the Scorer Requirements section in Lighthouse Config]');
+  }
+  lines.push('');
+
+  // ── HARD EXCLUSIONS ───────────────────────────────────────────
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('HARD EXCLUSIONS — any one triggers a Skip regardless of other signals');
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('');
+  if (cfg.hardExcls) {
+    cfg.hardExcls.split('\n').filter(function(l){return l.trim();}).forEach(function(l){
+      lines.push('- ' + l.trim());
+    });
+  } else {
+    lines.push('- [No hard exclusions configured — fill in the Scorer Requirements section in Lighthouse Config]');
+  }
+  lines.push('');
+
+  // ── SCORING SIGNALS ───────────────────────────────────────────
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('SCORING SIGNALS');
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('');
+  lines.push('GLASSDOOR SIGNAL:');
+  lines.push('Below 3.0 is a meaningful negative flag. Below 2.7 is a strong caution. Above 4.0');
+  lines.push('is a meaningful positive — note explicitly in flags. Declining trend matters as much');
+  lines.push('as the number. Surface Glassdoor signal in flags whenever available.');
+  lines.push('');
+  lines.push('WARM REFERRAL MODIFIER:');
+  lines.push('Direct introduction from a former manager/mentor actively advocating: +5-8 points.');
+  lines.push('Peer referral or LinkedIn connection: +2-3 points. Cold application: no modifier.');
+  lines.push('');
+  lines.push('LEADERSHIP STABILITY FLAG:');
+  lines.push('CEO departure, multiple C-suite vacancies, PE-backed with frequent priority shifts,');
+  lines.push('or mid-transformation chaos — flag as a caution even when role scope scores well.');
+  lines.push('The question is whether the conditions for winning exist, not just role fit on paper.');
+  lines.push('');
+  lines.push('MISSION TETHER:');
+  lines.push('Roles with a clear human outcome — healthcare navigation, marketplace dynamics,');
+  lines.push('fintech serving underserved communities — note this in positive flags. Not a score');
+  lines.push('modifier but worth surfacing as context for engagement and sustainability.');
+  lines.push('');
+  lines.push('DOMAIN:');
+  lines.push('Not a primary filter. Open to any domain. Do not reward or penalize domain alone.');
+  lines.push('Each company is scored on its own merits. Never generalize signals across companies.');
+  lines.push('');
+
+  // ── SCORING TIERS ─────────────────────────────────────────────
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('SCORING TIERS');
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('');
+  lines.push('85-100%: Priority — apply immediately');
+  lines.push('70-84%:  Strong — high priority');
+  lines.push('55-69%:  Maybe — worth considering');
+  lines.push('40-54%:  Borderline — proceed carefully');
+  lines.push('Below 40%: Skip — not worth time');
+  lines.push('');
+
+  // ── FEEDBACK HANDLING ─────────────────────────────────────────
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('FEEDBACK HANDLING');
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('');
+  lines.push('External feedback (from HR, recruiters, or interviewers) is company-specific');
+  lines.push('intelligence only. Never generalize it to other companies or lower scores elsewhere.');
+  lines.push('Own observations inform criteria refinement only.');
+  lines.push('');
+
+  // ── COVER LETTER RULES ────────────────────────────────────────
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('COVER LETTER RULES (always apply regardless of style guide)');
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('');
+  lines.push('- No em-dashes. Ever. Restructure any sentence that wants one.');
+  lines.push('- No fluff openers. No "I am excited to apply" or "With over X years of experience."');
+  lines.push('- Plain active voice. Fluid prose, not choppy fragments.');
+  lines.push('- Colons and semicolons only when genuinely necessary. Default to commas.');
+  lines.push('- Three paragraphs. Concrete metrics tied to specific role needs.');
+  lines.push('- Omit entirely if verdict is Borderline or Skip.');
+  if (!hasCL) {
+    lines.push('- No cover_letter_style.md attached — omit cover letter draft from all output.');
+  }
+  lines.push('');
+
+  // ── STANDARD SCORING OUTPUT ───────────────────────────────────
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('STANDARD SCORING OUTPUT — use this structure for every role scored');
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('');
+  lines.push('SCORE: [number]%');
+  lines.push('VERDICT: [priority / strong / maybe / borderline / skip]');
+  if (hasVariants) lines.push('RESUME VARIANT: [variant name from identity.md ## Resume Variants]');
+  lines.push('DOMAIN: [inferred industry]');
+  lines.push('');
+  lines.push('SUMMARY: [2 sentences max, direct assessment of fit]');
+  lines.push('');
+  lines.push('FLAGS:');
+  lines.push('+ [positive signal]');
+  lines.push('~ [caution or unknown]');
+  lines.push('- [hard exclusion or negative signal]');
+  lines.push('');
+  lines.push('COVER LETTER ANGLES:');
+  lines.push('1. [Specific angle using actual background from identity.md — not generic]');
+  lines.push('2. [Specific angle using actual background from identity.md — not generic]');
+  lines.push('3. [Specific angle using actual background from identity.md — not generic]');
+  lines.push('');
+  if (hasCL) {
+    lines.push('COVER LETTER:');
+    lines.push('[Full draft per cover_letter_style.md. 3 paragraphs, 200-250 words, no em-dashes.');
+    lines.push('Omit entirely if verdict is Borderline or Skip.]');
+    lines.push('');
+  }
+
+  // ── TRACKER EXPORT FORMAT ─────────────────────────────────────
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('TRACKER EXPORT FORMAT');
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('');
+  lines.push("When the user says \"export today's scores\" or similar, output a JSON code block.");
+  lines.push("One entry per role scored that session. User tells you which were applied to — set those to status \"applied\". User tells you which were passed on — set those to status \"passed\". All others (scored but no verdict given by user) get status \"scored\".");
+  lines.push('');
+  lines.push('```json');
+  lines.push('[');
+  lines.push('  {');
+  lines.push('    "id": "",');
+  lines.push('    "title": "",');
+  lines.push('    "company": "",');
+  lines.push('    "status": "applied|scored|passed",');
+  lines.push('    "verdict": "priority|strong|maybe|borderline|skip",');
+  lines.push('    "score": 0,');
+  lines.push('    "domain": "",');
+  lines.push('    "resumeVariant": "",');
+  lines.push('    "dateAdded": "YYYY-MM-DD",');
+  lines.push('    "source": "Job Scorer Project",');
+  lines.push('    "url": "",');
+  lines.push('    "angles": ["", "", ""],');
+  lines.push('    "flags": { "positive": [], "negative": [], "caution": [] },');
+  lines.push('    "notes": "",');
+  lines.push('    "feedbackExternal": "",');
+  lines.push('    "feedbackMine": ""');
+  lines.push('  }');
+  lines.push(']');
+  lines.push('```');
+  lines.push('');
+  lines.push("Leave id as empty string — Lighthouse generates its own on import. Set dateAdded to today's date.");
+  lines.push('Populate angles and flags from scoring output. Put the 2-sentence summary in notes.');
+
+  return lines.join('\n');
+}
+
+// ── cover letter style writer ─────────────────────────────────
+function buildCoverLetterStyle(cfg) {
+  if (!cfg.clPath) return '';
+  if (cfg.clPath === 'paste' && cfg.clPaste) return cfg.clPaste.trim();
+  const lines = [];
+  lines.push('# Cover Letter Style Guide');
+  lines.push('');
+  if (cfg.clTone)      lines.push(`**Tone:** ${cfg.clTone}`);
+  if (cfg.clLength)    lines.push(`**Target length:** ${cfg.clLength}`);
+  if (cfg.clAvoid) {
+    lines.push('');
+    lines.push('**Always avoid:**');
+    cfg.clAvoid.split('\n').filter(l=>l.trim()).forEach(l => lines.push('- ' + l.trim()));
+  }
+  if (cfg.clStructure) {
+    lines.push('');
+    lines.push(`**Structure:** ${cfg.clStructure}`);
+  }
+  return lines.join('\n');
+}
+
+
+// ── Per-section save ─────────────────────────────────────────
+async function saveSection(section) {
+  const btnId = { identity: 'btn-save-identity', scorer: 'btn-save-scorer', cl: 'btn-save-cl' }[section];
+  const btn = document.getElementById(btnId);
+  const origLabel = btn ? btn.textContent : '';
+
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Saving...';
+  }
+
+  try {
+    const cfg = collectConfig();
+
+    // Merge strategy: collected form values win, but don't overwrite with empty string
+    // if the store already has a real value (protects against accidental clears)
+    const prev = store.config || {};
+    const merged = Object.assign({}, prev);
+    Object.keys(cfg).forEach(function(k) {
+      const newVal = cfg[k];
+      const oldVal = prev[k];
+      if (Array.isArray(newVal)) {
+        merged[k] = newVal.length > 0 ? newVal : (oldVal || newVal);
+      } else if (typeof newVal === 'string') {
+        merged[k] = newVal.trim().length > 0 ? newVal : (oldVal || newVal);
+      } else {
+        merged[k] = newVal !== undefined ? newVal : oldVal;
+      }
+    });
+    store.config = merged;
+
+    // Rebuild the relevant output BEFORE saving so generatedOutputs is always current
+    if (section === 'identity' || section === 'scorer') {
+      generatedOutputs.identity = buildIdentityMd(store.config);
+      generatedOutputs.scorer   = buildScorerInstructions(store.config);
+    }
+    if (section === 'cl') {
+      generatedOutputs.cl = buildCoverLetterStyle(store.config);
+    }
+
+    // Demo mode: persisted to this browser's localStorage only, no server involved.
+    await saveConfig(store.config);
+    updateHeaderProfile(store.config);
+
+    // Guaranteed success state
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = 'Saved ✓';
+      btn.style.background = '#158a3e';
+      btn.style.borderColor = '#158a3e';
+    }
+
+    setTimeout(function() {
+      if (btn) {
+        btn.textContent = origLabel;
+        btn.style.background = '';
+        btn.style.borderColor = '';
+      }
+      switchToViewMode(store.config);
+    }, 1100);
+
+  } catch(err) {
+    console.error('saveSection failed:', err);
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = 'Save failed — retry';
+      btn.style.background = '#991b1b';
+      setTimeout(function() {
+        btn.textContent = origLabel;
+        btn.style.background = '';
+      }, 2500);
+    }
+  }
+}
+
+// ── Main generate function ────────────────────────────────────
+async function generateAllOutputs() {
+  const cfg = collectConfig();
+  store.config = cfg;
+  generatedOutputs.identity = buildIdentityMd(cfg);
+  generatedOutputs.scorer   = buildScorerInstructions(cfg);
+  generatedOutputs.cl       = buildCoverLetterStyle(cfg);
+
+  // Demo mode: persisted to this browser's localStorage only, no server involved.
+  await saveConfig(store.config);
+  updateHeaderProfile(cfg);
+  switchToViewMode(cfg);
+}
+
+function switchToViewMode(cfg) {
+  cfg = cfg || collectConfig();
+  document.getElementById('cfg-edit-mode').style.display = 'none';
+  document.getElementById('cfg-view-mode').style.display = 'block';
+
+  const nameStr = cfg.name || 'Search Profile';
+  const nameEl = document.getElementById('cfg-view-name');
+  const subtitleEl = document.getElementById('cfg-view-subtitle');
+  if (nameEl) nameEl.textContent = nameStr;
+  const shortTitle = (cfg.title || '').split(/,|—|-(?!\w)/)[0].trim();
+  const subtitle = [shortTitle, cfg.location].filter(Boolean).join(' · ');
+  if (subtitleEl) subtitleEl.textContent = subtitle;
+
+  // Identity summary card — clean status, not field values
+  const hasIdentity = !!(cfg.name || cfg.title || cfg.identityDesc);
+  const varCount = cfg.variants ? cfg.variants.filter(v=>v&&v.name).length : 0;
+  const hasExtended = !!(cfg.extendedCtx && cfg.extendedCtx.trim());
+  document.getElementById('cfg-sum-identity').innerHTML =
+    '<div class="cfg-sum-line cfg-sum-ok">✓ identity.md loaded</div>' +
+    (varCount > 0 ? '<div class="cfg-sum-line">' + varCount + ' resume variant' + (varCount!==1?'s':'') + ' defined</div>' : '') +
+    (hasExtended ? '<div class="cfg-sum-line">Extended context present</div>' : '') +
+    (!hasIdentity ? '<div class="cfg-sum-line cfg-sum-warn">⚠ Run Generate to populate</div>' : '');
+
+  // Scorer summary card
+  const reqs  = (cfg.hardReqs  || '').split('\n').filter(function(l){return l.trim();}).length;
+  const excls = (cfg.hardExcls || '').split('\n').filter(function(l){return l.trim();}).length;
+  const hasScorer = reqs > 0 || excls > 0;
+  document.getElementById('cfg-sum-scorer').innerHTML = hasScorer
+    ? '<div class="cfg-sum-line cfg-sum-ok">✓ Requirements configured</div>' +
+      '<div class="cfg-sum-line">' + reqs + ' requirement' + (reqs!==1?'s':'') + ' · ' + excls + ' exclusion' + (excls!==1?'s':'') + '</div>'
+    : '<div class="cfg-sum-line cfg-sum-warn">⚠ Not yet configured — fill in section ② below</div>';
+
+  // CL summary card
+  const clEl = document.getElementById('cfg-sum-cl');
+  const clBlock = document.getElementById('cl-output-block');
+  const clBtn = document.getElementById('cl-copy-btn');
+  const hasCL = !!(cfg.clPath === 'paste' && cfg.clPaste) || !!(cfg.clPath === 'prefs' && (cfg.clTone || cfg.clAvoid));
+  const clFromFile = !!generatedOutputs.cl;
+  if (hasCL || clFromFile) {
+    clEl.innerHTML = '<div class="cfg-sum-line cfg-sum-ok">✓ ' + (clFromFile ? 'cover_letter_style.md loaded' : 'Style guide configured') + '</div>';
+    clBlock.classList.remove('cfg-output-optional-empty');
+    if (clBtn) clBtn.disabled = false;
+  } else {
+    clEl.innerHTML = '<div class="cfg-sum-line" style="color:var(--text3);font-style:italic;">Optional — scorer omits cover letters if not provided</div>';
+    clBlock.classList.add('cfg-output-optional-empty');
+    if (clBtn) clBtn.disabled = true;
+  }
+
+  // File status indicators
+  document.getElementById('status-identity').textContent = generatedOutputs.identity ? '✓ Ready to copy' : '○ Load or generate to enable';
+  document.getElementById('status-scorer').textContent   = generatedOutputs.scorer   ? '✓ Ready to copy' : '○ Fill requirements then generate';
+  document.getElementById('status-cl').textContent       = generatedOutputs.cl       ? '✓ Ready to copy' : (hasCL ? '○ Generate to enable' : '— Not configured');
+
+  document.getElementById('cfg-identity-status').textContent = generatedOutputs.identity ? 'demo mode — saved to this browser only, nothing is sent anywhere' : '';
+}
+
+function switchToEditMode() {
+  document.getElementById('cfg-edit-mode').style.display = 'block';
+  document.getElementById('cfg-view-mode').style.display = 'none';
+  // Show cancel button only if we have a view mode to go back to
+  const cancelBtn = document.getElementById('cfg-cancel-edit');
+  if (cancelBtn) cancelBtn.style.display = 'inline-flex';
+}
+
+function cancelEdit() {
+  // Discard unsaved form changes — revert to last saved store.config
+  const cfg = store.config || {};
+  loadConfigIntoForm(cfg);
+  if (cfg.name || cfg.title || generatedOutputs.identity) {
+    switchToViewMode(cfg);
+  }
+}
+
+function scrollToSection(id) {
+  switchToEditMode();
+  setTimeout(() => {
+    // Collapse all sections first
+    ['identity','career','targets','comp','resumes','extended','reqs','cl'].forEach(function(s) {
+      var sec = document.getElementById('cfg-' + s);
+      if (sec) sec.classList.add('collapsed');
+    });
+    // Open only the target section
+    var el = document.getElementById('cfg-' + id);
+    if (el) {
+      el.classList.remove('collapsed');
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, 100);
+}
+
+function copyOutput(type) {
+  let text = generatedOutputs[type];
+
+  // Self-heal: if missing, try to rebuild from current store.config before giving up
+  if (!text && store.config) {
+    if (type === 'identity') text = generatedOutputs.identity = buildIdentityMd(store.config);
+    if (type === 'scorer')   text = generatedOutputs.scorer   = buildScorerInstructions(store.config);
+    if (type === 'cl')       text = generatedOutputs.cl       = buildCoverLetterStyle(store.config);
+  }
+
+  if (!text) {
+    alert('Nothing to copy yet. Fill in and Save the relevant section first.');
+    return;
+  }
+
+  const btnId = { identity: 'copy-identity-btn', scorer: 'copy-scorer-btn', cl: 'cl-copy-btn' }[type];
+  const btn = document.getElementById(btnId);
+
+  navigator.clipboard.writeText(text).then(function() {
+    if (btn) {
+      const orig = btn.textContent;
+      btn.textContent = 'Copied ✓';
+      btn.style.color = '#158a3e';
+      setTimeout(function() { btn.textContent = orig; btn.style.color = ''; }, 2000);
+    }
+  }).catch(function() {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  });
+}
+
+function loadConfigIntoForm(cfg) {
+  if (!cfg) return;
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val || ''; };
+  set('cfg-name',           cfg.name);
+  set('cfg-title',          cfg.title);
+  set('cfg-years',          cfg.years);
+  set('cfg-location',       cfg.location);
+  set('cfg-identity-desc',  cfg.identityDesc);
+  set('cfg-wlb',            cfg.wlb);
+  set('cfg-resume-paste',   cfg.resumePaste);
+  set('cfg-titles',         cfg.targetTitles);
+  set('cfg-company-types',  cfg.companyTypes);
+  set('cfg-domain',         cfg.domain);
+  set('cfg-comp-floor',     cfg.compFloor);
+  set('cfg-comp-notes',     cfg.compNotes);
+  set('cfg-hard-reqs',      cfg.hardReqs);
+  set('cfg-hard-excls',     cfg.hardExcls);
+  set('cfg-extended-ctx',   cfg.extendedCtx);
+  (cfg.variants || []).forEach(v => v && addResumeVariant(v));
+  if (cfg.clPath) {
+    const radio = document.querySelector(`input[name="cl-path"][value="${cfg.clPath}"]`);
+    if (radio) { radio.checked = true; toggleCLPath(); }
+  }
+  set('cfg-cl-paste',     cfg.clPaste);
+  set('cfg-cl-tone',      cfg.clTone);
+  set('cfg-cl-length',    cfg.clLength);
+  set('cfg-cl-avoid',     cfg.clAvoid);
+  set('cfg-cl-structure', cfg.clStructure);
+}
+
+function updateHeaderProfile(cfg) {
+  const el = document.querySelector('.tagline[style*="italic"]');
+  if (!el) return;
+  if (cfg && cfg.name) {
+    // Cap preferred titles at 3
+    const titles = (cfg.targetTitles || '')
+      .split(',')
+      .map(t => t.trim())
+      .filter(Boolean)
+      .slice(0, 3)
+      .join(', ');
+    const line = titles ? cfg.name + ' · ' + titles : cfg.name;
+    el.textContent = '· ' + line + ' ·';
+    el.style.opacity = '0.7';
+    el.style.fontStyle = 'normal';
+  } else {
+    el.textContent = '· search profile not configured ·';
+    el.style.opacity = '0.5';
+    el.style.fontStyle = 'italic';
+  }
+}
+
+// ── Career Coach instructions ─────────────────────────────────
+function buildCoachInstructions() {
+  const cfg = store.config || {};
+  const name = cfg.name || 'the user';
+  const pronouns = 'they/them';
+
+  return `You are a sounding board and career assistant helping ${name} with their job search. Three files are attached to maintain continuity across sessions:
+
+1. identity.md — core to who ${name} is: career history, operating style, target roles, compensation expectations, non-negotiables, and preferences in the search. This is the primary source of truth for who they are and what they want.
+
+2. network.md — ongoing outreach to former colleagues, coworkers, friends, and recruiters. Tracks relationship status, conversations in progress, and warm leads. This file is maintained here in the Career Coach project — update it as relationship status changes across sessions.
+
+3. A pipeline export from Lighthouse (the job tracker app) — the current state of what has been applied to, the fit score and verdict for each role, and where each opportunity stands in the process. Import a fresh export at the start of each session for current data.
+
+The aim is to produce a well-fitting job. Day to day this means prioritizing tasks and effort across the search, with identity, network, and pipeline serving as anchors to every conversation. Pipeline amendments happen in Lighthouse via the Job Scorer workflow. Network amendments happen here.
+
+-----
+
+IDENTITY FILE STRUCTURE NOTE:
+identity.md has two zones. Treat them differently when proposing amendments.
+
+Structured sections (## Who I Am, ## Sweet Spot, ## Non-Negotiables, ## Resume Variants) — amend field values in place, preserve format exactly. These are machine-readable by Lighthouse.
+
+Extended Context (## Extended Context) — append new learnings, emerging patterns, situational context, and anything narrative. Add a brief header and today's date. Never overwrite existing content.
+
+Never rename section headings or move content between zones.
+
+-----
+
+THREAD TRANSITION PROTOCOL:
+At the end of each search week or beginning of the next when transitioning sessions, produce three outputs:
+
+1. Recommended identity.md amendments if warranted — structured field changes shown as specific field and new value; new learnings appended to ## Extended Context with a date header.
+
+2. An updated network.md reflecting any relationship changes, conversations that progressed, or new contacts added during the week.
+
+3. A brief Monday starter summary covering: active decisions pending, pipeline urgency signals, and any emotional or situational context worth carrying forward.
+
+These three outputs together are the handoff package for the next session.`;
+}
+
+function renderCoachInstructions() {
+  const preview = document.getElementById('coach-instructions-preview');
+  if (preview) preview.textContent = buildCoachInstructions();
+}
+
+function toggleCoachDetails() {
+  const details = document.getElementById('coach-details');
+  const btn = document.getElementById('coach-toggle-btn');
+  if (!details || !btn) return;
+  const open = details.style.display !== 'none';
+  details.style.display = open ? 'none' : 'block';
+  btn.textContent = open ? 'Show details ▾' : 'Hide details ▴';
+}
+
+function copyCoachInstructions() {
+  const text = buildCoachInstructions();
+  navigator.clipboard.writeText(text).then(function() {
+    const btn = document.getElementById('coach-copy-btn');
+    if (btn) {
+      const orig = btn.textContent;
+      btn.textContent = 'Copied ✓';
+      btn.style.background = '#158a3e';
+      setTimeout(function() { btn.textContent = orig; btn.style.background = '#5b21b6'; }, 2000);
+    }
+  }).catch(function() {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  });
+}
+
+// ── Init ─────────────────────────────────────────────────────
+async function init() {
+  // Demo mode: everything comes from DEMO_DATA / DEMO_CONFIG (or this browser's
+  // localStorage if you've already edited the demo), never from a server.
+  const loaded = await load();
+  store = migrateStore(loaded);
+  updateStats();
+  renderPipeline();
+
+  const cfg = await loadConfig();
+  if (cfg) {
+    store.config = cfg;
+    loadConfigIntoForm(cfg);
+    updateHeaderProfile(cfg);
+    generatedOutputs.identity = buildIdentityMd(cfg);
+    generatedOutputs.scorer   = buildScorerInstructions(cfg);
+    generatedOutputs.cl       = buildCoverLetterStyle(cfg);
+    if (cfg.name || cfg.title) switchToViewMode(cfg);
+  }
+}
+
+init();
+</script>
+</body>
+</html>

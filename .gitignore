@@ -1,0 +1,17 @@
+# Real personal data — lives locally only, never committed.
+# Fresh clones get these bootstrapped from the .example templates by server.js
+# (except data.json, which intentionally starts empty — see server.js).
+data.json
+identity.md
+cover_letter_style.md
+config.json
+
+# Dated pipeline snapshots/backups — personal data, not app code.
+zImportFiles/
+
+# Dependencies
+node_modules/
+
+# OS/editor cruft
+.DS_Store
+Thumbs.db

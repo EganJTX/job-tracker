@@ -1,0 +1,13 @@
+{
+  "name": "lighthouse-job-tracker",
+  "version": "1.0.0",
+  "description": "Lighthouse — a local pipeline tracker, identity/instructions generator, and scoring-hub for a job search, paired with an external AI scorer bot.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "CC-BY-NC-4.0",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

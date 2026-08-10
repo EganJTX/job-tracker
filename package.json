@@ -4,7 +4,8 @@
   "description": "Lighthouse — a local pipeline tracker, identity/instructions generator, and scoring-hub for a job search, paired with an external AI scorer bot.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "suggest-ghosted": "node scripts/suggest-ghosted.js"
   },
   "license": "CC-BY-NC-4.0",
   "dependencies": {

@@ -162,6 +162,45 @@
   .btn-ghost:hover { background: var(--bg3); color: var(--text); box-shadow: none; transform: none; }
   .btn-sm { padding: 5px 12px; font-size: 11px; }
 
+  /* Ghosted-suggestion trigger */
+  .ghost-eval-status { font-family: var(--sans); font-size: 11px; color: var(--text3); max-width: 320px; text-align: right; }
+  .ghost-eval-status.state-loading { color: var(--text2); }
+  .ghost-eval-status.state-success { color: var(--priority); font-weight: 600; }
+  .ghost-eval-status.state-error   { color: var(--skip); font-weight: 600; }
+
+  /* Ghosted-suggestion badge + review box */
+  .ghost-badge {
+    display: inline-block;
+    background: rgba(146,64,14,0.1);
+    color: var(--amber);
+    border: 1px solid rgba(146,64,14,0.3);
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    cursor: help;
+  }
+  .ghost-suggestion-box {
+    background: rgba(146,64,14,0.06);
+    border: 1px solid rgba(146,64,14,0.25);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+  }
+  .ghost-suggestion-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
+  }
+  .ghost-suggestion-reasoning { font-size: 12px; color: var(--text2); line-height: 1.5; }
+
   /* Verdict badges */
   .verdict-badge {
     display: inline-block;
@@ -639,10 +678,15 @@
           <div class="lbl">Response</div>
         </div>
       </div>
-      <div style="display:flex;gap:8px;align-items:center;">
-        <span style="color:var(--text3);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;" id="last-export-label"></span>
-        <button class="btn btn-ghost btn-sm" onclick="importData()" title="Load a previously exported JSON file">Import</button>
-        <button class="btn btn-sm" onclick="exportData()" title="Download your pipeline as a JSON file">Export</button>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+        <div style="display:flex;gap:8px;align-items:center;">
+          <span style="color:var(--text3);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;" id="last-export-label"></span>
+          <button class="btn btn-ghost btn-sm" onclick="importData()" title="Load a previously exported JSON file">Import</button>
+          <button class="btn btn-sm" onclick="exportData()" title="Download your pipeline as a JSON file">Export</button>
+          <button class="btn btn-ghost btn-sm" id="ghost-eval-btn" onclick="triggerGhostEvaluation()" title="Ask Claude Code to review open applications for likely ghosting">Analyze</button>
+          <button class="btn btn-sm" id="ghost-review-btn" onclick="toggleGhostReviewMode()" title="Review roles Claude flagged as possibly ghosted" style="display:none;background:var(--amber);"></button>
+        </div>
+        <span id="ghost-eval-status" class="ghost-eval-status"></span>
       </div>
     </div>
   </div>
@@ -1130,7 +1174,7 @@
 // ── Constants ────────────────────────────────────────────────
 const STORE_KEY = 'lighthouse_job_tracker_v1';
 const API_URL   = '/api/job-tracker/data';
-const SCHEMA_VERSION = 4;
+const SCHEMA_VERSION = 5;
 
 // Ordered pipeline stages (furthest-along first for display)
 const STAGE_ORDER = [
@@ -1309,6 +1353,15 @@ function migrateStore(data) {
     });
     data.schemaVersion = 4;
   }
+  // v4 -> v5: add advisory-only suggestedState + suggestedReasoning (ghosted-suggestion feature).
+  // Never read as source of truth for status — UI badge/filter fields only.
+  if (data.schemaVersion < 5) {
+    (data.roles || []).forEach(r => {
+      if (r.suggestedState === undefined) r.suggestedState = null;
+      if (r.suggestedReasoning === undefined) r.suggestedReasoning = null;
+    });
+    data.schemaVersion = 5;
+  }
   return data;
 }
 
@@ -1395,12 +1448,119 @@ function updateStats() {
 }
 
 // ── Pipeline rendering ───────────────────────────────────────
+// ── Ghosted-suggestion trigger ──────────────────────────────────
+let ghostReviewMode = false;
+
+async function triggerGhostEvaluation() {
+  const btn    = document.getElementById('ghost-eval-btn');
+  const status = document.getElementById('ghost-eval-status');
+
+  btn.disabled = true;
+  status.className = 'ghost-eval-status state-loading';
+  status.textContent = 'Reasoning…';
+
+  try {
+    const resp = await fetch('/api/evaluate-ghosted', { method: 'POST' });
+
+    let data;
+    try {
+      data = await resp.json();
+    } catch (e) {
+      throw new Error(`Server returned a non-JSON response (status ${resp.status})`);
+    }
+
+    if (!resp.ok || !data.ok) {
+      throw new Error(data.error || `Request failed with status ${resp.status}`);
+    }
+
+    status.className = 'ghost-eval-status state-success';
+    status.textContent = `Reasoning complete — ${data.flaggedCount} suggestion${data.flaggedCount !== 1 ? 's' : ''} ready for review (${data.totalCandidates} reviewed).`;
+
+    // The route wrote suggestions directly to the data file server-side —
+    // reload so the in-memory store and badge/review UI reflect them.
+    store = await load();
+    updateGhostReviewButton();
+    const activeTab = document.querySelector('.tab.active')?.dataset.tab;
+    if (activeTab === 'pipeline') renderPipeline();
+  } catch (e) {
+    status.className = 'ghost-eval-status state-error';
+    status.textContent = `Reasoning failed: ${e.message}`;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+// Shows/labels the review-filter toggle based on how many roles are
+// currently flagged. Hidden entirely when there's nothing to review.
+function updateGhostReviewButton() {
+  const btn = document.getElementById('ghost-review-btn');
+  if (!btn) return;
+  const count = store.roles.filter(r => r.suggestedState).length;
+  if (count === 0) {
+    ghostReviewMode = false;
+    btn.style.display = 'none';
+    return;
+  }
+  btn.style.display = 'inline-flex';
+  btn.textContent = ghostReviewMode ? 'Back' : `Review (${count})`;
+}
+
+function toggleGhostReviewMode() {
+  ghostReviewMode = !ghostReviewMode;
+  updateGhostReviewButton();
+  renderPipeline();
+}
+
+// Sets the actual tracked status to match the suggestion and clears it —
+// this is the only path that ever writes suggestedState into status.
+function affirmSuggestion(id) {
+  const role = store.roles.find(r => r.id === id);
+  if (!role || !role.suggestedState) return;
+  advancePeak(role, role.suggestedState);
+  role.status = role.suggestedState;
+  role.suggestedState = null;
+  role.suggestedReasoning = null;
+  role.lastModified = new Date().toISOString().split('T')[0];
+  save(store);
+  updateStats();
+  updateGhostReviewButton();
+  renderPipeline();
+}
+
+// Clears the suggestion without touching status — a future evaluation run
+// may re-flag the same role if the underlying signals still hold.
+function dismissSuggestion(id) {
+  const role = store.roles.find(r => r.id === id);
+  if (!role) return;
+  role.suggestedState = null;
+  role.suggestedReasoning = null;
+  save(store);
+  updateGhostReviewButton();
+  renderPipeline();
+}
+
 function renderPipeline() {
   const container = document.getElementById('pipeline-content');
   const roles = store.roles;
 
   if (roles.length === 0) {
     container.innerHTML = `<div class="empty-state"><div class="empty-icon">◎</div><p>No roles tracked yet. Score a role in your Job Scorer Project and import it here.</p></div>`;
+    return;
+  }
+
+  if (ghostReviewMode) {
+    const flagged = roles.filter(r => r.suggestedState).sort((a,b) => b.score - a.score);
+    if (flagged.length === 0) {
+      container.innerHTML = `<div class="empty-state"><div class="empty-icon">◎</div><p>No suggestions left to review.</p></div>`;
+      return;
+    }
+    container.innerHTML = `<div class="pipeline-group">
+      <div class="pipeline-group-header">
+        <span class="pipeline-group-label" style="color:var(--amber);">Suggested Ghosted — Review</span>
+        <span class="pipeline-group-count">${flagged.length}</span>
+      </div>
+      <div class="role-list">${flagged.map(r => renderRoleCard(r)).join('')}</div>
+    </div>`;
     return;
   }
 
@@ -1468,7 +1628,6 @@ function renderRoleCard(r) {
   const lastUpdated = r.lastModified
     ? `<span class="last-updated">Updated ${formatDate(r.lastModified)}</span>`
     : '';
-
   return `
     <div class="role-card" id="rc-${r.id}" onclick="toggleExpand('${r.id}')">
       <div>
@@ -1486,6 +1645,12 @@ function renderRoleCard(r) {
       <div style="text-align:right;">
         <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:${getScoreColor(r.score)};">${r.score}%</div>
         <div style="color:var(--text3);font-size:10px;">${r.resumeVariant || ''}</div>
+        ${r.suggestedState ? `
+        <div style="margin-top:8px;display:flex;align-items:center;gap:6px;justify-content:flex-end;" onclick="event.stopPropagation()">
+          <span class="ghost-badge" title="${escHtml(r.suggestedReasoning || '')}">Ghosted?</span>
+          <button class="btn btn-sm" style="padding:3px 9px;font-size:10px;" title="${escHtml(r.suggestedReasoning || '')}" onclick="event.stopPropagation();affirmSuggestion('${r.id}')">Affirm</button>
+          <button class="btn btn-ghost btn-sm" style="padding:3px 9px;font-size:10px;" onclick="event.stopPropagation();dismissSuggestion('${r.id}')">Dismiss</button>
+        </div>` : ''}
       </div>
       <div class="role-expanded">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
@@ -1519,6 +1684,16 @@ function renderRoleCard(r) {
           </div>
         </div>
         ${r.notes ? `<div style="margin-top:10px;"><div class="exp-section-title">Notes</div><div class="exp-text">${r.notes}</div></div>` : ''}
+
+        ${r.suggestedState ? `
+        <div class="ghost-suggestion-box" onclick="event.stopPropagation()">
+          <div class="ghost-suggestion-label">⚠ Suggested: ${STATUS_LABELS[r.suggestedState] || r.suggestedState}</div>
+          <div class="ghost-suggestion-reasoning">${escHtml(r.suggestedReasoning || '')}</div>
+          <div style="display:flex;gap:8px;margin-top:10px;">
+            <button class="btn btn-sm" onclick="event.stopPropagation();affirmSuggestion('${r.id}')">Affirm — Mark ${STATUS_LABELS[r.suggestedState] || r.suggestedState}</button>
+            <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();dismissSuggestion('${r.id}')">Dismiss</button>
+          </div>
+        </div>` : ''}
 
         <div class="status-select-row" onclick="event.stopPropagation()">
           <div>
@@ -1860,7 +2035,10 @@ function handleImportFile(event) {
             feedbackMine:     incoming.feedbackMine     || existing.feedbackMine     || '',
             lastModified:     existing.lastModified     || incoming.lastModified     || incoming.dateAdded,
             peakStatus:       existing.peakStatus       || toActivePeak(keepStatus),
-            url:              existing.url || incoming.url || ''
+            url:              existing.url || incoming.url || '',
+            // Advisory-only fields — import never carries these, so always keep the local suggestion
+            suggestedState:     existing.suggestedState     ?? null,
+            suggestedReasoning: existing.suggestedReasoning ?? null
           };
         }
         // Brand new role — init fields
@@ -1869,7 +2047,9 @@ function handleImportFile(event) {
           feedbackExternal: incoming.feedbackExternal || '',
           feedbackMine:     incoming.feedbackMine     || '',
           lastModified:     incoming.lastModified     || incoming.dateAdded,
-          peakStatus:       incoming.peakStatus       || toActivePeak(incoming.status)
+          peakStatus:       incoming.peakStatus       || toActivePeak(incoming.status),
+          suggestedState:     null,
+          suggestedReasoning: null
         };
       });
 
@@ -1897,6 +2077,8 @@ function handleImportFile(event) {
         if (!r.flags)   r.flags   = { positive:[], negative:[], caution:[] };
         if (!r.lastModified) r.lastModified = r.dateAdded;
         if (!r.peakStatus)   r.peakStatus   = toActivePeak(r.status);
+        if (r.suggestedState === undefined) r.suggestedState = null;
+        if (r.suggestedReasoning === undefined) r.suggestedReasoning = null;
       });
 
       save(store);
@@ -1914,6 +2096,7 @@ function handleImportFile(event) {
         (mergedCount ? ' ' + mergedCount + ' existing local role' + (mergedCount!==1?'s':'') + ' retained.' : '')
       );
 
+      updateGhostReviewButton();
       const activeTab = document.querySelector('.tab.active')?.dataset.tab;
       if (activeTab === 'pipeline')  renderPipeline();
       if (activeTab === 'intel')     renderIntel();
@@ -2756,6 +2939,7 @@ async function init() {
   const loaded = await load();
   store = migrateStore(loaded);
   updateStats();
+  updateGhostReviewButton();
   renderPipeline();
 
   // Try to load identity.md from server

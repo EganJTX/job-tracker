@@ -1,6 +1,7 @@
 const express = require('express');
 const fs      = require('fs');
 const path    = require('path');
+const { runGhostEvaluation } = require('./scripts/evaluate-ghosted');
 const app     = express();
 const PORT    = process.env.PORT || 3000;
 
@@ -10,7 +11,10 @@ app.use(express.json({ limit: '10mb' }));
 app.use('/job-tracker', express.static(__dirname));
 
 // ── File paths (all relative to this folder) ─────────────────────────────────
-const DATA_PATH        = path.join(__dirname, 'data.json');
+// DATA_FILE lets the whole app (pipeline read/write + ghosted-eval) point at
+// an alternate file, e.g. `DATA_FILE=copy/test_data.json node server.js` —
+// useful for testing against a copy before pointing back at real data.json.
+const DATA_PATH        = path.join(__dirname, process.env.DATA_FILE || 'data.json');
 const IDENTITY_PATH    = path.join(__dirname, 'identity.md');
 const COVERLETTER_PATH = path.join(__dirname, 'cover_letter_style.md');
 
@@ -109,6 +113,15 @@ app.post('/api/job-tracker/config', (req, res) => {
   } catch (e) {
     res.status(500).json({ error: 'Failed to write config' });
   }
+});
+
+// ── Ghosted-suggestion (agentic) ───────────────────────────────────────────────
+// See scripts/evaluate-ghosted.js for the implementation (kept separate so
+// it can also be run standalone against a test data file).
+app.post('/api/evaluate-ghosted', async (req, res) => {
+  const result = await runGhostEvaluation({ dataPath: DATA_PATH });
+  if (!result.ok) return res.status(result.status || 500).json(result);
+  res.json(result);
 });
 
 // ── Start ─────────────────────────────────────────────────────────────────────

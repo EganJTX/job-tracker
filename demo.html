@@ -162,6 +162,45 @@
   .btn-ghost:hover { background: var(--bg3); color: var(--text); box-shadow: none; transform: none; }
   .btn-sm { padding: 5px 12px; font-size: 11px; }
 
+  /* Ghosted-suggestion trigger */
+  .ghost-eval-status { font-family: var(--sans); font-size: 11px; color: var(--text3); max-width: 320px; text-align: right; }
+  .ghost-eval-status.state-loading { color: var(--text2); }
+  .ghost-eval-status.state-success { color: var(--priority); font-weight: 600; }
+  .ghost-eval-status.state-error   { color: var(--skip); font-weight: 600; }
+
+  /* Ghosted-suggestion badge + review box */
+  .ghost-badge {
+    display: inline-block;
+    background: rgba(146,64,14,0.1);
+    color: var(--amber);
+    border: 1px solid rgba(146,64,14,0.3);
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    cursor: help;
+  }
+  .ghost-suggestion-box {
+    background: rgba(146,64,14,0.06);
+    border: 1px solid rgba(146,64,14,0.25);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+  }
+  .ghost-suggestion-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
+  }
+  .ghost-suggestion-reasoning { font-size: 12px; color: var(--text2); line-height: 1.5; }
+
   /* Verdict badges */
   .verdict-badge {
     display: inline-block;
@@ -639,10 +678,15 @@
           <div class="lbl">Response</div>
         </div>
       </div>
-      <div style="display:flex;gap:8px;align-items:center;">
-        <span style="color:var(--text3);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;" id="last-export-label"></span>
-        <button class="btn btn-ghost btn-sm" onclick="importData()" title="Load a previously exported JSON file">Import</button>
-        <button class="btn btn-sm" onclick="exportData()" title="Download your pipeline as a JSON file">Export</button>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+        <div style="display:flex;gap:8px;align-items:center;">
+          <span style="color:var(--text3);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;" id="last-export-label"></span>
+          <button class="btn btn-ghost btn-sm" onclick="importData()" title="Load a previously exported JSON file">Import</button>
+          <button class="btn btn-sm" onclick="exportData()" title="Download your pipeline as a JSON file">Export</button>
+          <button class="btn btn-ghost btn-sm" id="ghost-eval-btn" onclick="triggerGhostEvaluation()" title="Simulated in this demo — the live app shells out to Claude Code to review open applications for likely ghosting">Analyze</button>
+          <button class="btn btn-sm" id="ghost-review-btn" onclick="toggleGhostReviewMode()" title="Review roles flagged as possibly ghosted" style="display:none;background:var(--amber);"></button>
+        </div>
+        <span id="ghost-eval-status" class="ghost-eval-status"></span>
       </div>
     </div>
   </div>
@@ -1129,7 +1173,7 @@
 <script>
 // ── Constants ────────────────────────────────────────────────
 const STORE_KEY = 'lighthouse_demo_v1';
-const SCHEMA_VERSION = 4;
+const SCHEMA_VERSION = 5;
 
 // ── Demo mode: self-contained fictional data, no server required ─────────────
 // Everything below (DEMO_CONFIG, DEMO_DATA) is a made-up persona ("John Doe") and
@@ -1168,14 +1212,14 @@ const DEMO_DATA = {
     { "id":"demo02","title":"Data Engineer","company":"Meridian Cloud Systems","status":"scored","verdict":"strong","score":82,"domain":"B2B SaaS","resumeVariant":"Data Engineer Resume","dateAdded":"2026-07-02","source":"Job Scorer Project","url":"","angles":["Framing the FP&A automation work as a lightweight ETL pipeline built solo","dbt learning in progress as evidence of deliberate skill-building toward the role"],"flags":{"positive":["Glassdoor 4.1","Small data team, high ownership per hire","Posting explicitly welcomes analyst-to-DE transitions"],"negative":["No production pipeline experience yet, only internal automation scripts"],"caution":["Comp range not listed, unconfirmed whether it clears $85K floor"]},"notes":"Rare posting that explicitly frames itself as a good first data engineering seat for a strong analyst. Worth applying even without formal DE title history.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-07-02","peakStatus":"scored" },
     { "id":"demo03","title":"Data Analyst","company":"Coastal Freight Co","status":"passed","verdict":"borderline","score":55,"domain":"Logistics","resumeVariant":"Analyst Resume","dateAdded":"2026-06-18","source":"Job Scorer Project","url":"","angles":[],"flags":{"positive":["Logistics domain overlap with Northfield experience"],"negative":["Role is largely dashboard maintenance on an existing template, limited build scope"],"caution":["Comp listed at $70K-80K, below floor"]},"notes":"Scope is narrower than current role, mostly maintaining dashboards someone else built. Passed given comp is below floor and growth path is unclear.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-06-20","peakStatus":null },
     { "id":"demo04","title":"BI Analyst","company":"Palmerton Media Group","status":"scored","verdict":"skip","score":28,"domain":"Media/Entertainment","resumeVariant":"Analyst Resume","dateAdded":"2026-06-25","source":"Job Scorer Project","url":"","angles":[],"flags":{"positive":[],"negative":["Role is report-distribution only, explicitly no modeling or forecasting scope","Contract-to-hire, 3-month term"],"caution":[]},"notes":"Hard exclusion on scope: posting describes a ticket-queue reporting function with no analysis ownership. Contract length also falls below the 6-month floor.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-06-25","peakStatus":"scored" },
-    { "id":"demo05","title":"Senior Data Engineer","company":"Ashford Commerce","status":"applied","verdict":"strong","score":85,"domain":"E-commerce","resumeVariant":"Data Engineer Resume","dateAdded":"2026-07-15","source":"Job Scorer Project","url":"","angles":["SQL data dictionary work at Northfield as evidence of documentation discipline","Automated close-reporting pipeline at Cedar & Vine as a proof point for pipeline ownership under real deadline pressure"],"flags":{"positive":["Comp $100K-130K","Glassdoor 4.4","Team explicitly pairs junior DE hires with a senior mentor for the first 90 days"],"negative":[],"caution":["Title says Senior but years-of-experience requirement is flexible per the posting, worth confirming in screen"]},"notes":"Best comp and mentorship structure seen so far for a DE-track role. Applied despite title mismatch since posting explicitly said experience flexible.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-07-20","peakStatus":"applied" },
+    { "id":"demo05","title":"Senior Data Engineer","company":"Ashford Commerce","status":"applied","verdict":"strong","score":85,"domain":"E-commerce","resumeVariant":"Data Engineer Resume","dateAdded":"2026-05-25","source":"Job Scorer Project","url":"","angles":["SQL data dictionary work at Northfield as evidence of documentation discipline","Automated close-reporting pipeline at Cedar & Vine as a proof point for pipeline ownership under real deadline pressure"],"flags":{"positive":["Comp $100K-130K","Glassdoor 4.4","Team explicitly pairs junior DE hires with a senior mentor for the first 90 days"],"negative":[],"caution":["Title says Senior but years-of-experience requirement is flexible per the posting, worth confirming in screen"]},"notes":"Best comp and mentorship structure seen so far for a DE-track role. Applied despite title mismatch since posting explicitly said experience flexible.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-05-30","peakStatus":"applied","suggestedState":"ghosted","suggestedReasoning":"10 weeks no movement, strong fit — consider a follow-up before writing off." },
     { "id":"demo06","title":"Business Intelligence Analyst","company":"Lakeview Mutual Insurance","status":"interview-recruiter","verdict":"maybe","score":68,"domain":"Insurance","resumeVariant":"Analyst Resume","dateAdded":"2026-06-05","source":"Job Scorer Project","url":"","angles":["Forecast variance work at Cedar & Vine as a proof point for board-level reporting"],"flags":{"positive":["Comp clears floor at $90K-105K"],"negative":["No clear path to data engineering, function is BI-only long term"],"caution":["Glassdoor 3.4, unremarkable, worth asking about team turnover in recruiter screen"]},"notes":"Solid comp and scope, but no visible growth path toward data engineering. Worth a recruiter conversation to understand team trajectory before going further.","feedbackExternal":"Recruiter said team has been stable for 2 years and next step would be a hiring manager screen focused on SQL and stakeholder examples.","feedbackMine":"","lastModified":"2026-07-10","peakStatus":"interview-recruiter" },
     { "id":"demo07","title":"Data Engineer II","company":"Windmere Travel","status":"scored","verdict":"strong","score":80,"domain":"Travel/Hospitality","resumeVariant":"Data Engineer Resume","dateAdded":"2026-07-28","source":"Job Scorer Project","url":"","angles":["dbt self-study as direct evidence of preparing for this exact tool stack"],"flags":{"positive":["Stack listed is dbt + Snowflake, matches current self-study directly","Glassdoor 4.0"],"negative":[],"caution":["Posting says 2+ years DE experience preferred, current profile is a lateral move not a direct match"]},"notes":"Strong tool-stack match given current dbt self-study. Title says DE II which may be a stretch, but worth applying given the direct tooling overlap.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-07-28","peakStatus":"scored" },
     { "id":"demo08","title":"Financial Analyst","company":"Harrow Manufacturing","status":"passed","verdict":"borderline","score":48,"domain":"Manufacturing","resumeVariant":"Analyst Resume","dateAdded":"2026-06-12","source":"Job Scorer Project","url":"","angles":[],"flags":{"positive":["Comp clears floor at $88K"],"negative":["Role is largely manual monthly close support with minimal forecasting ownership","Glassdoor 2.6, multiple reviews cite unstable leadership"],"caution":[]},"notes":"Comp clears the floor but scope is a step back toward pure close support, and the Glassdoor pattern on leadership instability is a real caution. Passed.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-06-14","peakStatus":null },
     { "id":"demo09","title":"Analytics Associate","company":"Bluepeak EdTech","status":"scored","verdict":"maybe","score":60,"domain":"EdTech","resumeVariant":"Analyst Resume","dateAdded":"2026-07-08","source":"Job Scorer Project","url":"","angles":[],"flags":{"positive":["Small mission-driven team, direct founder access","Glassdoor 4.6"],"negative":["Associate title and comp band ($70K-82K) likely below floor"],"caution":["Comp not confirmed in posting, worth clarifying before applying further"]},"notes":"Great culture signal and real ownership scope, but title and likely comp band sit below the $85K floor. Save-for-later unless comp clarifies higher.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-07-08","peakStatus":"scored" },
     { "id":"demo10","title":"Senior Business Analyst","company":"Fairmont Telecom","status":"offer","verdict":"priority","score":94,"domain":"Telecom","resumeVariant":"Analyst Resume","dateAdded":"2026-05-20","source":"Job Scorer Project","url":"","angles":["Root-cause analysis on the Northfield late-shipment pattern as evidence of independent problem framing","Cedar & Vine forecasting model as evidence of model ownership at senior scope"],"flags":{"positive":["Comp $105K-125K, clears comfortable target","Glassdoor 4.2","Hiring manager explicitly wants someone to own model build, not just distribute reports"],"negative":[],"caution":[]},"notes":"Best overall match seen this search: senior title, strong comp, real model-ownership scope, and a hiring manager who described the role in terms of decisions it should change, not reports it should produce.","feedbackExternal":"Hiring manager said the panel was unanimous and the offer would be extended within the week; final comp still being finalized with HR.","feedbackMine":"","lastModified":"2026-08-05","peakStatus":"offer" },
     { "id":"demo11","title":"Data Analyst","company":"Ironwood Financial Group","status":"rejected","verdict":"strong","score":76,"domain":"FinTech","resumeVariant":"Analyst Resume","dateAdded":"2026-05-15","source":"Job Scorer Project","url":"","angles":["FP&A background as direct domain overlap for a fintech analytics team"],"flags":{"positive":["Comp $92K-108K","FinTech domain overlap with FP&A background"],"negative":[],"caution":["Glassdoor 3.6, unremarkable"]},"notes":"Good fit on paper, domain overlap with FP&A background was a real asset in the recruiter screen. Lost out to an internal candidate after the hiring manager round.","feedbackExternal":"Recruiter said the team ultimately promoted an internal candidate and encouraged reapplying if a similar opening comes up.","feedbackMine":"","lastModified":"2026-06-30","peakStatus":"interview-hiringmgr" },
-    { "id":"demo12","title":"Business Analyst","company":"Vantage Point Analytics","status":"applied","verdict":"strong","score":78,"domain":"Professional Services/Consulting","resumeVariant":"Analyst Resume","dateAdded":"2026-07-22","source":"Job Scorer Project","url":"","angles":["Cross-client dashboard variety framed as a strength for a consulting-facing analyst role"],"flags":{"positive":["Comp $88K-102K","Glassdoor 4.0","Explicit exposure to multiple industries per year, useful for someone still figuring out domain preference"],"negative":[],"caution":["Travel expectation unclear from posting, worth confirming before interview"]},"notes":"Consulting structure would expose John to more industries quickly, useful while domain preference is still open. Applied, need to confirm travel expectations in screen.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-07-25","peakStatus":"applied" },
+    { "id":"demo12","title":"Business Analyst","company":"Vantage Point Analytics","status":"applied","verdict":"strong","score":78,"domain":"Professional Services/Consulting","resumeVariant":"Analyst Resume","dateAdded":"2026-06-01","source":"Job Scorer Project","url":"","angles":["Cross-client dashboard variety framed as a strength for a consulting-facing analyst role"],"flags":{"positive":["Comp $88K-102K","Glassdoor 4.0","Explicit exposure to multiple industries per year, useful for someone still figuring out domain preference"],"negative":[],"caution":["Travel expectation unclear from posting, worth confirming before interview"]},"notes":"Consulting structure would expose John to more industries quickly, useful while domain preference is still open. Applied, need to confirm travel expectations in screen.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-06-05","peakStatus":"applied","suggestedState":"ghosted","suggestedReasoning":"9 weeks no movement, good fit — consider a follow-up before writing off." },
     { "id":"demo13","title":"Financial Analyst","company":"Greenfield Grocers","status":"scored","verdict":"maybe","score":62,"domain":"Retail/CPG","resumeVariant":"Analyst Resume","dateAdded":"2026-08-01","source":"Job Scorer Project","url":"","angles":[],"flags":{"positive":["Retail domain overlap with Cedar & Vine background"],"negative":["Scope looks close to current role, limited growth signal in posting"],"caution":["Comp not listed, likely near floor given company size"]},"notes":"Comfortable domain match but scope reads as a lateral move rather than a step up. Worth applying only if comp confirms above current level.","feedbackExternal":"","feedbackMine":"","lastModified":"2026-08-01","peakStatus":"scored" }
   ],
   "watchlist": [],
@@ -1322,6 +1366,14 @@ function migrateStore(data) {
     });
     data.schemaVersion = 4;
   }
+  // v4 -> v5: add advisory-only suggestedState + suggestedReasoning (ghosted-suggestion feature).
+  if (data.schemaVersion < 5) {
+    (data.roles || []).forEach(r => {
+      if (r.suggestedState === undefined) r.suggestedState = null;
+      if (r.suggestedReasoning === undefined) r.suggestedReasoning = null;
+    });
+    data.schemaVersion = 5;
+  }
   return data;
 }
 
@@ -1407,6 +1459,77 @@ function updateStats() {
   document.getElementById('stat-response').textContent = responseRate + '%';
 }
 
+// ── Ghosted-suggestion trigger (demo mode: simulated, no live Claude Code call) ──
+let ghostReviewMode = false;
+
+async function triggerGhostEvaluation() {
+  const btn    = document.getElementById('ghost-eval-btn');
+  const status = document.getElementById('ghost-eval-status');
+
+  btn.disabled = true;
+  status.className = 'ghost-eval-status state-loading';
+  status.textContent = 'Reasoning…';
+
+  // Demo mode has no server, so there's no live Claude Code call to make —
+  // this simulates the same loading -> success flow the real app goes
+  // through, over the example rows already seeded as suggestions below.
+  await new Promise(resolve => setTimeout(resolve, 1200));
+
+  const GHOST_ELIGIBLE = ['applied', 'interview-recruiter', 'interview-hiringmgr', 'interview-panel'];
+  const totalCandidates = store.roles.filter(r => !TERMINAL.includes(r.status) && GHOST_ELIGIBLE.includes(r.status)).length;
+  const flaggedCount    = store.roles.filter(r => r.suggestedState).length;
+
+  status.className = 'ghost-eval-status state-success';
+  status.textContent = `Reasoning complete — ${flaggedCount} suggestion${flaggedCount !== 1 ? 's' : ''} ready for review (${totalCandidates} reviewed).`;
+
+  updateGhostReviewButton();
+  renderPipeline();
+  btn.disabled = false;
+}
+
+function updateGhostReviewButton() {
+  const btn = document.getElementById('ghost-review-btn');
+  if (!btn) return;
+  const count = store.roles.filter(r => r.suggestedState).length;
+  if (count === 0) {
+    ghostReviewMode = false;
+    btn.style.display = 'none';
+    return;
+  }
+  btn.style.display = 'inline-flex';
+  btn.textContent = ghostReviewMode ? 'Back' : `Review (${count})`;
+}
+
+function toggleGhostReviewMode() {
+  ghostReviewMode = !ghostReviewMode;
+  updateGhostReviewButton();
+  renderPipeline();
+}
+
+function affirmSuggestion(id) {
+  const role = store.roles.find(r => r.id === id);
+  if (!role || !role.suggestedState) return;
+  advancePeak(role, role.suggestedState);
+  role.status = role.suggestedState;
+  role.suggestedState = null;
+  role.suggestedReasoning = null;
+  role.lastModified = new Date().toISOString().split('T')[0];
+  save(store);
+  updateStats();
+  updateGhostReviewButton();
+  renderPipeline();
+}
+
+function dismissSuggestion(id) {
+  const role = store.roles.find(r => r.id === id);
+  if (!role) return;
+  role.suggestedState = null;
+  role.suggestedReasoning = null;
+  save(store);
+  updateGhostReviewButton();
+  renderPipeline();
+}
+
 // ── Pipeline rendering ───────────────────────────────────────
 function renderPipeline() {
   const container = document.getElementById('pipeline-content');
@@ -1414,6 +1537,22 @@ function renderPipeline() {
 
   if (roles.length === 0) {
     container.innerHTML = `<div class="empty-state"><div class="empty-icon">◎</div><p>No roles tracked yet. Score a role in your Job Scorer Project and import it here.</p></div>`;
+    return;
+  }
+
+  if (ghostReviewMode) {
+    const flagged = roles.filter(r => r.suggestedState).sort((a,b) => b.score - a.score);
+    if (flagged.length === 0) {
+      container.innerHTML = `<div class="empty-state"><div class="empty-icon">◎</div><p>No suggestions left to review.</p></div>`;
+      return;
+    }
+    container.innerHTML = `<div class="pipeline-group">
+      <div class="pipeline-group-header">
+        <span class="pipeline-group-label" style="color:var(--amber);">Suggested Ghosted — Review</span>
+        <span class="pipeline-group-count">${flagged.length}</span>
+      </div>
+      <div class="role-list">${flagged.map(r => renderRoleCard(r)).join('')}</div>
+    </div>`;
     return;
   }
 
@@ -1499,6 +1638,12 @@ function renderRoleCard(r) {
       <div style="text-align:right;">
         <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:${getScoreColor(r.score)};">${r.score}%</div>
         <div style="color:var(--text3);font-size:10px;">${r.resumeVariant || ''}</div>
+        ${r.suggestedState ? `
+        <div style="margin-top:8px;display:flex;align-items:center;gap:6px;justify-content:flex-end;" onclick="event.stopPropagation()">
+          <span class="ghost-badge" title="${escHtml(r.suggestedReasoning || '')}">Ghosted?</span>
+          <button class="btn btn-sm" style="padding:3px 9px;font-size:10px;" title="${escHtml(r.suggestedReasoning || '')}" onclick="event.stopPropagation();affirmSuggestion('${r.id}')">Affirm</button>
+          <button class="btn btn-ghost btn-sm" style="padding:3px 9px;font-size:10px;" onclick="event.stopPropagation();dismissSuggestion('${r.id}')">Dismiss</button>
+        </div>` : ''}
       </div>
       <div class="role-expanded">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
@@ -1532,6 +1677,16 @@ function renderRoleCard(r) {
           </div>
         </div>
         ${r.notes ? `<div style="margin-top:10px;"><div class="exp-section-title">Notes</div><div class="exp-text">${r.notes}</div></div>` : ''}
+
+        ${r.suggestedState ? `
+        <div class="ghost-suggestion-box" onclick="event.stopPropagation()">
+          <div class="ghost-suggestion-label">⚠ Suggested: ${STATUS_LABELS[r.suggestedState] || r.suggestedState}</div>
+          <div class="ghost-suggestion-reasoning">${escHtml(r.suggestedReasoning || '')}</div>
+          <div style="display:flex;gap:8px;margin-top:10px;">
+            <button class="btn btn-sm" onclick="event.stopPropagation();affirmSuggestion('${r.id}')">Affirm — Mark ${STATUS_LABELS[r.suggestedState] || r.suggestedState}</button>
+            <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();dismissSuggestion('${r.id}')">Dismiss</button>
+          </div>
+        </div>` : ''}
 
         <div class="status-select-row" onclick="event.stopPropagation()">
           <div>
@@ -1914,6 +2069,7 @@ function handleImportFile(event) {
 
       save(store);
       updateStats();
+      updateGhostReviewButton();
 
       if (parsed.exportedAt) {
         const el = document.getElementById('last-export-label');
@@ -2747,6 +2903,7 @@ async function init() {
   const loaded = await load();
   store = migrateStore(loaded);
   updateStats();
+  updateGhostReviewButton();
   renderPipeline();
 
   const cfg = await loadConfig();

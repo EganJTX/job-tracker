@@ -1457,7 +1457,16 @@ async function triggerGhostEvaluation() {
 
   btn.disabled = true;
   status.className = 'ghost-eval-status state-loading';
-  status.textContent = 'Reasoning…';
+
+  // Ticking counter proves the call is actually alive (a frozen number is
+  // the tell something's wrong) and sets the expectation up front so a
+  // 60-90s wait doesn't read as a hang.
+  let elapsed = 0;
+  status.textContent = 'Reasoning… (usually 60–90s)';
+  const tick = setInterval(() => {
+    elapsed++;
+    status.textContent = `Reasoning… (${elapsed}s, usually 60–90s)`;
+  }, 1000);
 
   try {
     const resp = await fetch('/api/evaluate-ghosted', { method: 'POST' });
@@ -1486,6 +1495,7 @@ async function triggerGhostEvaluation() {
     status.className = 'ghost-eval-status state-error';
     status.textContent = `Reasoning failed: ${e.message}`;
   } finally {
+    clearInterval(tick);
     btn.disabled = false;
   }
 }
@@ -2481,6 +2491,21 @@ function buildScorerInstructions(cfg) {
   }
   lines.push('');
 
+  // ── WHY THIS ROLE RULES ─────────────────────────────────────────
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('"WHY THIS ROLE" RULES (always apply)');
+  lines.push('─────────────────────────────────────────────────────────────────');
+  lines.push('');
+  lines.push('For short-answer "why this role" / "why are you interested" application fields —');
+  lines.push('distinct from the cover letter, and generated regardless of whether a cover letter style');
+  lines.push('guide is attached.');
+  lines.push('');
+  lines.push('- 5-6 sentences. Every sentence must earn its place — cut anything generic.');
+  lines.push('- Do not restate resume or work history. Assume the reader already has the resume.');
+  lines.push('- Focus on unique value-add mapped to inferred JD priorities, not a summary of background.');
+  lines.push('- Omit entirely if verdict is Borderline or Skip.');
+  lines.push('');
+
   // ── STANDARD SCORING OUTPUT ───────────────────────────────────
   lines.push('─────────────────────────────────────────────────────────────────');
   lines.push('STANDARD SCORING OUTPUT — use this structure for every role scored');
@@ -2503,12 +2528,21 @@ function buildScorerInstructions(cfg) {
   lines.push('2. [Specific angle using actual background from identity.md — not generic]');
   lines.push('3. [Specific angle using actual background from identity.md — not generic]');
   lines.push('');
+  lines.push('WHY THIS ROLE:');
+  lines.push('[5-6 sentences per "WHY THIS ROLE" RULES above. Omit entirely if verdict is Borderline or Skip.]');
+  lines.push('');
   if (hasCL) {
     lines.push('COVER LETTER:');
     lines.push('[Full draft per cover_letter_style.md. 3 paragraphs, 200-250 words, no em-dashes.');
     lines.push('Omit entirely if verdict is Borderline or Skip.]');
     lines.push('');
   }
+  lines.push('APPLICATION TACTICS:');
+  lines.push('Minimum-qualifications line check: on any role scoring "strong" or higher, verify resume');
+  lines.push('language explicitly mirrors each stated minimum/required qualification in the JD — flag any');
+  lines.push('gap as a specific word-level tweak (e.g. missing years-of-experience framing, missing named');
+  lines.push('tool/skill), not a full rewrite. This is a distinct check from general fit scoring.');
+  lines.push('');
 
   // ── TRACKER EXPORT FORMAT ─────────────────────────────────────
   lines.push('─────────────────────────────────────────────────────────────────');

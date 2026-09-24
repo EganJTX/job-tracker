@@ -82,7 +82,7 @@ function runGhostEvaluation({ dataPath, now = new Date() } = {}) {
       title:      r.title,
       status:     r.status,
       score:      r.score,
-      weeksStale: weeksSince(r.lastModified || r.dateAdded, now)
+      weeksStale: weeksSince(r.statusChangedAt || r.lastModified || r.dateAdded, now)
     }));
 
     const prompt = buildGhostPrompt(candidates, todayIso);

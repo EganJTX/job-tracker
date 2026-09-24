@@ -50,7 +50,7 @@ function run({ dryRun = false, now = new Date() } = {}) {
       return;
     }
 
-    const weeks = weeksSince(r.lastModified || r.dateAdded, now);
+    const weeks = weeksSince(r.statusChangedAt || r.lastModified || r.dateAdded, now);
     const band  = bandFor(r.score || 0);
 
     if (weeks >= band.weeks) {

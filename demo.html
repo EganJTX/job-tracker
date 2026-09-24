@@ -52,11 +52,14 @@
     border-radius: 8px;
     padding: 10px 16px;
     text-align: center;
-    min-width: 68px;
+    min-width: 96px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   }
   .stat-pill .num { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: var(--accent); }
   .stat-pill .lbl { color: var(--text3); font-family: var(--sans); font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+  /* Funnel conversion: % vs the previous step, and (Advanced only) % of all applications */
+  .stat-pill .pct { color: var(--text2); font-family: var(--sans); font-size: 11px; font-weight: 600; margin-top: 4px; }
+  .stat-pill .sub { color: var(--text3); font-family: var(--sans); font-size: 9.5px; margin-top: 1px; }
 
   /* Tabs */
   .tabs { display: flex; gap: 2px; margin-bottom: 24px; border-bottom: 2px solid var(--border); }
@@ -661,21 +664,29 @@
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
       <div class="header-stats">
-        <div class="stat-pill">
+        <div class="stat-pill" id="pill-total" title="Every role scored and added to the pipeline">
           <div class="num" id="stat-total">0</div>
           <div class="lbl">Assessed</div>
+          <div class="pct">&nbsp;</div>
+          <div class="sub">&nbsp;</div>
         </div>
-        <div class="stat-pill">
+        <div class="stat-pill" id="pill-applied" title="Roles that ever reached Applied (furthest stage), including ones since rejected or ghosted">
           <div class="num" id="stat-applied">0</div>
           <div class="lbl">Applied</div>
+          <div class="pct" id="stat-applied-pct">—</div>
+          <div class="sub">&nbsp;</div>
         </div>
-        <div class="stat-pill">
-          <div class="num" id="stat-active">0</div>
-          <div class="lbl">Interviewing</div>
+        <div class="stat-pill" id="pill-interviewed" title="Roles that ever reached a recruiter conversation or beyond">
+          <div class="num" id="stat-interviewed">0</div>
+          <div class="lbl">Interviewed</div>
+          <div class="pct" id="stat-interviewed-pct">—</div>
+          <div class="sub">&nbsp;</div>
         </div>
-        <div class="stat-pill">
-          <div class="num" id="stat-response">0%</div>
-          <div class="lbl">Response</div>
+        <div class="stat-pill" id="pill-advanced" title="Roles that made it past the hiring manager round (panel or offer)">
+          <div class="num" id="stat-advanced">0</div>
+          <div class="lbl">Advanced</div>
+          <div class="pct" id="stat-advanced-pct">—</div>
+          <div class="sub" id="stat-advanced-sub">—</div>
         </div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
@@ -1173,7 +1184,7 @@
 <script>
 // ── Constants ────────────────────────────────────────────────
 const STORE_KEY = 'lighthouse_demo_v1';
-const SCHEMA_VERSION = 5;
+const SCHEMA_VERSION = 6;
 
 // ── Demo mode: self-contained fictional data, no server required ─────────────
 // Everything below (DEMO_CONFIG, DEMO_DATA) is a made-up persona ("John Doe") and
@@ -1374,6 +1385,12 @@ function migrateStore(data) {
     });
     data.schemaVersion = 5;
   }
+  // v5 -> v6: add statusChangedAt + appliedDate (timing for Intelligence) and heal peak drift.
+  // Backfilled values are approximate (from lastModified) and flagged with timingApprox.
+  if (data.schemaVersion < 6) {
+    reconcileRoles(data.roles);
+    data.schemaVersion = 6;
+  }
   return data;
 }
 
@@ -1383,13 +1400,60 @@ function toActivePeak(status) {
   return status;
 }
 
-// Advance peakStatus only forward
+// Advance peakStatus only forward. Terminal statuses (ghosted/rejected/shelved/passed)
+// are not in STAGE_ORDINAL and never move the peak — it keeps recording how far the role got.
 function advancePeak(role, newStatus) {
   const newOrdinal = STAGE_ORDINAL[newStatus] ?? -1;
   const curOrdinal = STAGE_ORDINAL[role.peakStatus] ?? -1;
   if (newOrdinal > curOrdinal && !TERMINAL.includes(newStatus)) {
     role.peakStatus = newStatus;
   }
+}
+
+function todayStr() { return new Date().toISOString().split('T')[0]; }
+
+// The one place a role's status changes. Keeps peakStatus, statusChangedAt and
+// appliedDate in step so no code path can forget any of them.
+function setStatus(role, newStatus) {
+  if (role.status !== newStatus) {
+    role.status = newStatus;
+    role.statusChangedAt = todayStr();
+  }
+  advancePeak(role, newStatus);
+  // First time the role reaches Applied or beyond — stamped once, never overwritten
+  if (!role.appliedDate && (STAGE_ORDINAL[newStatus] ?? 0) >= 1) {
+    role.appliedDate = todayStr();
+  }
+}
+
+// Higher of two peak values (either may be null/unset)
+function maxPeak(a, b) {
+  return (STAGE_ORDINAL[b] ?? -1) > (STAGE_ORDINAL[a] ?? -1) ? (b || null) : (a || null);
+}
+
+// Heals drift: peak must never trail a non-terminal current status, and timing fields
+// exist on every role. Backfilled timing is approximate (from lastModified) and flagged.
+// Returns the number of roles changed.
+function reconcileRoles(roles) {
+  let changed = 0;
+  (roles || []).forEach(r => {
+    let touched = false;
+    const before = r.peakStatus;
+    advancePeak(r, r.status);
+    if (r.peakStatus !== before) touched = true;
+    if (!r.statusChangedAt) {
+      r.statusChangedAt = r.lastModified || r.dateAdded || todayStr();
+      r.timingApprox = true;
+      touched = true;
+    }
+    if (r.appliedDate === undefined) {
+      r.appliedDate = (STAGE_ORDINAL[r.status] ?? 0) >= 1 ? r.statusChangedAt : null;
+      if (r.appliedDate) r.timingApprox = true;
+      touched = true;
+    }
+    if (touched) changed++;
+  });
+  return changed;
 }
 
 // ── Utilities ────────────────────────────────────────────────
@@ -1446,17 +1510,39 @@ document.querySelectorAll('.tab').forEach(tab => {
 });
 
 // ── Stats ────────────────────────────────────────────────────
+// Topline funnel, driven by peakStatus (furthest stage ever reached) so roles that were
+// later rejected or ghosted still count. Each % is vs. the previous step; Advanced also
+// shows its share of all applications. "—" when the denominator is zero (not 0%).
+function funnelCounts(roles) {
+  const reached = min => roles.filter(r => (STAGE_ORDINAL[r.peakStatus] ?? -1) >= STAGE_ORDINAL[min]).length;
+  return {
+    assessed:    roles.length,
+    applied:     reached('applied'),
+    interviewed: reached('interview-recruiter'),
+    advanced:    reached('interview-panel')   // past the hiring manager: panel or offer
+  };
+}
+
+function pctOf(n, d) { return d > 0 ? Math.round((n / d) * 100) + '%' : '—'; }
+
 function updateStats() {
-  const roles = store.roles;
-  const INTERVIEW_STATUSES = ['interview-recruiter','interview-hiringmgr','interview-panel'];
-  const applied  = roles.filter(r => ['applied','interview-recruiter','interview-hiringmgr','interview-panel','offer'].includes(r.status));
-  const active   = roles.filter(r => INTERVIEW_STATUSES.includes(r.status));
-  const responded = roles.filter(r => [...INTERVIEW_STATUSES, 'offer'].includes(r.status));
-  const responseRate = applied.length > 0 ? Math.round((responded.length / applied.length) * 100) : 0;
-  document.getElementById('stat-total').textContent    = roles.length;
-  document.getElementById('stat-applied').textContent  = applied.length;
-  document.getElementById('stat-active').textContent   = active.length;
-  document.getElementById('stat-response').textContent = responseRate + '%';
+  const f = funnelCounts(store.roles);
+  const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+  const tip = (id, text) => { const el = document.getElementById(id); if (el) el.title = text; };
+
+  set('stat-total',       f.assessed);
+  set('stat-applied',     f.applied);
+  set('stat-interviewed', f.interviewed);
+  set('stat-advanced',    f.advanced);
+
+  set('stat-applied-pct',     pctOf(f.applied, f.assessed)      + ' of assessed');
+  set('stat-interviewed-pct', pctOf(f.interviewed, f.applied)   + ' of applied');
+  set('stat-advanced-pct',    pctOf(f.advanced, f.interviewed)  + ' of interviewed');
+  set('stat-advanced-sub',    pctOf(f.advanced, f.applied)      + ' of applied');
+
+  tip('pill-applied',     `${f.applied} of ${f.assessed} assessed roles ever reached Applied (furthest stage, so rejected/ghosted count)`);
+  tip('pill-interviewed', `${f.interviewed} of ${f.applied} applications reached a recruiter conversation or beyond`);
+  tip('pill-advanced',    `${f.advanced} of ${f.interviewed} interviewed roles made it past the hiring manager (panel or offer); ${f.advanced} of ${f.applied} applications overall`);
 }
 
 // ── Ghosted-suggestion trigger (demo mode: simulated, no live Claude Code call) ──
@@ -1509,8 +1595,7 @@ function toggleGhostReviewMode() {
 function affirmSuggestion(id) {
   const role = store.roles.find(r => r.id === id);
   if (!role || !role.suggestedState) return;
-  advancePeak(role, role.suggestedState);
-  role.status = role.suggestedState;
+  setStatus(role, role.suggestedState);
   role.suggestedState = null;
   role.suggestedReasoning = null;
   role.lastModified = new Date().toISOString().split('T')[0];
@@ -1691,14 +1776,15 @@ function renderRoleCard(r) {
         <div class="status-select-row" onclick="event.stopPropagation()">
           <div>
             <div class="exp-section-title" style="margin-bottom:3px;">Current Status</div>
-            <select id="status-${r.id}">
+            <select id="status-${r.id}" onchange="syncPeakSelect('${r.id}')">
               ${ALL_STATUSES.map(function(s){ return '<option value="' + s + '" ' + (r.status === s ? 'selected' : '') + '>' + STATUS_LABELS[s] + '</option>'; }).join('')}
             </select>
           </div>
           <div>
             <div class="exp-section-title" style="margin-bottom:3px;">Furthest Stage Reached</div>
             <select id="peak-${r.id}">
-              ${['scored','applied','interview-recruiter','interview-hiringmgr','interview-panel','offer'].map(function(s){ return '<option value="' + s + '" ' + ((r.peakStatus||r.status) === s ? 'selected' : '') + '>' + STATUS_LABELS[s] + '</option>'; }).join('')}
+              ${r.peakStatus ? '' : '<option value="" selected>Not recorded</option>'}
+              ${['scored','applied','interview-recruiter','interview-hiringmgr','interview-panel','offer'].map(function(s){ return '<option value="' + s + '" ' + (r.peakStatus === s ? 'selected' : '') + '>' + STATUS_LABELS[s] + '</option>'; }).join('')}
             </select>
           </div>
           ${r.url ? `<a href="${r.url}" target="_blank" style="color:var(--blue);font-size:11px;align-self:flex-end;margin-bottom:2px;" onclick="event.stopPropagation()">View posting ↗</a>` : '<span style="font-size:11px;color:var(--text3);align-self:flex-end;margin-bottom:2px;">No URL saved</span>'}
@@ -1725,6 +1811,17 @@ function renderRoleCard(r) {
     </div>`;
 }
 
+// When Current Status moves forward, show the Furthest Stage following it. Terminal
+// statuses leave the Furthest Stage dropdown alone.
+function syncPeakSelect(id) {
+  const statusEl = document.getElementById('status-' + id);
+  const peakEl   = document.getElementById('peak-' + id);
+  if (!statusEl || !peakEl) return;
+  const s = statusEl.value;
+  if (TERMINAL.includes(s)) return;
+  if ((STAGE_ORDINAL[s] ?? -1) > (STAGE_ORDINAL[peakEl.value] ?? -1)) peakEl.value = s;
+}
+
 function toggleExpand(id) {
   document.getElementById('rc-' + id)?.classList.toggle('expanded');
 }
@@ -1746,14 +1843,14 @@ function saveRoleEdits(id) {
   const extEl    = document.getElementById('ext-' + id);
   const mineEl   = document.getElementById('mine-' + id);
 
-  if (statusEl) {
-    const newStatus = statusEl.value;
-    // Advance peak automatically unless user overrode it
-    advancePeak(role, newStatus);
-    role.status = newStatus;
+  // Manual peak override applies only if the dropdown was actually changed — an untouched
+  // dropdown holds the value from render time and must not clobber the automatic advance.
+  if (peakEl && (peakEl.value || null) !== (role.peakStatus || null)) {
+    role.peakStatus = peakEl.value || null;
   }
-  // Allow manual peak override
-  if (peakEl) role.peakStatus = peakEl.value;
+  // Then move status: a forward move pulls the peak up with it; a terminal move
+  // (ghosted/rejected/shelved/passed) leaves the peak alone.
+  if (statusEl) setStatus(role, statusEl.value);
   if (extEl)  role.feedbackExternal = extEl.value;
   if (mineEl) role.feedbackMine = mineEl.value;
 
@@ -1790,7 +1887,10 @@ function renderIntel() {
   document.getElementById('intel-content').style.display = 'block';
 
   const INTERVIEW_STATUSES = ['interview-recruiter','interview-hiringmgr','interview-panel'];
-  const applied    = roles.filter(r => ['applied',...INTERVIEW_STATUSES,'offer'].includes(r.status));
+  // Applied / interview rate use furthest stage reached (matches the header funnel);
+  // "in interview process" stays current-state.
+  const applied    = roles.filter(r => (STAGE_ORDINAL[r.peakStatus] ?? -1) >= STAGE_ORDINAL['applied']);
+  const interviewedEver = roles.filter(r => (STAGE_ORDINAL[r.peakStatus] ?? -1) >= STAGE_ORDINAL['interview-recruiter']);
   const responding = roles.filter(r => [...INTERVIEW_STATUSES,'offer'].includes(r.status));
   const avgScore   = Math.round(roles.reduce((a,r)=>a+r.score,0)/roles.length);
 
@@ -1800,7 +1900,7 @@ function renderIntel() {
     <div class="pattern-item"><span class="pattern-label">Applied</span><span class="pattern-val" style="color:var(--blue)">${applied.length}</span></div>
     <div class="pattern-item"><span class="pattern-label">In interview process</span><span class="pattern-val" style="color:var(--accent)">${responding.length}</span></div>
     <div class="pattern-item"><span class="pattern-label">Avg fit score</span><span class="pattern-val" style="color:${getScoreColor(avgScore)}">${avgScore}%</span></div>
-    <div class="pattern-item"><span class="pattern-label">Response rate</span><span class="pattern-val" style="color:var(--accent)">${applied.length > 0 ? Math.round((responding.length/applied.length)*100) : 0}%</span></div>
+    <div class="pattern-item"><span class="pattern-label">Interview rate (of applied)</span><span class="pattern-val" style="color:var(--accent)">${applied.length > 0 ? Math.round((interviewedEver.length/applied.length)*100) + '%' : '—'}</span></div>
   `;
 
   // Interview funnel — uses peakStatus to show where roles fell out
@@ -2027,7 +2127,14 @@ function handleImportFile(event) {
             feedbackExternal: incoming.feedbackExternal || existing.feedbackExternal || '',
             feedbackMine:     incoming.feedbackMine     || existing.feedbackMine     || '',
             lastModified:     existing.lastModified     || incoming.lastModified     || incoming.dateAdded,
-            peakStatus:       existing.peakStatus       || toActivePeak(keepStatus),
+            // Peak only ever moves forward; reconcileRoles below pulls it up to keepStatus
+            peakStatus:       maxPeak(existing.peakStatus, incoming.peakStatus) || toActivePeak(keepStatus),
+            // If the import advanced the status past what we had, that's a change today
+            statusChangedAt:  keepStatus !== existing.status
+                                ? todayStr()
+                                : (existing.statusChangedAt || incoming.statusChangedAt),
+            appliedDate:      existing.appliedDate || incoming.appliedDate,
+            timingApprox:     existing.timingApprox || incoming.timingApprox,
             url:              existing.url || incoming.url || ''
           };
         }
@@ -2066,6 +2173,8 @@ function handleImportFile(event) {
         if (!r.lastModified) r.lastModified = r.dateAdded;
         if (!r.peakStatus)   r.peakStatus   = toActivePeak(r.status);
       });
+      // Heal peak drift and fill any missing timing fields
+      reconcileRoles(store.roles);
 
       save(store);
       updateStats();
@@ -2902,6 +3011,7 @@ async function init() {
   // localStorage if you've already edited the demo), never from a server.
   const loaded = await load();
   store = migrateStore(loaded);
+  reconcileRoles(store.roles);
   updateStats();
   updateGhostReviewButton();
   renderPipeline();

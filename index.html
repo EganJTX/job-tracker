@@ -165,6 +165,90 @@
   .btn-ghost:hover { background: var(--bg3); color: var(--text); box-shadow: none; transform: none; }
   .btn-sm { padding: 5px 12px; font-size: 11px; }
 
+  /* Dialogs + toasts (replace native alert/confirm) */
+  .lh-overlay {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(24,18,14,0.45);
+    backdrop-filter: blur(2px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+    opacity: 0; transition: opacity 0.15s;
+  }
+  .lh-overlay.show { opacity: 1; }
+  .lh-modal {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(24,18,14,0.28);
+    width: 100%; max-width: 460px; max-height: 88vh;
+    display: flex; flex-direction: column;
+    transform: translateY(8px) scale(0.98); transition: transform 0.15s;
+  }
+  .lh-overlay.show .lh-modal { transform: none; }
+  .lh-modal.wide { max-width: 780px; }
+  .lh-modal-head { padding: 20px 24px 12px; display: flex; gap: 12px; align-items: flex-start; }
+  .lh-modal-icon {
+    flex: none; width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--sans); font-weight: 800; font-size: 15px;
+    background: rgba(3,105,161,0.1); color: var(--accent);
+  }
+  .lh-modal-icon.success { background: rgba(21,138,62,0.12); color: var(--priority); }
+  .lh-modal-icon.warn    { background: rgba(146,64,14,0.12); color: var(--amber); }
+  .lh-modal-icon.error   { background: rgba(153,27,27,0.1);  color: var(--skip); }
+  .lh-modal-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.2px; }
+  .lh-modal-sub { font-family: var(--sans); font-size: 12px; color: var(--text2); margin-top: 3px; line-height: 1.5; }
+  .lh-modal-body { padding: 4px 24px 8px; overflow-y: auto; font-family: var(--sans); font-size: 13px; color: var(--text2); line-height: 1.55; }
+  .lh-modal-foot { padding: 14px 24px 20px; display: flex; gap: 8px; justify-content: flex-end; align-items: center; flex-wrap: wrap; }
+  .lh-modal-foot .spacer { flex: 1; }
+  .btn-danger { background: var(--skip); }
+  .btn-danger:hover { background: #7f1616; box-shadow: 0 3px 8px rgba(153,27,27,0.25); }
+
+  .lh-toast-stack { position: fixed; bottom: 20px; right: 20px; z-index: 1100; display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+  .lh-toast {
+    background: var(--text); color: #fff;
+    font-family: var(--sans); font-size: 12px; font-weight: 600;
+    padding: 10px 16px; border-radius: 8px; border-left: 4px solid var(--accent2);
+    box-shadow: 0 8px 24px rgba(24,18,14,0.25);
+    max-width: 380px; line-height: 1.45;
+    opacity: 0; transform: translateY(8px); transition: all 0.2s;
+  }
+  .lh-toast.show { opacity: 1; transform: none; }
+  .lh-toast.success { border-left-color: #22c55e; }
+  .lh-toast.error   { border-left-color: #f87171; }
+  .lh-toast.warn    { border-left-color: #fbbf24; }
+
+  /* Import summary + duplicate review */
+  .imp-chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 14px; }
+  .imp-chip {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 14px; text-align: center; min-width: 84px;
+  }
+  .imp-chip .n { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; color: var(--accent); }
+  .imp-chip .l { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text3); margin-top: 1px; }
+  .imp-chip.warn .n { color: var(--amber); }
+  .imp-bulk { display: flex; gap: 6px; align-items: center; margin-bottom: 10px; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; flex-wrap: wrap; }
+  .imp-row { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; background: var(--bg2); }
+  .imp-row-title { font-weight: 700; color: var(--text); font-size: 13px; }
+  .imp-row-co { color: var(--text2); }
+  .imp-hint { display: inline-block; margin-left: 8px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; color: var(--amber); background: rgba(146,64,14,0.1); border: 1px solid rgba(146,64,14,0.3); border-radius: 3px; padding: 1px 7px; }
+  .imp-cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; }
+  .imp-side { background: var(--bg3); border-radius: 6px; padding: 8px 10px; font-size: 11.5px; line-height: 1.6; }
+  .imp-side .h { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text3); margin-bottom: 2px; }
+  .imp-side .diff { color: var(--accent); font-weight: 700; }
+  .imp-choices { display: flex; gap: 6px; flex-wrap: wrap; }
+  .imp-choice {
+    font-family: var(--sans); font-size: 11px; font-weight: 600; cursor: pointer;
+    padding: 5px 11px; border-radius: 6px; border: 1px solid var(--border2);
+    background: transparent; color: var(--text2); transition: all 0.12s;
+  }
+  .imp-choice:hover { background: var(--bg3); }
+  .imp-choice.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .imp-choice-desc { font-size: 11px; color: var(--text3); margin-top: 6px; min-height: 16px; }
+  .imp-result { font-size: 11.5px; color: var(--text); margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border); }
+  .imp-result strong { color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; font-size: 10px; }
+  @media (max-width: 600px) { .imp-cmp { grid-template-columns: 1fr; } }
+
   /* Ghosted-suggestion trigger */
   .ghost-eval-status { font-family: var(--sans); font-size: 11px; color: var(--text3); max-width: 320px; text-align: right; }
   .ghost-eval-status.state-loading { color: var(--text2); }
@@ -1884,8 +1968,10 @@ function saveRoleEdits(id) {
   setTimeout(() => renderPipeline(), 400);
 }
 
-function deleteRole(id) {
-  if (!confirm('Remove this role from your pipeline?')) return;
+async function deleteRole(id) {
+  const r = store.roles.find(x => x.id === id);
+  const label = r ? (r.title || 'this role') + (r.company ? ' at ' + r.company : '') : 'this role';
+  if (!(await uiConfirm('Remove ' + label + ' from your pipeline? This can\'t be undone.', { title: 'Remove role?', confirmLabel: 'Remove', danger: true }))) return;
   store.roles = store.roles.filter(r => r.id !== id);
   save(store);
   renderPipeline();
@@ -2069,6 +2155,91 @@ function removeWatchCompany(name) {
   renderDiscovery();
 }
 
+// ── Dialogs + toasts (styled replacements for alert / confirm) ────────────────
+// openModal resolves with the clicked button's `value`, or null if dismissed (Esc / backdrop).
+function openModal({ title, sub, icon, tone, body, buttons, wide, dismissible = true, onMount }) {
+  return new Promise(resolve => {
+    const overlay = document.createElement('div');
+    overlay.className = 'lh-overlay';
+    overlay.innerHTML = `
+      <div class="lh-modal${wide ? ' wide' : ''}" role="dialog" aria-modal="true">
+        <div class="lh-modal-head">
+          ${icon ? `<div class="lh-modal-icon ${tone || ''}">${icon}</div>` : ''}
+          <div>
+            <div class="lh-modal-title">${escHtml(title || '')}</div>
+            ${sub ? `<div class="lh-modal-sub">${sub}</div>` : ''}
+          </div>
+        </div>
+        <div class="lh-modal-body"></div>
+        <div class="lh-modal-foot"></div>
+      </div>`;
+    const bodyEl = overlay.querySelector('.lh-modal-body');
+    const footEl = overlay.querySelector('.lh-modal-foot');
+    if (body instanceof Node) bodyEl.appendChild(body);
+    else if (body) bodyEl.innerHTML = body;
+    else bodyEl.remove();
+
+    const prevFocus = document.activeElement;
+    const close = (value) => {
+      document.removeEventListener('keydown', onKey, true);
+      overlay.classList.remove('show');
+      setTimeout(() => overlay.remove(), 160);
+      if (prevFocus && prevFocus.focus) prevFocus.focus();
+      resolve(value);
+    };
+    const onKey = (e) => {
+      if (e.key === 'Escape' && dismissible) { e.stopPropagation(); close(null); }
+    };
+    document.addEventListener('keydown', onKey, true);
+    if (dismissible) overlay.addEventListener('mousedown', e => { if (e.target === overlay) close(null); });
+
+    let primaryBtn = null;
+    (buttons || [{ label: 'OK', value: true }]).forEach(b => {
+      if (b.spacer) { const s = document.createElement('span'); s.className = 'spacer'; footEl.appendChild(s); return; }
+      const el = document.createElement('button');
+      el.className = 'btn btn-sm' + (b.kind === 'ghost' ? ' btn-ghost' : b.kind === 'danger' ? ' btn-danger' : '');
+      el.textContent = b.label;
+      el.onclick = () => close(b.value);
+      footEl.appendChild(el);
+      if (!primaryBtn && b.kind !== 'ghost') primaryBtn = el;
+    });
+
+    document.body.appendChild(overlay);
+    requestAnimationFrame(() => overlay.classList.add('show'));
+    if (onMount) onMount(overlay);
+    if (primaryBtn) primaryBtn.focus();
+  });
+}
+
+function uiAlert(message, { title = 'Heads up', tone = 'warn', icon } = {}) {
+  const glyph = icon || (tone === 'error' ? '!' : tone === 'success' ? '✓' : tone === 'warn' ? '!' : 'i');
+  return openModal({ title, icon: glyph, tone, body: `<p>${escHtml(message)}</p>`, buttons: [{ label: 'Got it', value: true }] });
+}
+
+async function uiConfirm(message, { title = 'Are you sure?', confirmLabel = 'Confirm', danger = false } = {}) {
+  const res = await openModal({
+    title, icon: '?', tone: danger ? 'error' : '', body: `<p>${escHtml(message)}</p>`,
+    buttons: [{ label: 'Cancel', value: false, kind: 'ghost' }, { label: confirmLabel, value: true, kind: danger ? 'danger' : 'primary' }]
+  });
+  return res === true;
+}
+
+function toast(message, tone = '') {
+  let stack = document.getElementById('lh-toast-stack');
+  if (!stack) {
+    stack = document.createElement('div');
+    stack.id = 'lh-toast-stack';
+    stack.className = 'lh-toast-stack';
+    document.body.appendChild(stack);
+  }
+  const t = document.createElement('div');
+  t.className = 'lh-toast ' + tone;
+  t.textContent = message;
+  stack.appendChild(t);
+  requestAnimationFrame(() => t.classList.add('show'));
+  setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 220); }, 3200);
+}
+
 // ── Export ────────────────────────────────────────────────────
 function exportData() {
   const payload = { schemaVersion: SCHEMA_VERSION, exportedAt: new Date().toISOString(), ...store };
@@ -2079,11 +2250,14 @@ function exportData() {
   const now     = new Date();
   const dateStr = now.toISOString().split('T')[0];
   const timeStr = now.toTimeString().slice(0,5).replace(':','');
-  a.download = 'lighthouse_job_tracker_' + dateStr + '_' + timeStr + '.json';
+  const fileName = 'lighthouse_job_tracker_' + dateStr + '_' + timeStr + '.json';
+  a.download = fileName;
   a.click();
   URL.revokeObjectURL(url);
   const el = document.getElementById('last-export-label');
   if (el) el.textContent = 'last export ' + new Date().toLocaleDateString();
+  const n = store.roles.length;
+  toast('Exported ' + n + ' role' + (n !== 1 ? 's' : '') + ' → ' + fileName, 'success');
 }
 
 // ── Import ────────────────────────────────────────────────────
@@ -2100,132 +2274,323 @@ function statusOrdinal(s) {
   return idx === -1 ? 0 : idx;
 }
 
+// ── Merge rules ───────────────────────────────────────────────
+// "Original" = the record already in the pipeline, "New" = the one in the file.
+//   Status ................ furthest-along wins (closed statuses outrank active ones)
+//   Date added ............ keep original (earliest)
+//   Applied date .......... keep original, fill if blank
+//   Score/verdict/angles/flags ... new overrides
+//   Notes, feedback notes . append new (only if it differs)
+//   URL/source/domain/resume variant ... fill if blank
+//   Last modified ......... today, if anything changed
+//   Ghost suggestion ...... keep original (cleared if status moved)
+function appendText(original, addition) {
+  const o = (original || '').trim(), a = (addition || '').trim();
+  if (!a || o.includes(a)) return original || '';
+  return o ? o + '\n\n' + a : a;
+}
+const fillBlank = (o, n) => (o === undefined || o === null || o === '') ? (n ?? o) : o;
+const newOrKeep = (o, n) => (n === undefined || n === null || n === '' || (Array.isArray(n) && !n.length)) ? o : n;
+const isEarlier = (a, b) => a && (!b || a < b);
+
+function mergeRole(existing, incoming) {
+  const out = Object.assign({}, existing);                 // preserves key order for change detection
+  Object.keys(incoming).forEach(k => { if (!(k in out)) out[k] = incoming[k]; });
+
+  const keepStatus = statusOrdinal(existing.status) >= statusOrdinal(incoming.status)
+    ? existing.status : incoming.status;
+  out.status = keepStatus;
+  if (keepStatus !== existing.status) {
+    out.statusChangedAt = todayStr();
+    out.suggestedState = null;
+    out.suggestedReasoning = null;
+  }
+  out.peakStatus = maxPeak(existing.peakStatus, incoming.peakStatus) || toActivePeak(keepStatus);
+
+  out.dateAdded   = isEarlier(incoming.dateAdded, existing.dateAdded) ? incoming.dateAdded : existing.dateAdded;
+  out.appliedDate = fillBlank(existing.appliedDate, incoming.appliedDate);
+  if (out.appliedDate !== existing.appliedDate && incoming.timingApprox) out.timingApprox = true;
+
+  // Only write a field if it has a value or already existed, so blanks don't count as a change
+  const put = (k, v) => { if ((v !== undefined && v !== '') || k in existing) out[k] = v ?? ''; };
+  ['score','verdict','angles','flags'].forEach(k => put(k, newOrKeep(existing[k], incoming[k])));
+  ['notes','feedbackExternal','feedbackMine'].forEach(k => put(k, appendText(existing[k], incoming[k])));
+  ['url','source','domain','resumeVariant'].forEach(k => put(k, fillBlank(existing[k], incoming[k])));
+
+  if (JSON.stringify(out) !== JSON.stringify(existing)) out.lastModified = todayStr();
+  return out;
+}
+
+// Applied or beyond, and not closed
+function isActiveApplied(status) {
+  return !TERMINAL.includes(status) && (STAGE_ORDINAL[status] ?? 0) >= 1;
+}
+
+// A genuine new application of a role whose earlier attempt was closed. One card, moved forward;
+// the earlier attempt is recorded as a line in the notes.
+function reapplyRole(existing, incoming) {
+  const out = mergeRole(existing, incoming);
+  const newDate  = incoming.appliedDate || incoming.dateAdded || todayStr();
+  const prevDate = existing.appliedDate || existing.dateAdded || 'unknown date';
+  const prevPeak = existing.peakStatus && existing.peakStatus !== 'applied'
+    ? ', reached ' + (STATUS_LABELS[existing.peakStatus] || existing.peakStatus) : '';
+  const line = 'Re-applied ' + newDate + '. Previously applied ' + prevDate +
+               ' (' + (STATUS_LABELS[existing.status] || existing.status) + prevPeak + ').';
+  out.notes = appendText(appendText(existing.notes, line), incoming.notes);
+  out.status          = incoming.status;
+  out.appliedDate     = newDate;
+  out.statusChangedAt = todayStr();           // restarts the ghost clock
+  out.peakStatus      = toActivePeak(incoming.status);   // new cycle; the earlier peak is in the notes
+  out.timingApprox    = false;
+  out.suggestedState = null;
+  out.suggestedReasoning = null;
+  out.lastModified = todayStr();
+  return out;
+}
+
+// File's version wins outright (keeps the local id and any feedback the file lacks)
+function replaceRole(existing, incoming) {
+  return {
+    ...freshRole(incoming),
+    id:               existing.id,
+    feedbackExternal: incoming.feedbackExternal || existing.feedbackExternal || '',
+    feedbackMine:     incoming.feedbackMine     || existing.feedbackMine     || ''
+  };
+}
+
+function freshRole(incoming) {
+  return {
+    ...incoming,
+    feedbackExternal: incoming.feedbackExternal || '',
+    feedbackMine:     incoming.feedbackMine     || '',
+    lastModified:     incoming.lastModified     || incoming.dateAdded,
+    peakStatus:       incoming.peakStatus       || toActivePeak(incoming.status),
+    suggestedState:     null,
+    suggestedReasoning: null
+  };
+}
+
+const IMPORT_ACTIONS = {
+  merge:   { label: 'Merge',     desc: "A correction, accident or update to the same application. Your record keeps its history and picks up what's new.",
+             detail: "Status: furthest along wins. Score, verdict, angles, flags: new overrides. Notes and feedback: appended if different. Date added, applied date, URL and the rest: original kept, blanks filled." },
+  reapply: { label: 'Re-apply',  desc: "A true re-application: I applied to this role again. The card moves forward and the earlier attempt is noted.",
+             detail: "Status, applied date, score: new overrides. Ghost clock restarts. Earlier application added to notes. Date added stays original." },
+  replace: { label: 'Replace',   desc: "The file's version is the right one; overwrite mine.",
+             detail: "Every field: new overrides. Your feedback notes are kept only if the file has none." },
+  both:    { label: 'Keep both', desc: "Two separate records for this role.",
+             detail: "Nothing is merged. The file's version is added as its own role." },
+  skip:    { label: 'Ignore',    desc: "Leave my record alone and drop the file's version.",
+             detail: "Nothing changes." }
+};
+
+// Pick the default choice for a same-title-and-company, different-record pair, with the reason.
+function suggestConflictAction(existing, incoming) {
+  const lbl = STATUS_LABELS[existing.status] || existing.status;
+  if (!TERMINAL.includes(existing.status) || !isActiveApplied(incoming.status)) {
+    return { action: 'merge', reason: '' };
+  }
+  const prev = existing.appliedDate || existing.dateAdded;
+  const next = incoming.appliedDate || incoming.dateAdded;
+  if (prev && next && next > prev) {
+    return { action: 'reapply', reapply: true,
+             reason: "File's applied date " + next + ' is after your ' + prev + ' application (now ' + lbl + ').' };
+  }
+  return { action: 'merge', reason: 'Dates are not newer than your ' + lbl.toLowerCase() + ' record, so this looks like an older copy.' };
+}
+
+// What the chosen action leaves behind, for the review dialog
+function previewResult(c) {
+  const lbl = s => STATUS_LABELS[s] || s;
+  if (c.action === 'skip') return 'Unchanged: ' + lbl(c.existing.status);
+  if (c.action === 'both') return 'Two roles: ' + lbl(c.existing.status) + ' (original) and ' + lbl(c.incoming.status) + ' (new)';
+  const r = c.action === 'merge' ? mergeRole(c.existing, c.incoming)
+          : c.action === 'reapply' ? reapplyRole(c.existing, c.incoming)
+          : replaceRole(c.existing, c.incoming);
+  let t = 'Status: ' + lbl(r.status);
+  if (r.status === c.existing.status && c.incoming.status !== c.existing.status) t += ' (file says ' + lbl(c.incoming.status) + ', original kept)';
+  if (r.appliedDate && r.appliedDate !== c.existing.appliedDate) t += ' · applied ' + r.appliedDate;
+  return t;
+}
+
 function handleImportFile(event) {
   const file = event.target.files[0];
   if (!file) return;
   const reader = new FileReader();
-  reader.onload = (e) => {
+  reader.onload = async (e) => {
     try {
-      let parsed = JSON.parse(e.target.result);
-      let incomingRoles = [];
-      if (Array.isArray(parsed)) {
-        incomingRoles = parsed;
-        parsed = { roles: incomingRoles };
-      } else {
-        parsed = migrateStore(parsed);
-        incomingRoles = parsed.roles || [];
-      }
-
-      incomingRoles.forEach(r => {
-        if (!r.id) r.id = uid();
-      });
-
-      const importedIds  = new Set(incomingRoles.map(r => r.id));
-      const importedKeys = new Set(incomingRoles.map(r => roleKey(r)));
-
-      // Build lookup of existing roles by key for status-protection
-      const existingByKey = {};
-      store.roles.forEach(r => { existingByKey[roleKey(r)] = r; });
-      const existingById  = {};
-      store.roles.forEach(r => { existingById[r.id] = r; });
-
-      // Merge incoming: protect status from downgrade
-      const mergedIncoming = incomingRoles.map(incoming => {
-        const existing = existingById[incoming.id] || existingByKey[roleKey(incoming)];
-        if (existing) {
-          // Preserve the higher-ordinal status
-          const keepStatus = statusOrdinal(existing.status) > statusOrdinal(incoming.status)
-            ? existing.status
-            : incoming.status;
-          // Carry over fields the import may not know about
-          return {
-            ...incoming,
-            status:          keepStatus,
-            feedbackExternal: incoming.feedbackExternal || existing.feedbackExternal || '',
-            feedbackMine:     incoming.feedbackMine     || existing.feedbackMine     || '',
-            lastModified:     existing.lastModified     || incoming.lastModified     || incoming.dateAdded,
-            // Peak only ever moves forward; reconcileRoles below pulls it up to keepStatus
-            peakStatus:       maxPeak(existing.peakStatus, incoming.peakStatus) || toActivePeak(keepStatus),
-            // If the import advanced the status past what we had, that's a change today
-            statusChangedAt:  keepStatus !== existing.status
-                                ? todayStr()
-                                : (existing.statusChangedAt || incoming.statusChangedAt),
-            appliedDate:      existing.appliedDate || incoming.appliedDate,
-            timingApprox:     existing.timingApprox || incoming.timingApprox,
-            url:              existing.url || incoming.url || '',
-            // Advisory-only fields — import never carries these, so always keep the local suggestion
-            suggestedState:     existing.suggestedState     ?? null,
-            suggestedReasoning: existing.suggestedReasoning ?? null
-          };
-        }
-        // Brand new role — init fields
-        return {
-          ...incoming,
-          feedbackExternal: incoming.feedbackExternal || '',
-          feedbackMine:     incoming.feedbackMine     || '',
-          lastModified:     incoming.lastModified     || incoming.dateAdded,
-          peakStatus:       incoming.peakStatus       || toActivePeak(incoming.status),
-          suggestedState:     null,
-          suggestedReasoning: null
-        };
-      });
-
-      // Local-only roles not present in import at all
-      const localOnly = store.roles.filter(r =>
-        !importedIds.has(r.id) && !importedKeys.has(roleKey(r))
-      );
-
-      store = {
-        schemaVersion: SCHEMA_VERSION,
-        roles:        [...mergedIncoming, ...localOnly],
-        watchlist:    parsed.watchlist    || store.watchlist    || [],
-        feedbackLog:  parsed.feedbackLog  || store.feedbackLog  || []
-      };
-
-      // Ensure all roles are migrated
-      store.roles.forEach(r => {
-        if (r.status === 'new') r.status = 'scored';
-        if (r.status === 'interviewing') r.status = 'interview-recruiter';
-        if (!r.feedbackExternal) r.feedbackExternal = '';
-        if (!r.feedbackMine)     r.feedbackMine     = '';
-        if (!r.source)  r.source  = '';
-        if (!r.url)     r.url     = '';
-        if (!r.angles)  r.angles  = [];
-        if (!r.flags)   r.flags   = { positive:[], negative:[], caution:[] };
-        if (!r.lastModified) r.lastModified = r.dateAdded;
-        if (!r.peakStatus)   r.peakStatus   = toActivePeak(r.status);
-        if (r.suggestedState === undefined) r.suggestedState = null;
-        if (r.suggestedReasoning === undefined) r.suggestedReasoning = null;
-      });
-      // Heal peak drift and fill any missing timing fields
-      reconcileRoles(store.roles);
-
-      save(store);
-      updateStats();
-
-      if (parsed.exportedAt) {
-        const el = document.getElementById('last-export-label');
-        if (el) el.textContent = 'last export ' + new Date(parsed.exportedAt).toLocaleDateString();
-      }
-
-      const newCount    = incomingRoles.length;
-      const mergedCount = localOnly.length;
-      alert(
-        'Imported ' + newCount + ' role' + (newCount!==1?'s':'') + '.' +
-        (mergedCount ? ' ' + mergedCount + ' existing local role' + (mergedCount!==1?'s':'') + ' retained.' : '')
-      );
-
-      updateGhostReviewButton();
-      const activeTab = document.querySelector('.tab.active')?.dataset.tab;
-      if (activeTab === 'pipeline')  renderPipeline();
-      if (activeTab === 'intel')     renderIntel();
-      if (activeTab === 'discovery') renderDiscovery();
+      await runImport(file.name, e.target.result);
     } catch(err) {
-      alert('Import failed: ' + err.message);
+      await uiAlert(err.message, { title: 'Import failed', tone: 'error' });
     }
     event.target.value = '';
   };
   reader.readAsText(file);
+}
+
+async function runImport(fileName, text) {
+  let parsed = JSON.parse(text);
+  let incomingRoles = [];
+  if (Array.isArray(parsed)) {
+    incomingRoles = parsed;
+    parsed = { roles: incomingRoles };
+  } else {
+    parsed = migrateStore(parsed);
+    incomingRoles = parsed.roles || [];
+  }
+  incomingRoles.forEach(r => { if (!r.id) r.id = uid(); });
+
+  // ── Classify every incoming role against what's already here ──
+  const byId  = new Map(store.roles.map(r => [r.id, r]));
+  const byKey = new Map();
+  store.roles.forEach(r => { if (!byKey.has(roleKey(r))) byKey.set(roleKey(r), r); });
+
+  const updates = [], fresh = [], conflicts = [];
+  const seenKeys = new Set();
+  let fileDupes = 0;
+  incomingRoles.forEach(inc => {
+    const key = roleKey(inc);
+    const idHit = byId.get(inc.id);
+    if (idHit) { updates.push({ existing: idHit, incoming: inc }); seenKeys.add(key); return; }
+    if (key !== '||' && seenKeys.has(key)) { fileDupes++; return; }   // same role listed twice in the file
+    seenKeys.add(key);
+    const keyHit = key !== '||' ? byKey.get(key) : null;
+    if (keyHit) {
+      const sug = suggestConflictAction(keyHit, inc);
+      conflicts.push({ existing: keyHit, incoming: inc, action: sug.action, reapply: !!sug.reapply, reason: sug.reason });
+    } else {
+      fresh.push(inc);
+    }
+  });
+
+  // ── Ask about the ambiguous ones ──
+  if (conflicts.length) {
+    const ok = await reviewImportConflicts(fileName, { updates, fresh, conflicts });
+    if (!ok) { toast('Import cancelled — nothing changed'); return; }
+  }
+
+  // ── Apply ──
+  const replacements = new Map();   // existing.id -> new version of that role
+  const additions = [];
+  let skipped = fileDupes;
+  updates.forEach(u => replacements.set(u.existing.id, mergeRole(u.existing, u.incoming)));
+  conflicts.forEach(c => {
+    if (c.action === 'merge')        replacements.set(c.existing.id, mergeRole(c.existing, c.incoming));
+    else if (c.action === 'reapply') replacements.set(c.existing.id, reapplyRole(c.existing, c.incoming));
+    else if (c.action === 'replace') replacements.set(c.existing.id, replaceRole(c.existing, c.incoming));
+    else if (c.action === 'both')    additions.push(freshRole(c.incoming));
+    else skipped++;
+  });
+  fresh.forEach(f => additions.push(freshRole(f)));
+  const updatedCount = replacements.size;
+
+  const union = (a, b) => {
+    const seen = new Set(a.map(x => JSON.stringify(x)));
+    return [...a, ...b.filter(x => !seen.has(JSON.stringify(x)))];
+  };
+  store = {
+    ...store,
+    schemaVersion: SCHEMA_VERSION,
+    roles:        [...additions, ...store.roles.map(r => replacements.get(r.id) || r)],
+    watchlist:    union(store.watchlist || [],   parsed.watchlist   || []),
+    feedbackLog:  union(store.feedbackLog || [], parsed.feedbackLog || [])
+  };
+
+  // Ensure all roles are migrated
+  store.roles.forEach(r => {
+    if (r.status === 'new') r.status = 'scored';
+    if (r.status === 'interviewing') r.status = 'interview-recruiter';
+    if (!r.feedbackExternal) r.feedbackExternal = '';
+    if (!r.feedbackMine)     r.feedbackMine     = '';
+    if (!r.source)  r.source  = '';
+    if (!r.url)     r.url     = '';
+    if (!r.angles)  r.angles  = [];
+    if (!r.flags)   r.flags   = { positive:[], negative:[], caution:[] };
+    if (!r.lastModified) r.lastModified = r.dateAdded;
+    if (!r.peakStatus)   r.peakStatus   = toActivePeak(r.status);
+    if (r.suggestedState === undefined) r.suggestedState = null;
+    if (r.suggestedReasoning === undefined) r.suggestedReasoning = null;
+  });
+  // Heal peak drift and fill any missing timing fields
+  reconcileRoles(store.roles);
+
+  save(store);
+  updateStats();
+
+  if (parsed.exportedAt) {
+    const el = document.getElementById('last-export-label');
+    if (el) el.textContent = 'last export ' + new Date(parsed.exportedAt).toLocaleDateString();
+  }
+
+  updateGhostReviewButton();
+  const activeTab = document.querySelector('.tab.active')?.dataset.tab;
+  if (activeTab === 'pipeline')  renderPipeline();
+  if (activeTab === 'intel')     renderIntel();
+  if (activeTab === 'discovery') renderDiscovery();
+
+  const chip = (n, l, cls) => `<div class="imp-chip ${cls || ''}"><div class="n">${n}</div><div class="l">${l}</div></div>`;
+  await openModal({
+    title: 'Import complete', icon: '✓', tone: 'success',
+    sub: escHtml(fileName),
+    body: `<div class="imp-chips">${chip(additions.length, 'Added')}${chip(updatedCount, 'Updated')}${skipped ? chip(skipped, 'Skipped', 'warn') : ''}${chip(store.roles.length, 'In pipeline')}</div>`,
+    buttons: [{ label: 'Done', value: true }]
+  });
+}
+
+// Shows the possible-duplicate review. Mutates conflicts[i].action; resolves true to apply, false to cancel.
+async function reviewImportConflicts(fileName, { updates, fresh, conflicts }) {
+  const chip = (n, l, cls) => `<div class="imp-chip ${cls || ''}"><div class="n">${n}</div><div class="l">${l}</div></div>`;
+  const side = (r, other, heading) => {
+    const f = (label, val, otherVal) => {
+      const v = val || '—';
+      return `<div>${label}: <span class="${(val || '') !== (otherVal || '') ? 'diff' : ''}">${escHtml(String(v))}</span></div>`;
+    };
+    return `<div class="imp-side"><div class="h">${heading}</div>
+      ${f('Status', STATUS_LABELS[r.status] || r.status, STATUS_LABELS[other.status] || other.status)}
+      ${f('Added', r.dateAdded, other.dateAdded)}
+      ${f('Applied', r.appliedDate, other.appliedDate)}
+      ${f('Score', r.score, other.score)}
+    </div>`;
+  };
+
+  const wrap = document.createElement('div');
+  const render = () => {
+    wrap.innerHTML = `
+      <div class="imp-chips">
+        ${chip(fresh.length, 'New')}${chip(updates.length, 'Already here')}${chip(conflicts.length, 'To review', 'warn')}
+      </div>
+      <div class="imp-bulk">Set all to:
+        ${Object.entries(IMPORT_ACTIONS).map(([k, v]) => `<button class="imp-choice" data-bulk="${k}">${v.label}</button>`).join('')}
+      </div>
+      ${conflicts.map((c, i) => `
+        <div class="imp-row">
+          <div class="imp-row-title">${escHtml(c.incoming.title || '(untitled)')} <span class="imp-row-co">· ${escHtml(c.incoming.company || '')}</span>${c.reapply ? '<span class="imp-hint">Looks like a re-application</span>' : ''}</div>
+          ${c.reason ? `<div class="imp-choice-desc" style="margin-top:4px;">${escHtml(c.reason)}</div>` : ''}
+          <div class="imp-cmp">${side(c.existing, c.incoming, 'In your pipeline')}${side(c.incoming, c.existing, 'In this file')}</div>
+          <div class="imp-choices">
+            ${Object.entries(IMPORT_ACTIONS).map(([k, v]) => `<button class="imp-choice${c.action === k ? ' on' : ''}" data-i="${i}" data-act="${k}" title="${escHtml(v.detail)}">${v.label}</button>`).join('')}
+          </div>
+          <div class="imp-choice-desc">${escHtml(IMPORT_ACTIONS[c.action].desc)}</div>
+          <div class="imp-result"><strong>Result</strong> · ${escHtml(previewResult(c))}</div>
+        </div>`).join('')}`;
+  };
+  render();
+  wrap.addEventListener('click', e => {
+    const b = e.target.closest('.imp-choice');
+    if (!b) return;
+    if (b.dataset.bulk) conflicts.forEach(c => { c.action = b.dataset.bulk; });
+    else conflicts[+b.dataset.i].action = b.dataset.act;
+    render();
+  });
+
+  const n = conflicts.length;
+  const res = await openModal({
+    title: n + ' possible duplicate' + (n !== 1 ? 's' : ''),
+    icon: '!', tone: 'warn', wide: true, dismissible: false,
+    sub: `<strong>${escHtml(fileName)}</strong> has role${n !== 1 ? 's' : ''} that match one already in your pipeline by title and company, but aren't the same record. Choose what happens to each.`,
+    body: wrap,
+    buttons: [{ label: 'Cancel import', value: false, kind: 'ghost' }, { spacer: true }, { label: 'Apply import', value: true }]
+  });
+  return res === true;
 }
 
 // ── Duplicate detection (kept for future use if score tab re-enabled) ────────
@@ -2926,12 +3291,13 @@ function copyOutput(type) {
   }
 
   if (!text) {
-    alert('Nothing to copy yet. Fill in and Save the relevant section first.');
+    uiAlert('Fill in and Save the relevant section first, then try again.', { title: 'Nothing to copy yet' });
     return;
   }
 
   const btnId = { identity: 'copy-identity-btn', scorer: 'copy-scorer-btn', cl: 'cl-copy-btn' }[type];
   const btn = document.getElementById(btnId);
+  const niceName = { identity: 'identity.md', scorer: 'Scorer instructions', cl: 'Cover letter style guide' }[type];
 
   navigator.clipboard.writeText(text).then(function() {
     if (btn) {
@@ -2940,6 +3306,7 @@ function copyOutput(type) {
       btn.style.color = '#158a3e';
       setTimeout(function() { btn.textContent = orig; btn.style.color = ''; }, 2000);
     }
+    toast(niceName + ' copied to clipboard', 'success');
   }).catch(function() {
     const ta = document.createElement('textarea');
     ta.value = text;
@@ -2947,6 +3314,7 @@ function copyOutput(type) {
     ta.select();
     document.execCommand('copy');
     document.body.removeChild(ta);
+    toast(niceName + ' copied to clipboard', 'success');
   });
 }
 
@@ -3067,6 +3435,7 @@ function copyCoachInstructions() {
       btn.style.background = '#158a3e';
       setTimeout(function() { btn.textContent = orig; btn.style.background = '#5b21b6'; }, 2000);
     }
+    toast('Career coach instructions copied to clipboard', 'success');
   }).catch(function() {
     const ta = document.createElement('textarea');
     ta.value = text;
@@ -3074,6 +3443,7 @@ function copyCoachInstructions() {
     ta.select();
     document.execCommand('copy');
     document.body.removeChild(ta);
+    toast('Career coach instructions copied to clipboard', 'success');
   });
 }
 

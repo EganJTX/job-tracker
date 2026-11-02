@@ -3115,7 +3115,8 @@ function buildScorerInstructions(cfg) {
   lines.push('');
   lines.push('- Start with the minimum-qualifications line check: verify the resume mirrors each');
   lines.push('  stated minimum/required qualification in the JD, and make each gap its own numbered');
-  lines.push('  edit before any discretionary tweak.');
+  lines.push('  edit, placed in resume order with the rest, and mark it "Minimum-qualification gap"');
+  lines.push('  at the start of its Why line.');
   lines.push('- "From" must be verbatim. If the line cannot be found, say so instead of guessing.');
   lines.push('- "To" must only claim experience already supported elsewhere in the resume and must');
   lines.push('  follow PROOF-POINT ACCURACY above (no upgraded verbs, no inflated claims).');
@@ -3123,11 +3124,19 @@ function buildScorerInstructions(cfg) {
   lines.push('  it NEW LANGUAGE and ask me to confirm it is accurate before I use it.');
   lines.push('- One change per block. Two rewrites of the same line are labeled #3A / #3B.');
   lines.push('- If an edit depends on another, note "requires #n".');
+  lines.push('- Order the edits to match the resume, top to bottom: Summary, then Skills, then');
+  lines.push('  Experience by company in resume order (most recent first), then Education and');
+  lines.push('  Certifications, skipping any section the resume does not have. Group each');
+  lines.push("  section's edits together under a bold section label so all changes to one section");
+  lines.push('  appear at once. Number the edits sequentially in that order, not by impact. When');
+  lines.push('  two edits rewrite the same line, label them #1A / #1B (same From, pick one) and say');
+  lines.push('  so. Place a "requires #n" edit after the edit it depends on where possible. If the');
+  lines.push('  resume runs long, name which edits to drop first.');
   lines.push('- No em-dashes in the replacement text.');
   lines.push('- After the list, say whether the edits together add or cut a line or more.');
   lines.push('');
   lines.push('When I reply with the numbers I accept (e.g. "1, 2, 4, 6A"), output only the accepted');
-  lines.push('edits in the same block format, headed with:');
+  lines.push('edits in the same block format, in resume order, headed with:');
   lines.push(hasVariants ? 'Company: [company]   Role: [title]   Resume: [final variant]' : 'Company: [company]   Role: [title]');
   if (hasVariants) {
     lines.push('If we changed the variant during discussion, use the one we settled on and add');
